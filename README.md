@@ -34,9 +34,9 @@ dependencies {
 Set RecyclerView ItemAnimator.
 
 ```java
-    Glide.with(this).load(R.drawable.demo)
-            .bitmapTransform(new BlurTransformation(this, Glide.get(this).getBitmapPool()))
-            .into((ImageView) findViewById(R.id.image));
+Glide.with(this).load(R.drawable.demo)
+        .bitmapTransform(new BlurTransformation(this, Glide.get(this).getBitmapPool()))
+        .into((ImageView) findViewById(R.id.image));
 ```
 
 ## Advanced Step 3
@@ -44,10 +44,10 @@ Set RecyclerView ItemAnimator.
 You can set an multiple transformations.
 
 ```java
-    BitmapPool pool = Glide.get(this).getBitmapPool();
-    Glide.with(this).load(R.drawable.demo)
-    .bitmapTransform(new BlurTransformation(this, pool, 5), new CropCircleTransformation(pool))
-            .into((ImageView) findViewById(R.id.image));
+BitmapPool pool = Glide.get(this).getBitmapPool();
+Glide.with(this).load(R.drawable.demo).bitmapTransform(
+  new BlurTransformation(this, pool, 5),  new CropCircleTransformation(pool))
+  .into((ImageView) findViewById(R.id.image));
 ```
 
 ## Transformations
