@@ -4,6 +4,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
+import org.w3c.dom.Text;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -84,6 +87,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         Glide.with(mContext).load(R.drawable.demo)
                 .bitmapTransform(transformation).into(holder.image);
+        holder.title.setText(mDataSet.get(position).name());
     }
 
     @Override
@@ -94,10 +98,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView image;
+        public TextView title;
 
         ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
+            title = (TextView) itemView.findViewById(R.id.title);
         }
     }
 }

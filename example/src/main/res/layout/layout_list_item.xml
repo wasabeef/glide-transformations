@@ -6,9 +6,19 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@null"/>
+        android:layout_centerInParent="true"
+        android:contentDescription="@null"
+        android:src="@drawable/demo"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/white"/>
 
 </RelativeLayout>
