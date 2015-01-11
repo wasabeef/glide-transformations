@@ -71,6 +71,6 @@ public class CropTransformation implements Transformation<Bitmap> {
 
     @Override
     public String getId() {
-        return "CropTransform(width=" + mWidth + ", height=" + mHeight + ")";
+        return "CropTransformation(width=" + mWidth + ", height=" + mHeight + ")";
     }
 }

@@ -59,6 +59,6 @@ public class ColorFilterTransformation implements Transformation<Bitmap> {
 
     @Override
     public String getId() {
-        return "ColorFilterTransform(color=" + mColor + ")";
+        return "ColorFilterTransformation(color=" + mColor + ")";
     }
 }

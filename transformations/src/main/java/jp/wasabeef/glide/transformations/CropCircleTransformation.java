@@ -66,6 +66,6 @@ public class CropCircleTransformation implements Transformation<Bitmap> {
 
     @Override
     public String getId() {
-        return "CircleTransform()";
+        return "CropCircleTransformation()";
     }
 }

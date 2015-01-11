@@ -299,6 +299,6 @@ public class BlurTransformation implements Transformation<Bitmap> {
 
     @Override
     public String getId() {
-        return "BlurTransform(radius=" + mRadius + ")";
+        return "BlurTransformation(radius=" + mRadius + ")";
     }
 }
