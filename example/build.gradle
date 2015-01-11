@@ -50,8 +50,7 @@ def getKeyAliasPasswordProperty() {
 }
 
 dependencies {
-//    compile project(':animators')
-    compile 'com.github.bumptech.glide:glide:3.4.+'
+    compile project(':transformations')
     compile 'com.android.support:appcompat-v7:+'
-    compile 'com.squareup.picasso:picasso:+'
+    compile 'com.github.bumptech.glide:glide:3.+'
 }

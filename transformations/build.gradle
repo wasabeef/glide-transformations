@@ -1,24 +1,41 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
+        renderscriptTargetApi RENDERSCRIPT_TARGET_API as int
+        renderscriptSupportModeEnabled true
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.github.bumptech.glide:glide:3.+'
 }
+
+android.libraryVariants.all { variant ->
+    if (variant.buildType.isDebuggable()) {
+        return; // Skip debug builds.
+    }
+    task("javadoc${variant.name.capitalize()}", type: Javadoc) {
+        description "Generates Javadoc for $variant.name."
+        source = variant.javaCompile.source
+        ext.androidJar = System.getenv("ANDROID_HOME") + "/platforms/${android.compileSdkVersion}/android.jar"
+        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+    }
+
+    task("bundleJavadoc${variant.name.capitalize()}", type: Jar) {
+        description "Bundles Javadoc into zip for $variant.name."
+        classifier = "javadoc"
+        from tasks["javadoc${variant.name.capitalize()}"]
+    }
+}
+
+apply from: 'android-artifacts.gradle'
+apply from: 'central-publish.gradle'
+apply from: 'bintray-publish.gradle'
