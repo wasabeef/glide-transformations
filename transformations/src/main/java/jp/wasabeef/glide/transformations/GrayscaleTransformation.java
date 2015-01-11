@@ -42,7 +42,7 @@ public class GrayscaleTransformation implements Transformation<Bitmap> {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        Bitmap bitmap = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(bitmap);
         ColorMatrix saturation = new ColorMatrix();

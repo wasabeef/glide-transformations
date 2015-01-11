@@ -44,10 +44,10 @@ public class CropSquareTransformation implements Transformation<Bitmap> {
         Bitmap source = resource.get();
         int size = Math.min(source.getWidth(), source.getHeight());
 
-        int x = (source.getWidth() - size) / 2;
-        int y = (source.getHeight() - size) / 2;
+        int width = (source.getWidth() - size) / 2;
+        int height = (source.getHeight() - size) / 2;
 
-        Bitmap bitmap = Bitmap.createBitmap(source, x, y, size, size);
+        Bitmap bitmap = Bitmap.createBitmap(source, width, height, size, size);
         if (bitmap != source) {
             source.recycle();
         }

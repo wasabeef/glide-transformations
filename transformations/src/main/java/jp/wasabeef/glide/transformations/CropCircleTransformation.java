@@ -39,10 +39,10 @@ public class CropCircleTransformation implements Transformation<Bitmap> {
         Bitmap source = resource.get();
         int size = Math.min(source.getWidth(), source.getHeight());
 
-        int x = (source.getWidth() - size) / 2;
-        int y = (source.getHeight() - size) / 2;
+        int width = (source.getWidth() - size) / 2;
+        int height = (source.getHeight() - size) / 2;
 
-        Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+        Bitmap squaredBitmap = Bitmap.createBitmap(source, width, height, size, size);
         if (squaredBitmap != source) {
             source.recycle();
         }
