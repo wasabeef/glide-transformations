@@ -11,7 +11,7 @@ Please feel free to use this.
 ### Original Image
 <img src="art/demo-org.jpg" width="30%">
 
-### Transformation
+### Transformations
 <img src="art/demo.png" width="50%">
 
 # How do I use it?
