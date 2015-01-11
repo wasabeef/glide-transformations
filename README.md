@@ -41,7 +41,7 @@ Glide.with(this).load(R.drawable.demo)
 
 ## Advanced Step 3
 
-You can set an multiple transformations.
+You can set a multiple transformations.
 
 ```java
 BitmapPool pool = Glide.get(this).getBitmapPool();
