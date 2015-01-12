@@ -64,10 +64,10 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
         gpuImage.setImage(source);
         GPUImageSwirlFilter filter = new GPUImageSwirlFilter();
         if (mRadius != 0) {
-            filter.setAngle(mAngle);
+            filter.setRadius(mRadius);
         }
         if (mAngle != 0) {
-            filter.setRadius(mAngle);
+            filter.setAngle(mAngle);
         }
         if (mCenter != null) {
             filter.setCenter(mCenter);
