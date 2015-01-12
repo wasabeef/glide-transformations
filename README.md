@@ -62,7 +62,7 @@ Glide.with(this).load(R.drawable.demo).bitmapTransform(
 ### Blur
 `BlurTransformation`
 
-### Filter from GPUImage
+### Filter (use GPUImage)
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
 `SwirlFilterTransformation`
@@ -78,6 +78,11 @@ Daichi Furiya (Wasabeef) - <dadadada.chop@gmail.com>
 <img alt="Follow me on Twitter"
 src="https://raw.githubusercontent.com/wasabeef/wasabeef.github.io/master/art/twitter.png" width="75"/>
 </a>
+
+Thanks
+-------
+
+* Inspired by `Picasso Transformations` in [TannerPerrien](https://github.com/TannerPerrien).
 
 License
 -------
