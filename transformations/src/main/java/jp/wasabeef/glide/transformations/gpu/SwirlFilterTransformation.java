@@ -41,6 +41,7 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
     public SwirlFilterTransformation(Context context, BitmapPool pool) {
         mContext = context;
         mBitmapPool = pool;
+        mCenter = new PointF();
     }
 
     /**
@@ -76,10 +77,7 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
 
     @Override
     public String getId() {
-        if (mCenter == null) {
-            mCenter = new PointF();
-        }
         return "SwirlFilterTransformation(radius=" + mRadius +
-                ",angle=" + mAngle + ",center=" + mCenter + ")";
+                ",angle=" + mAngle + ",center=" + mCenter.toString() + ")";
     }
 }
