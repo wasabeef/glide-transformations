@@ -42,6 +42,11 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
         mBitmapPool = pool;
     }
 
+    /**
+     * @param radius from 0.0 to 1.0, default 0.5
+     * @param angle  minimum 0.0, default 1.0
+     * @param center default (0.5, 0.5)
+     */
     public SwirlFilterTransformation(Context context, BitmapPool pool,
             float radius, float angle, PointF center) {
         mContext = context;

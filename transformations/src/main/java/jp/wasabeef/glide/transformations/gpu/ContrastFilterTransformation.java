@@ -27,6 +27,9 @@ import android.graphics.Bitmap;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
 
+/**
+ * contrast value ranges from 0.0 to 4.0, with 1.0 as the normal level
+ */
 public class ContrastFilterTransformation implements Transformation<Bitmap> {
 
     private Context mContext;
