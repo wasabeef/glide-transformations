@@ -13,7 +13,7 @@ Please feel free to use this.
 <img src="art/demo-org.jpg" width="30%">
 
 ### Transformations
-<img src="art/demo.png" width="50%">
+<img src="art/demo.gif" width="50%">
 
 # How do I use it?
 
