@@ -33,6 +33,7 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
     private Context mContext;
     private BitmapPool mBitmapPool;
 
+    private GPUImageSwirlFilter mFilter = new GPUImageSwirlFilter();
     private float mRadius;
     private float mAngle;
     private PointF mCenter;
@@ -54,6 +55,9 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
         mRadius = radius;
         mAngle = angle;
         mCenter = center;
+        mFilter.setRadius(mRadius);
+        mFilter.setAngle(mAngle);
+        mFilter.setCenter(mCenter);
     }
 
     @Override
@@ -62,18 +66,7 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
 
         GPUImage gpuImage = new GPUImage(mContext);
         gpuImage.setImage(source);
-        GPUImageSwirlFilter filter = new GPUImageSwirlFilter();
-        if (mRadius != 0) {
-            filter.setRadius(mRadius);
-        }
-        if (mAngle != 0) {
-            filter.setAngle(mAngle);
-        }
-        if (mCenter != null) {
-            filter.setCenter(mCenter);
-        }
-
-        gpuImage.setFilter(filter);
+        gpuImage.setFilter(mFilter);
         Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
         source.recycle();

@@ -32,6 +32,7 @@ public class PixelationFilterTransformation implements Transformation<Bitmap> {
     private Context mContext;
     private BitmapPool mBitmapPool;
 
+    private GPUImagePixelationFilter mFilter = new GPUImagePixelationFilter();
     private float mPixel;
 
     public PixelationFilterTransformation(Context context, BitmapPool pool) {
@@ -43,6 +44,7 @@ public class PixelationFilterTransformation implements Transformation<Bitmap> {
         mContext = context;
         mBitmapPool = pool;
         mPixel = pixel;
+        mFilter.setPixel(mPixel);
     }
 
     @Override
@@ -51,12 +53,7 @@ public class PixelationFilterTransformation implements Transformation<Bitmap> {
 
         GPUImage gpuImage = new GPUImage(mContext);
         gpuImage.setImage(source);
-        GPUImagePixelationFilter filter = new GPUImagePixelationFilter();
-        if (mPixel != 0) {
-            filter.setPixel(mPixel);
-        }
-
-        gpuImage.setFilter(filter);
+        gpuImage.setFilter(mFilter);
         Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
         source.recycle();

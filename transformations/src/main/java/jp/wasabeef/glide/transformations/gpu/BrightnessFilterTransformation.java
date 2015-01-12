@@ -35,6 +35,7 @@ public class BrightnessFilterTransformation implements Transformation<Bitmap> {
     private Context mContext;
     private BitmapPool mBitmapPool;
 
+    private GPUImageBrightnessFilter mFilter = new GPUImageBrightnessFilter();
     private float mBrightness;
 
     public BrightnessFilterTransformation(Context context, BitmapPool pool) {
@@ -46,6 +47,7 @@ public class BrightnessFilterTransformation implements Transformation<Bitmap> {
         mContext = context;
         mBitmapPool = pool;
         mBrightness = brightness;
+        mFilter.setBrightness(mBrightness);
     }
 
     @Override
@@ -54,12 +56,7 @@ public class BrightnessFilterTransformation implements Transformation<Bitmap> {
 
         GPUImage gpuImage = new GPUImage(mContext);
         gpuImage.setImage(source);
-        GPUImageBrightnessFilter filter = new GPUImageBrightnessFilter();
-        if (mBrightness != 0) {
-            filter.setBrightness(mBrightness);
-        }
-
-        gpuImage.setFilter(filter);
+        gpuImage.setFilter(mFilter);
         Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
         source.recycle();

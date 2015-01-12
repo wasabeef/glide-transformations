@@ -32,6 +32,7 @@ public class ToonFilterTransformation implements Transformation<Bitmap> {
     private Context mContext;
     private BitmapPool mBitmapPool;
 
+    private GPUImageToonFilter mFilter = new GPUImageToonFilter();
     private float mThreshold;
     private float mQuantizationLevels;
 
@@ -46,6 +47,8 @@ public class ToonFilterTransformation implements Transformation<Bitmap> {
         mBitmapPool = pool;
         mThreshold = threshold;
         mQuantizationLevels = quantizationLevels;
+        mFilter.setThreshold(mThreshold);
+        mFilter.setQuantizationLevels(mQuantizationLevels);
     }
 
     @Override
@@ -54,15 +57,7 @@ public class ToonFilterTransformation implements Transformation<Bitmap> {
 
         GPUImage gpuImage = new GPUImage(mContext);
         gpuImage.setImage(source);
-        GPUImageToonFilter filter = new GPUImageToonFilter();
-        if (mThreshold != 0) {
-            filter.setThreshold(mThreshold);
-        }
-        if (mQuantizationLevels != 0) {
-            filter.setQuantizationLevels(mQuantizationLevels);
-        }
-
-        gpuImage.setFilter(filter);
+        gpuImage.setFilter(mFilter);
         Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
         source.recycle();

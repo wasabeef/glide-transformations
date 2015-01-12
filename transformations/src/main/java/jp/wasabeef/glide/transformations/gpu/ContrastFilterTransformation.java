@@ -35,6 +35,7 @@ public class ContrastFilterTransformation implements Transformation<Bitmap> {
     private Context mContext;
     private BitmapPool mBitmapPool;
 
+    private GPUImageContrastFilter mFilter = new GPUImageContrastFilter();
     private float mContrast;
 
     public ContrastFilterTransformation(Context context, BitmapPool pool) {
@@ -46,6 +47,7 @@ public class ContrastFilterTransformation implements Transformation<Bitmap> {
         mContext = context;
         mBitmapPool = pool;
         mContrast = contrast;
+        mFilter.setContrast(mContrast);
     }
 
     @Override
@@ -54,12 +56,7 @@ public class ContrastFilterTransformation implements Transformation<Bitmap> {
 
         GPUImage gpuImage = new GPUImage(mContext);
         gpuImage.setImage(source);
-        GPUImageContrastFilter filter = new GPUImageContrastFilter();
-        if (mContrast != 0) {
-            filter.setContrast(mContrast);
-        }
-
-        gpuImage.setFilter(filter);
+        gpuImage.setFilter(mFilter);
         Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
         source.recycle();

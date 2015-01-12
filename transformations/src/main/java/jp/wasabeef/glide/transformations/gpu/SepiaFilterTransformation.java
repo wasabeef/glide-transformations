@@ -32,6 +32,7 @@ public class SepiaFilterTransformation implements Transformation<Bitmap> {
     private Context mContext;
     private BitmapPool mBitmapPool;
 
+    private GPUImageSepiaFilter mFilter = new GPUImageSepiaFilter();
     private float mIntensity;
 
     public SepiaFilterTransformation(Context context, BitmapPool pool) {
@@ -43,6 +44,7 @@ public class SepiaFilterTransformation implements Transformation<Bitmap> {
         mContext = context;
         mBitmapPool = pool;
         mIntensity = intensity;
+        mFilter.setIntensity(mIntensity);
     }
 
     @Override
@@ -51,12 +53,7 @@ public class SepiaFilterTransformation implements Transformation<Bitmap> {
 
         GPUImage gpuImage = new GPUImage(mContext);
         gpuImage.setImage(source);
-        GPUImageSepiaFilter filter = new GPUImageSepiaFilter();
-        if (mIntensity != 0) {
-            filter.setIntensity(mIntensity);
-        }
-
-        gpuImage.setFilter(filter);
+        gpuImage.setFilter(mFilter);
         Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
         source.recycle();
