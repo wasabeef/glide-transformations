@@ -33,7 +33,7 @@ dependencies {
 
 ## Step 2
 
-Set RecyclerView ItemAnimator.
+Set Glide Transform.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
