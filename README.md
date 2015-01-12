@@ -79,6 +79,11 @@ Daichi Furiya (Wasabeef) - <dadadada.chop@gmail.com>
 src="https://raw.githubusercontent.com/wasabeef/wasabeef.github.io/master/art/twitter.png" width="75"/>
 </a>
 
+Thanks
+-------
+
+* Inspired by `Picasso Transformations` in [TannerPerrien](https://github.com/TannerPerrien).
+
 License
 -------
 
