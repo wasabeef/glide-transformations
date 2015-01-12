@@ -27,6 +27,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation;
@@ -57,7 +58,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Pixel,
         Sketch,
         Swirl,
-        Brightness
+        Brightness,
+        Kuawahara
     }
 
     public MainAdapter(Context context, List<Type> dataSet) {
@@ -122,6 +124,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 break;
             case Brightness:
                 transformation = new BrightnessFilterTransformation(mContext, mPool, 0.5f);
+                break;
+            case Kuawahara:
+                transformation = new KuwaharaFilterTransformation(mContext, mPool, 25);
                 break;
         }
 

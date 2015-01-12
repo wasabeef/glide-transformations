@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
         dataSet.add(Type.Sketch);
         dataSet.add(Type.Swirl);
         dataSet.add(Type.Brightness);
+        dataSet.add(Type.Kuawahara);
 
         recyclerView.setAdapter(new MainAdapter(this, dataSet));
     }
