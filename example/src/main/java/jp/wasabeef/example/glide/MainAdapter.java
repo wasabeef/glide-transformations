@@ -4,11 +4,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
-import org.w3c.dom.Text;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +24,14 @@ import jp.wasabeef.glide.transformations.CropSquareTransformation;
 import jp.wasabeef.glide.transformations.CropTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation;
 
 /**
  * Created by Wasabeef on 2015/01/11.
@@ -42,7 +49,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         ColorFilter,
         Grayscale,
         RoundedCorners,
-        Blur
+        Blur,
+        Toon,
+        Sepia,
+        Contrast,
+        Invert,
+        Pixel,
+        Sketch,
+        Swirl,
+        Brightness
     }
 
     public MainAdapter(Context context, List<Type> dataSet) {
@@ -78,10 +93,35 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 transformation = new GrayscaleTransformation(mPool);
                 break;
             case RoundedCorners:
-                transformation = new RoundedCornersTransformation(mPool, 50, 0);
+                transformation = new RoundedCornersTransformation(mPool, 100, 0);
                 break;
             case Blur:
                 transformation = new BlurTransformation(mContext, mPool, 10);
+                break;
+            case Toon:
+                transformation = new ToonFilterTransformation(mContext, mPool);
+                break;
+            case Sepia:
+                transformation = new SepiaFilterTransformation(mContext, mPool);
+                break;
+            case Contrast:
+                transformation = new ContrastFilterTransformation(mContext, mPool, 2.0f);
+                break;
+            case Invert:
+                transformation = new InvertFilterTransformation(mContext, mPool);
+                break;
+            case Pixel:
+                transformation = new PixelationFilterTransformation(mContext, mPool, 20);
+                break;
+            case Sketch:
+                transformation = new SketchFilterTransformation(mContext, mPool);
+                break;
+            case Swirl:
+                transformation = new SwirlFilterTransformation(mContext, mPool,
+                        0.5f, 1.0f, new PointF(0.5f, 0.5f));
+                break;
+            case Brightness:
+                transformation = new BrightnessFilterTransformation(mContext, mPool, 0.5f);
                 break;
         }
 

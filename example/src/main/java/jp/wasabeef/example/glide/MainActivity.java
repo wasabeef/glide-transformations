@@ -29,6 +29,14 @@ public class MainActivity extends ActionBarActivity {
         dataSet.add(Type.Grayscale);
         dataSet.add(Type.RoundedCorners);
         dataSet.add(Type.Blur);
+        dataSet.add(Type.Toon);
+        dataSet.add(Type.Sepia);
+        dataSet.add(Type.Contrast);
+        dataSet.add(Type.Invert);
+        dataSet.add(Type.Pixel);
+        dataSet.add(Type.Sketch);
+        dataSet.add(Type.Swirl);
+        dataSet.add(Type.Brightness);
 
         recyclerView.setAdapter(new MainAdapter(this, dataSet));
     }
