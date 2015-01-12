@@ -65,7 +65,7 @@ Glide.with(this).load(R.drawable.demo).bitmapTransform(
 ### Filter (use GPUImage)
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
-`SwirlFilterTransformation`, `KuwaharaFilterTransformation`
+`SwirlFilterTransformation`, `KuwaharaFilterTransformation`, `VignetteFilterTransformation`
 
 ### Other
 `RoundedCornersTransformation`

@@ -33,6 +33,7 @@ import jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation;
 
 /**
  * Created by Wasabeef on 2015/01/11.
@@ -59,7 +60,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Sketch,
         Swirl,
         Brightness,
-        Kuawahara
+        Kuawahara,
+        Vignette
     }
 
     public MainAdapter(Context context, List<Type> dataSet) {
@@ -127,6 +129,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 break;
             case Kuawahara:
                 transformation = new KuwaharaFilterTransformation(mContext, mPool, 25);
+                break;
+            case Vignette:
+                transformation = new VignetteFilterTransformation(mContext, mPool,
+                        new PointF(0.5f, 0.5f), new float[]{0.0f, 0.0f, 0.0f}, 0f, 0.75f);
                 break;
         }
 
