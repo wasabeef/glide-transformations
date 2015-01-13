@@ -63,7 +63,7 @@ Glide.with(this).load(R.drawable.demo).bitmapTransform(
 ### Blur
 `BlurTransformation`
 
-### Filter (use GPUImage)
+### Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
 `SwirlFilterTransformation`, `KuwaharaFilterTransformation`, `VignetteFilterTransformation`
