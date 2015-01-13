@@ -7,8 +7,7 @@ publishing {
             groupId GROUP
             version VERSION_NAME
             artifactId ARTIFACT_ID
-//            artifact androidJar
-            artifact "build/outputs/aar/transformations-release.aar"
+            artifact androidJar
             artifact androidJavadocsJar
             artifact androidSourcesJar
             pom.withXml {
