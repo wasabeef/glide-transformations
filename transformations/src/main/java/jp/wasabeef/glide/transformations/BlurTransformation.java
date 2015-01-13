@@ -65,6 +65,8 @@ public class BlurTransformation implements Transformation<Bitmap> {
             script.setInput(input);
             script.forEach(output);
             output.copyTo(bitmap);
+
+            source.recycle();
             return BitmapResource.obtain(bitmap, mBitmapPool);
         }
 

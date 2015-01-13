@@ -33,21 +33,15 @@ public class CropSquareTransformation implements Transformation<Bitmap> {
         this.mBitmapPool = pool;
     }
 
-    public CropSquareTransformation(BitmapPool pool, int width, int height) {
-        mBitmapPool = pool;
-        mWidth = width;
-        mHeight = height;
-    }
-
     @Override
     public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
         Bitmap source = resource.get();
         int size = Math.min(source.getWidth(), source.getHeight());
 
-        int width = (source.getWidth() - size) / 2;
-        int height = (source.getHeight() - size) / 2;
+        mWidth = (source.getWidth() - size) / 2;
+        mHeight = (source.getHeight() - size) / 2;
 
-        Bitmap bitmap = Bitmap.createBitmap(source, width, height, size, size);
+        Bitmap bitmap = Bitmap.createBitmap(source, mWidth, mHeight, size, size);
         if (bitmap != source) {
             source.recycle();
         }
