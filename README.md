@@ -4,7 +4,7 @@ Glide Transformations
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Download](https://api.bintray.com/packages/wasabeef/maven/glide-transformations/images/download.svg)](https://bintray.com/wasabeef/maven/glide-transformations/_latestVersion)
 
-A transformation library providing a variety of image transformations for [Glide](https://github.com/bumptech/glide).
+An Android transformation library providing a variety of image transformations for [Glide](https://github.com/bumptech/glide).
 
 Please feel free to use this.
 
@@ -33,7 +33,7 @@ dependencies {
 
 ## Step 2
 
-Set RecyclerView ItemAnimator.
+Set Glide Transform.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
@@ -63,7 +63,7 @@ Glide.with(this).load(R.drawable.demo).bitmapTransform(
 ### Blur
 `BlurTransformation`
 
-### Filter (use GPUImage)
+### Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
 `SwirlFilterTransformation`, `KuwaharaFilterTransformation`, `VignetteFilterTransformation`
