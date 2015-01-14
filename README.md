@@ -9,7 +9,7 @@ An Android transformation library providing a variety of image transformations f
 Please feel free to use this.
 
 
-#### Are you using Picasso?
+#### Are you using the Picasso?
 [Picasso Transformations](https://github.com/wasabeef/picasso-transformations)
 
 # Demo
