@@ -58,7 +58,7 @@ Glide.with(this).load(R.drawable.demo).bitmapTransform(
 
 ## Step 4
 
-If you are using BlurTransformation.
+If you are using `BlurTransformation`.
 
 ```groovy
 android {

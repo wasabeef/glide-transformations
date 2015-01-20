@@ -53,14 +53,11 @@ public class BlurTransformation implements Transformation<Bitmap> {
         Bitmap source = resource.get();
 
         if (Build.VERSION.SDK_INT > 16) {
-
-            //recreate new bitmap based on source bitmap
             Bitmap outBitmap = Bitmap.createBitmap(source.getWidth(), source.getHeight(),
                     Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(outBitmap);
             canvas.drawBitmap(source, 0, 0, null);
 
-            //apply blur effect on image
             RenderScript rs = RenderScript.create(mContext);
             Allocation overlayAlloc = Allocation.createFromBitmap(rs, outBitmap);
             ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
