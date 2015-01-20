@@ -8,6 +8,10 @@ An Android transformation library providing a variety of image transformations f
 
 Please feel free to use this.
 
+
+#### Are you using Picasso?
+[Picasso Transformations](https://github.com/wasabeef/picasso-transformations)
+
 # Demo
 
 ### Original Image
@@ -92,7 +96,7 @@ Daichi Furiya (Wasabeef) - <dadadada.chop@gmail.com>
 
 <a href="https://twitter.com/wasabeef_jp">
 <img alt="Follow me on Twitter"
-src="https://raw.githubusercontent.com/wasabeef/wasabeef.github.io/master/art/twitter.png" width="75"/>
+src="https://raw.githubusercontent.com/wasabeef/art/master/twitter.png" width="75"/>
 </a>
 
 Thanks
