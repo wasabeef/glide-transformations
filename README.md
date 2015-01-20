@@ -52,6 +52,21 @@ Glide.with(this).load(R.drawable.demo).bitmapTransform(
   .into((ImageView) findViewById(R.id.image));
 ```
 
+## Step 4
+
+If you are using BlurTransformation.
+
+```groovy
+android {
+    ...
+    defaultConfig {
+        ...
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
+    }
+}
+```
+
 ## Transformations
 
 ### Crop

@@ -23,11 +23,11 @@ import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.RenderScript;
+import android.support.v8.renderscript.ScriptIntrinsicBlur;
 
 public class BlurTransformation implements Transformation<Bitmap> {
 
@@ -45,7 +45,7 @@ public class BlurTransformation implements Transformation<Bitmap> {
     public BlurTransformation(Context context, BitmapPool pool, int radius) {
         mContext = context;
         mBitmapPool = pool;
-        this.mRadius = radius;
+        mRadius = radius;
     }
 
     @Override
@@ -53,21 +53,26 @@ public class BlurTransformation implements Transformation<Bitmap> {
         Bitmap source = resource.get();
 
         if (Build.VERSION.SDK_INT > 16) {
-            Bitmap bitmap = source.copy(source.getConfig(), true);
 
-            final RenderScript rs = RenderScript.create(mContext);
-            final Allocation input = Allocation.createFromBitmap(rs, source,
-                    Allocation.MipmapControl.MIPMAP_NONE,
-                    Allocation.USAGE_SCRIPT);
-            final Allocation output = Allocation.createTyped(rs, input.getType());
-            final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-            script.setRadius(mRadius /* e.g. 3.f */);
-            script.setInput(input);
-            script.forEach(output);
-            output.copyTo(bitmap);
+            //recreate new bitmap based on source bitmap
+            Bitmap outBitmap = Bitmap.createBitmap(source.getWidth(), source.getHeight(),
+                    Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(outBitmap);
+            canvas.drawBitmap(source, 0, 0, null);
+
+            //apply blur effect on image
+            RenderScript rs = RenderScript.create(mContext);
+            Allocation overlayAlloc = Allocation.createFromBitmap(rs, outBitmap);
+            ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
+            blur.setInput(overlayAlloc);
+            blur.setRadius(mRadius);
+            blur.forEach(overlayAlloc);
+            overlayAlloc.copyTo(outBitmap);
 
             source.recycle();
-            return BitmapResource.obtain(bitmap, mBitmapPool);
+            rs.destroy();
+
+            return BitmapResource.obtain(outBitmap, mBitmapPool);
         }
 
         // Stack Blur v1.0 from

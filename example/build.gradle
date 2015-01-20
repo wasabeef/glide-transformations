@@ -9,6 +9,8 @@ android {
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
+        renderscriptTargetApi RENDERSCRIPT_TARGET_API as int
+        renderscriptSupportModeEnabled true
     }
 
     signingConfigs {
