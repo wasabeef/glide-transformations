@@ -28,10 +28,12 @@ Please feel free to use this.
 ```groovy
 repositories {
     jcenter()
+    mavenCentral()  // GPUImage for Android
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.0.0'
+    compile 'jp.wasabeef:glide-transformations:1.0.1'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3'
 }
 ```
 
