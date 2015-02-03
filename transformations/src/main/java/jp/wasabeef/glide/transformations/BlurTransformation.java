@@ -50,23 +50,30 @@ public class BlurTransformation implements Transformation<Bitmap> {
     @Override
     public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
         Bitmap source = resource.get();
-        Bitmap outBitmap = Bitmap.createBitmap(source.getWidth(), source.getHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outBitmap);
+
+        int width = source.getWidth();
+        int height = source.getHeight();
+
+        Bitmap bitmap = mBitmapPool.get(width, height, source.getConfig());
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, source.getConfig());
+        }
+
+        Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(source, 0, 0, null);
 
         RenderScript rs = RenderScript.create(mContext);
-        Allocation overlayAlloc = Allocation.createFromBitmap(rs, outBitmap);
+        Allocation overlayAlloc = Allocation.createFromBitmap(rs, bitmap);
         ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
         blur.setInput(overlayAlloc);
         blur.setRadius(mRadius);
         blur.forEach(overlayAlloc);
-        overlayAlloc.copyTo(outBitmap);
+        overlayAlloc.copyTo(bitmap);
 
         source.recycle();
         rs.destroy();
 
-        return BitmapResource.obtain(outBitmap, mBitmapPool);
+        return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 
     @Override

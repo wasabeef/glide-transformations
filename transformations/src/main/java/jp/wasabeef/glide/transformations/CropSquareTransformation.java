@@ -41,7 +41,11 @@ public class CropSquareTransformation implements Transformation<Bitmap> {
         mWidth = (source.getWidth() - size) / 2;
         mHeight = (source.getHeight() - size) / 2;
 
-        Bitmap bitmap = Bitmap.createBitmap(source, mWidth, mHeight, size, size);
+        Bitmap bitmap = mBitmapPool.get(mWidth, mHeight, source.getConfig());
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(source, mWidth, mHeight, size, size);
+        }
+
         if (bitmap != source) {
             source.recycle();
         }

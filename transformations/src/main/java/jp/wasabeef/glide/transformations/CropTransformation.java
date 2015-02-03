@@ -51,6 +51,11 @@ public class CropTransformation implements Transformation<Bitmap> {
             mHeight = source.getHeight();
         }
 
+        Bitmap bitmap = mBitmapPool.get(mWidth, mHeight, source.getConfig());
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(mWidth, mHeight, source.getConfig());
+        }
+
         float scaleX = (float) mWidth / source.getWidth();
         float scaleY = (float) mHeight / source.getHeight();
         float scale = Math.max(scaleX, scaleY);
@@ -61,9 +66,9 @@ public class CropTransformation implements Transformation<Bitmap> {
         float top = (mHeight - scaledHeight) / 2;
         RectF targetRect = new RectF(left, top, left + scaledWidth, top + scaledHeight);
 
-        Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, source.getConfig());
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(source, null, targetRect, null);
+
         source.recycle();
 
         return BitmapResource.obtain(bitmap, mBitmapPool);

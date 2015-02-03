@@ -45,13 +45,17 @@ public class ColorFilterTransformation implements Transformation<Bitmap> {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = mBitmapPool.get(width, height, source.getConfig());
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, source.getConfig());
+        }
 
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColorFilter(new PorterDuffColorFilter(mColor, PorterDuff.Mode.SRC_ATOP));
         canvas.drawBitmap(source, 0, 0, paint);
+
         source.recycle();
 
         return BitmapResource.obtain(bitmap, mBitmapPool);

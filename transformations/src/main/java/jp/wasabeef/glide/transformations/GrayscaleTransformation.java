@@ -42,7 +42,10 @@ public class GrayscaleTransformation implements Transformation<Bitmap> {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = mBitmapPool.get(width, height, source.getConfig());
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, source.getConfig());
+        }
 
         Canvas canvas = new Canvas(bitmap);
         ColorMatrix saturation = new ColorMatrix();
@@ -50,6 +53,7 @@ public class GrayscaleTransformation implements Transformation<Bitmap> {
         Paint paint = new Paint();
         paint.setColorFilter(new ColorMatrixColorFilter(saturation));
         canvas.drawBitmap(source, 0, 0, paint);
+
         source.recycle();
 
         return BitmapResource.obtain(bitmap, mBitmapPool);
