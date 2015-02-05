@@ -24,6 +24,8 @@ import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
@@ -54,9 +56,11 @@ public class BlurTransformation implements Transformation<Bitmap> {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        Bitmap bitmap = mBitmapPool.get(width, height, source.getConfig());
+        Bitmap.Config config =
+                source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = mBitmapPool.get(width, height, config);
         if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(width, height, source.getConfig());
+            bitmap = Bitmap.createBitmap(width, height, config);
         }
 
         Canvas canvas = new Canvas(bitmap);

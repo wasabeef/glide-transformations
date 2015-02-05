@@ -51,9 +51,11 @@ public class CropTransformation implements Transformation<Bitmap> {
             mHeight = source.getHeight();
         }
 
-        Bitmap bitmap = mBitmapPool.get(mWidth, mHeight, source.getConfig());
+        Bitmap.Config config =
+                source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = mBitmapPool.get(mWidth, mHeight, config);
         if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(mWidth, mHeight, source.getConfig());
+            bitmap = Bitmap.createBitmap(mWidth, mHeight, config);
         }
 
         float scaleX = (float) mWidth / source.getWidth();

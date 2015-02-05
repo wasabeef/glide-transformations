@@ -48,9 +48,11 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        Bitmap bitmap = mBitmapPool.get(width, height, source.getConfig());
+        Bitmap.Config config =
+                source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = mBitmapPool.get(width, height, config);
         if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(width, height, source.getConfig());
+            bitmap = Bitmap.createBitmap(width, height, config);
         }
 
         Canvas canvas = new Canvas(bitmap);
