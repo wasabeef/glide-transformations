@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.0.4 *(2015-02-13)*
+----------------------------
+
+Bug fix : remove original bitmap resource recycling.
+
 Version 1.0.3 *(2015-02-05)*
 ----------------------------
 
