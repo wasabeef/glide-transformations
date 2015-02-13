@@ -24,8 +24,6 @@ import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
@@ -74,7 +72,6 @@ public class BlurTransformation implements Transformation<Bitmap> {
         blur.forEach(overlayAlloc);
         overlayAlloc.copyTo(bitmap);
 
-        source.recycle();
         rs.destroy();
 
         return BitmapResource.obtain(bitmap, mBitmapPool);

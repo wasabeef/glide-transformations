@@ -56,8 +56,6 @@ public class GrayscaleTransformation implements Transformation<Bitmap> {
         paint.setColorFilter(new ColorMatrixColorFilter(saturation));
         canvas.drawBitmap(source, 0, 0, paint);
 
-        source.recycle();
-
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 

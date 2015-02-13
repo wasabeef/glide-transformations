@@ -62,8 +62,6 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
         canvas.drawRoundRect(new RectF(margin, margin, width - margin, height - margin),
                 radius, radius, paint);
 
-        source.recycle();
-
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 
