@@ -71,8 +71,6 @@ public class CropTransformation implements Transformation<Bitmap> {
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(source, null, targetRect, null);
 
-        source.recycle();
-
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 

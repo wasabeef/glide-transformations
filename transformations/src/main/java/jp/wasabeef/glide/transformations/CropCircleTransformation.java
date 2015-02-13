@@ -63,8 +63,6 @@ public class CropCircleTransformation implements Transformation<Bitmap> {
         float r = size / 2f;
         canvas.drawCircle(r, r, r, paint);
 
-        source.recycle();
-
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 

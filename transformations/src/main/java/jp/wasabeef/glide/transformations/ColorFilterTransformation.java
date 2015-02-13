@@ -58,8 +58,6 @@ public class ColorFilterTransformation implements Transformation<Bitmap> {
         paint.setColorFilter(new PorterDuffColorFilter(mColor, PorterDuff.Mode.SRC_ATOP));
         canvas.drawBitmap(source, 0, 0, paint);
 
-        source.recycle();
-
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 
