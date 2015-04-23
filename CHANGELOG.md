@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+Version 1.0.6 *(2015-04-23)*
+----------------------------
+
+add: CropType(Top, Center, Bottom) for CropTransformation.
+
+Version 1.0.5 *(2015-03-09)*
+----------------------------
+
+Bug fix: Transparency.
+
 Version 1.0.4 *(2015-02-13)*
 ----------------------------
 
