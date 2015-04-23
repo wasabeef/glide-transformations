@@ -22,7 +22,9 @@ public class MainActivity extends ActionBarActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         List<Type> dataSet = new ArrayList<>();
-        dataSet.add(Type.Crop);
+        dataSet.add(Type.CropTop);
+        dataSet.add(Type.CropCenter);
+        dataSet.add(Type.CropBottom);
         dataSet.add(Type.CropSquare);
         dataSet.add(Type.CropCircle);
         dataSet.add(Type.ColorFilter);

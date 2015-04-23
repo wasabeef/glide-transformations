@@ -45,7 +45,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private BitmapPool mPool;
 
     enum Type {
-        Crop,
+        CropTop,
+        CropCenter,
+        CropBottom,
         CropSquare,
         CropCircle,
         ColorFilter,
@@ -81,8 +83,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
         Transformation<Bitmap> transformation = null;
         switch (mDataSet.get(position)) {
-            case Crop:
+            case CropTop:
+                transformation =
+                        new CropTransformation(mPool, 300, 100, CropTransformation.CropType.TOP);
+                break;
+            case CropCenter:
                 transformation = new CropTransformation(mPool, 300, 100);
+                break;
+            case CropBottom:
+                transformation =
+                        new CropTransformation(mPool, 300, 100, CropTransformation.CropType.BOTTOM);
                 break;
             case CropSquare:
                 transformation = new CropSquareTransformation(mPool);
