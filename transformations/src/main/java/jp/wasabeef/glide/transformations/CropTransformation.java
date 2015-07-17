@@ -53,12 +53,8 @@ public class CropTransformation implements Transformation<Bitmap> {
     @Override
     public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
         Bitmap source = resource.get();
-        if (mWidth == 0) {
-            mWidth = source.getWidth();
-        }
-        if (mHeight == 0) {
-            mHeight = source.getHeight();
-        }
+        mWidth = mWidth == 0 ? source.getWidth() : mWidth;
+        mHeight = mHeight == 0 ? source.getHeight() : mHeight;
 
         Bitmap.Config config =
                 source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
