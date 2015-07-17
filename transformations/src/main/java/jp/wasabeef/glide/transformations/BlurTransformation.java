@@ -54,11 +54,9 @@ public class BlurTransformation implements Transformation<Bitmap> {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        Bitmap.Config config =
-                source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = mBitmapPool.get(width, height, config);
+        Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
         if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(width, height, config);
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         }
 
         Canvas canvas = new Canvas(bitmap);
