@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.0.6@aar'
+    compile 'jp.wasabeef:glide-transformations:1.0.7@aar'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3@aar'
 }
 ```
@@ -67,7 +67,7 @@ android {
     ...
     defaultConfig {
         ...
-        renderscriptTargetApi 21
+        renderscriptTargetApi 22
         renderscriptSupportModeEnabled true
     }
 }
