@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.0.7@aar'
+    compile 'jp.wasabeef:glide-transformations:1.0.8@aar'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3@aar'
 }
 ```
@@ -54,7 +54,7 @@ You can set a multiple transformations.
 ```java
 BitmapPool pool = Glide.get(this).getBitmapPool();
 Glide.with(this).load(R.drawable.demo).bitmapTransform(
-  new BlurTransformation(this, pool, 5),  new CropCircleTransformation(pool))
+  new BlurTransformation(this, pool, 25, 2),  new CropCircleTransformation(pool))
   .into((ImageView) findViewById(R.id.image));
 ```
 
