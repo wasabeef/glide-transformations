@@ -15,9 +15,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.bumptech.glide:glide:3.6.1'
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3'
+    compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    compile "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
 }
 
 android.libraryVariants.all { variant ->

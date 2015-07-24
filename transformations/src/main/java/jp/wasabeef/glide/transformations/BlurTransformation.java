@@ -24,27 +24,36 @@ import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
 
 public class BlurTransformation implements Transformation<Bitmap> {
 
     private static int MAX_RADIUS = 25;
+    private static int DEFAULT_DOWN_SAMPLING = 1;
 
     private Context mContext;
     private BitmapPool mBitmapPool;
 
     private int mRadius;
+    private int mSampling;
 
     public BlurTransformation(Context context, BitmapPool pool) {
-        this(context, pool, MAX_RADIUS);
+        this(context, pool, MAX_RADIUS, DEFAULT_DOWN_SAMPLING);
     }
 
     public BlurTransformation(Context context, BitmapPool pool, int radius) {
+        this(context, pool, radius, DEFAULT_DOWN_SAMPLING);
+    }
+
+    public BlurTransformation(Context context, BitmapPool pool, int radius, int sampling) {
         mContext = context;
         mBitmapPool = pool;
         mRadius = radius;
+        mSampling = sampling;
     }
 
     @Override
@@ -53,22 +62,30 @@ public class BlurTransformation implements Transformation<Bitmap> {
 
         int width = source.getWidth();
         int height = source.getHeight();
+        int scaledWidth = width / mSampling;
+        int scaledHeight = height / mSampling;
 
-        Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = mBitmapPool.get(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
         if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
         }
 
         Canvas canvas = new Canvas(bitmap);
-        canvas.drawBitmap(source, 0, 0, null);
+        canvas.scale(1 / (float) mSampling, 1 / (float) mSampling);
+        Paint paint = new Paint();
+        paint.setFlags(Paint.FILTER_BITMAP_FLAG);
+        canvas.drawBitmap(source, 0, 0, paint);
 
         RenderScript rs = RenderScript.create(mContext);
-        Allocation overlayAlloc = Allocation.createFromBitmap(rs, bitmap);
-        ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
-        blur.setInput(overlayAlloc);
+        Allocation input = Allocation.createFromBitmap(rs, bitmap,
+                Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+        ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+
+        blur.setInput(input);
         blur.setRadius(mRadius);
-        blur.forEach(overlayAlloc);
-        overlayAlloc.copyTo(bitmap);
+        blur.forEach(output);
+        output.copyTo(bitmap);
 
         rs.destroy();
 
@@ -77,6 +94,6 @@ public class BlurTransformation implements Transformation<Bitmap> {
 
     @Override
     public String getId() {
-        return "BlurTransformation(radius=" + mRadius + ")";
+        return "BlurTransformation(radius=" + mRadius + ", sampling=" + mSampling + ")";
     }
 }

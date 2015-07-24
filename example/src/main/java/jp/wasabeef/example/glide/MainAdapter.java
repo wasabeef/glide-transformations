@@ -81,7 +81,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
-        Transformation<Bitmap> transformation = null;
+        Transformation transformation = null;
         switch (mDataSet.get(position)) {
             case CropTop:
                 transformation =
@@ -110,7 +110,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 transformation = new RoundedCornersTransformation(mPool, 100, 0);
                 break;
             case Blur:
-                transformation = new BlurTransformation(mContext, mPool, 10);
+                transformation = new BlurTransformation(mContext, mPool, 25, 1);
                 break;
             case Toon:
                 transformation = new ToonFilterTransformation(mContext, mPool);
