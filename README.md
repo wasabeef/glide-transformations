@@ -32,8 +32,8 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.0.8@aar'
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3@aar'
+    compile 'jp.wasabeef:glide-transformations:1.0.8'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3'
 }
 ```
 
