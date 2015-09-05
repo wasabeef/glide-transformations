@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -27,6 +28,11 @@ import android.graphics.Bitmap;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
 
+/**
+ * The threshold at which to apply the edges, default of 0.2.
+ * The levels of quantization for the posterization of colors within the scene,
+ * with a default of 10.0.
+ */
 public class ToonFilterTransformation implements Transformation<Bitmap> {
 
     private Context mContext;
@@ -36,9 +42,16 @@ public class ToonFilterTransformation implements Transformation<Bitmap> {
     private float mThreshold;
     private float mQuantizationLevels;
 
+    public ToonFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
+
     public ToonFilterTransformation(Context context, BitmapPool pool) {
-        mContext = context;
-        mBitmapPool = pool;
+        this(context, pool, .2f, 10.0f);
+    }
+
+    public ToonFilterTransformation(Context context, float threshold, float quantizationLevels) {
+        this(context, Glide.get(context).getBitmapPool(), threshold, quantizationLevels);
     }
 
     public ToonFilterTransformation(Context context, BitmapPool pool,

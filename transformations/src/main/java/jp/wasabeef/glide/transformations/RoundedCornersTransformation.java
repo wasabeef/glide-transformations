@@ -16,11 +16,13 @@ package jp.wasabeef.glide.transformations;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -35,10 +37,14 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
     private int radius;
     private int margin;
 
+    public RoundedCornersTransformation(Context context, int radius, int margin) {
+        this(Glide.get(context).getBitmapPool(), radius, margin);
+    }
+
     public RoundedCornersTransformation(BitmapPool pool, int radius, int margin) {
+        mBitmapPool = pool;
         this.radius = radius;
         this.margin = margin;
-        mBitmapPool = pool;
     }
 
     @Override

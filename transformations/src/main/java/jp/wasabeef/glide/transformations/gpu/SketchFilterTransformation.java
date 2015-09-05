@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -31,6 +32,10 @@ public class SketchFilterTransformation implements Transformation<Bitmap> {
 
     private Context mContext;
     private BitmapPool mBitmapPool;
+
+    public SketchFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
 
     public SketchFilterTransformation(Context context, BitmapPool pool) {
         mContext = context;

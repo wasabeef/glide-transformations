@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -41,6 +42,10 @@ public class BlurTransformation implements Transformation<Bitmap> {
     private int mRadius;
     private int mSampling;
 
+    public BlurTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool(), MAX_RADIUS, DEFAULT_DOWN_SAMPLING);
+    }
+
     public BlurTransformation(Context context, BitmapPool pool) {
         this(context, pool, MAX_RADIUS, DEFAULT_DOWN_SAMPLING);
     }
@@ -49,9 +54,20 @@ public class BlurTransformation implements Transformation<Bitmap> {
         this(context, pool, radius, DEFAULT_DOWN_SAMPLING);
     }
 
+    public BlurTransformation(Context context, int radius) {
+        this(context, Glide.get(context).getBitmapPool(), radius, DEFAULT_DOWN_SAMPLING);
+    }
+
     public BlurTransformation(Context context, BitmapPool pool, int radius, int sampling) {
         mContext = context;
         mBitmapPool = pool;
+        mRadius = radius;
+        mSampling = sampling;
+    }
+
+    public BlurTransformation(Context context, int radius, int sampling) {
+        mContext = context;
+        mBitmapPool = Glide.get(context).getBitmapPool();
         mRadius = radius;
         mSampling = sampling;
     }

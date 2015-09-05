@@ -16,16 +16,24 @@ package jp.wasabeef.glide.transformations;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 
 public class CropTransformation implements Transformation<Bitmap> {
+
+    public enum CropType {
+        TOP,
+        CENTER,
+        BOTTOM
+    }
 
     private BitmapPool mBitmapPool;
     private int mWidth;
@@ -33,14 +41,24 @@ public class CropTransformation implements Transformation<Bitmap> {
 
     private CropType mCropType = CropType.CENTER;
 
+    public CropTransformation(Context context) {
+        this(Glide.get(context).getBitmapPool());
+    }
+
     public CropTransformation(BitmapPool pool) {
-        mBitmapPool = pool;
+        this(pool, 0, 0);
+    }
+
+    public CropTransformation(Context context, int width, int height) {
+        this(Glide.get(context).getBitmapPool(), width, height);
     }
 
     public CropTransformation(BitmapPool pool, int width, int height) {
-        mBitmapPool = pool;
-        mWidth = width;
-        mHeight = height;
+        this(pool, width, height, CropType.CENTER);
+    }
+
+    public CropTransformation(Context context, int width, int height, CropType cropType) {
+        this(Glide.get(context).getBitmapPool(), width, height, cropType);
     }
 
     public CropTransformation(BitmapPool pool, int width, int height, CropType cropType) {
@@ -96,11 +114,5 @@ public class CropTransformation implements Transformation<Bitmap> {
             default:
                 return 0;
         }
-    }
-
-    public enum CropType {
-        TOP,
-        CENTER,
-        BOTTOM
     }
 }

@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -28,7 +29,14 @@ import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageKuwaharaFilter;
 
 /**
- * The radius to sample from when creating the brush-stroke effect, with a default of 3.
+ * Kuwahara image abstraction, drawn from the work of Kyprianidis, et. al. in their publication
+ * "Anisotropic Kuwahara Filtering on the GPU" within the GPU Pro collection. This produces an
+ * oil-painting-like
+ * image, but it is extremely computationally expensive, so it can take seconds to render a frame on
+ * an iPad 2.
+ * This might be best used for still images.
+ *
+ * The radius to sample from when creating the brush-stroke effect, with a default of 25.
  * The larger the radius, the slower the filter.
  */
 public class KuwaharaFilterTransformation implements Transformation<Bitmap> {
@@ -39,9 +47,16 @@ public class KuwaharaFilterTransformation implements Transformation<Bitmap> {
     private GPUImageKuwaharaFilter mFilter = new GPUImageKuwaharaFilter();
     private int mRadius;
 
+    public KuwaharaFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
+
     public KuwaharaFilterTransformation(Context context, BitmapPool pool) {
-        mContext = context;
-        mBitmapPool = pool;
+        this(context, pool, 25);
+    }
+
+    public KuwaharaFilterTransformation(Context context, int radius) {
+        this(context, Glide.get(context).getBitmapPool(), radius);
     }
 
     public KuwaharaFilterTransformation(Context context, BitmapPool pool, int radius) {

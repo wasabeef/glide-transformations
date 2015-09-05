@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -38,9 +39,16 @@ public class BrightnessFilterTransformation implements Transformation<Bitmap> {
     private GPUImageBrightnessFilter mFilter = new GPUImageBrightnessFilter();
     private float mBrightness;
 
+    public BrightnessFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
+
     public BrightnessFilterTransformation(Context context, BitmapPool pool) {
-        mContext = context;
-        mBitmapPool = pool;
+        this(context, pool, 0.0f);
+    }
+
+    public BrightnessFilterTransformation(Context context, float brightness) {
+        this(context, Glide.get(context).getBitmapPool(), brightness);
     }
 
     public BrightnessFilterTransformation(Context context, BitmapPool pool, float brightness) {

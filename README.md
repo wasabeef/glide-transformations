@@ -32,9 +32,9 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.0.8'
+    compile 'jp.wasabeef:glide-transformations:1.1.0'
     // If you want to use the GPU Filters
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
 }
 ```
 
@@ -44,7 +44,7 @@ Set Glide Transform.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
-        .bitmapTransform(new BlurTransformation(this, Glide.get(this).getBitmapPool()))
+        .bitmapTransform(new BlurTransformation(context))
         .into((ImageView) findViewById(R.id.image));
 ```
 
@@ -53,9 +53,8 @@ Glide.with(this).load(R.drawable.demo)
 You can set a multiple transformations.
 
 ```java
-BitmapPool pool = Glide.get(this).getBitmapPool();
-Glide.with(this).load(R.drawable.demo).bitmapTransform(
-  new BlurTransformation(this, pool, 25, 2),  new CropCircleTransformation(pool))
+Glide.with(this).load(R.drawable.demo)
+  .bitmapTransform(new BlurTransformation(context, 25, 2), new CropCircleTransformation(pool))
   .into((ImageView) findViewById(R.id.image));
 ```
 
@@ -68,7 +67,7 @@ android {
     ...
     defaultConfig {
         ...
-        renderscriptTargetApi 22
+        renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
     }
 }

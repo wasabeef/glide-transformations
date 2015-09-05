@@ -2,10 +2,8 @@ package jp.wasabeef.example.glide;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +40,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private Context mContext;
     private List<Type> mDataSet;
-    private BitmapPool mPool;
 
     enum Type {
         CropTop,
@@ -69,7 +66,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public MainAdapter(Context context, List<Type> dataSet) {
         mContext = context;
         mDataSet = dataSet;
-        mPool = Glide.get(mContext).getBitmapPool();
     }
 
     @Override
@@ -85,63 +81,64 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         switch (mDataSet.get(position)) {
             case CropTop:
                 transformation =
-                        new CropTransformation(mPool, 300, 100, CropTransformation.CropType.TOP);
+                        new CropTransformation(mContext, 300, 100, CropTransformation.CropType.TOP);
                 break;
             case CropCenter:
-                transformation = new CropTransformation(mPool, 300, 100);
+                transformation = new CropTransformation(mContext, 300, 100);
                 break;
             case CropBottom:
                 transformation =
-                        new CropTransformation(mPool, 300, 100, CropTransformation.CropType.BOTTOM);
+                        new CropTransformation(mContext, 300, 100,
+                                CropTransformation.CropType.BOTTOM);
                 break;
             case CropSquare:
-                transformation = new CropSquareTransformation(mPool);
+                transformation = new CropSquareTransformation(mContext);
                 break;
             case CropCircle:
-                transformation = new CropCircleTransformation(mPool);
+                transformation = new CropCircleTransformation(mContext);
                 break;
             case ColorFilter:
-                transformation = new ColorFilterTransformation(mPool, Color.argb(80, 255, 0, 0));
+                transformation = new ColorFilterTransformation(mContext, Color.argb(80, 255, 0, 0));
                 break;
             case Grayscale:
-                transformation = new GrayscaleTransformation(mPool);
+                transformation = new GrayscaleTransformation(mContext);
                 break;
             case RoundedCorners:
-                transformation = new RoundedCornersTransformation(mPool, 100, 0);
+                transformation = new RoundedCornersTransformation(mContext, 100, 0);
                 break;
             case Blur:
-                transformation = new BlurTransformation(mContext, mPool, 25, 1);
+                transformation = new BlurTransformation(mContext, 25, 1);
                 break;
             case Toon:
-                transformation = new ToonFilterTransformation(mContext, mPool);
+                transformation = new ToonFilterTransformation(mContext);
                 break;
             case Sepia:
-                transformation = new SepiaFilterTransformation(mContext, mPool);
+                transformation = new SepiaFilterTransformation(mContext);
                 break;
             case Contrast:
-                transformation = new ContrastFilterTransformation(mContext, mPool, 2.0f);
+                transformation = new ContrastFilterTransformation(mContext, 2.0f);
                 break;
             case Invert:
-                transformation = new InvertFilterTransformation(mContext, mPool);
+                transformation = new InvertFilterTransformation(mContext);
                 break;
             case Pixel:
-                transformation = new PixelationFilterTransformation(mContext, mPool, 20);
+                transformation = new PixelationFilterTransformation(mContext, 20);
                 break;
             case Sketch:
-                transformation = new SketchFilterTransformation(mContext, mPool);
+                transformation = new SketchFilterTransformation(mContext);
                 break;
             case Swirl:
-                transformation = new SwirlFilterTransformation(mContext, mPool,
+                transformation = new SwirlFilterTransformation(mContext,
                         0.5f, 1.0f, new PointF(0.5f, 0.5f));
                 break;
             case Brightness:
-                transformation = new BrightnessFilterTransformation(mContext, mPool, 0.5f);
+                transformation = new BrightnessFilterTransformation(mContext, 0.5f);
                 break;
             case Kuawahara:
-                transformation = new KuwaharaFilterTransformation(mContext, mPool, 25);
+                transformation = new KuwaharaFilterTransformation(mContext, 25);
                 break;
             case Vignette:
-                transformation = new VignetteFilterTransformation(mContext, mPool,
+                transformation = new VignetteFilterTransformation(mContext,
                         new PointF(0.5f, 0.5f), new float[]{0.0f, 0.0f, 0.0f}, 0f, 0.75f);
                 break;
         }

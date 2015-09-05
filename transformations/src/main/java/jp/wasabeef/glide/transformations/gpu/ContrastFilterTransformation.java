@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -38,9 +39,16 @@ public class ContrastFilterTransformation implements Transformation<Bitmap> {
     private GPUImageContrastFilter mFilter = new GPUImageContrastFilter();
     private float mContrast;
 
+    public ContrastFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
+
     public ContrastFilterTransformation(Context context, BitmapPool pool) {
-        mContext = context;
-        mBitmapPool = pool;
+        this(context, pool, 1.0f);
+    }
+
+    public ContrastFilterTransformation(Context context, float contrast) {
+        this(context, Glide.get(context).getBitmapPool(), contrast);
     }
 
     public ContrastFilterTransformation(Context context, BitmapPool pool, float contrast) {

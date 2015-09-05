@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -32,8 +33,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
 
 /**
  * Performs a vignetting effect, fading out the image at the edges
- * x:
- * y: The directional intensity of the vignetting, with a default of x = 0.75, y = 0.5
+ * The directional intensity of the vignetting,
+ * with a default of x = 0.5, y = 0.5, start = 0, end = 0.75
  */
 public class VignetteFilterTransformation implements Transformation<Bitmap> {
 
@@ -46,11 +47,17 @@ public class VignetteFilterTransformation implements Transformation<Bitmap> {
     private float mVignetteStart;
     private float mVignetteEnd;
 
+    public VignetteFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
 
     public VignetteFilterTransformation(Context context, BitmapPool pool) {
-        mContext = context;
-        mBitmapPool = pool;
-        mCenter = new PointF();
+        this(context, pool, new PointF(0.5f, 0.5f), new float[]{0.0f, 0.0f, 0.0f}, 0.0f, 0.75f);
+    }
+
+    public VignetteFilterTransformation(Context context,
+            PointF center, float[] color, float start, float end) {
+        this(context, Glide.get(context).getBitmapPool(), center, color, start, end);
     }
 
     public VignetteFilterTransformation(Context context, BitmapPool pool,

@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -27,6 +28,11 @@ import android.graphics.Bitmap;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
 
+/**
+ * Applies a simple sepia effect.
+ *
+ * The intensity with a default of 1.0.
+ */
 public class SepiaFilterTransformation implements Transformation<Bitmap> {
 
     private Context mContext;
@@ -35,9 +41,16 @@ public class SepiaFilterTransformation implements Transformation<Bitmap> {
     private GPUImageSepiaFilter mFilter = new GPUImageSepiaFilter();
     private float mIntensity;
 
+    public SepiaFilterTransformation(Context context) {
+        this(context, Glide.get(context).getBitmapPool());
+    }
+
     public SepiaFilterTransformation(Context context, BitmapPool pool) {
-        mContext = context;
-        mBitmapPool = pool;
+        this(context, pool, 1.0f);
+    }
+
+    public SepiaFilterTransformation(Context context, float intensity) {
+        this(context, Glide.get(context).getBitmapPool(), intensity);
     }
 
     public SepiaFilterTransformation(Context context, BitmapPool pool, float intensity) {
