@@ -16,18 +16,15 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.PointF;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.PointF;
-
 import java.util.Arrays;
-
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
 
@@ -38,60 +35,59 @@ import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
  */
 public class VignetteFilterTransformation implements Transformation<Bitmap> {
 
-    private Context mContext;
-    private BitmapPool mBitmapPool;
+  private Context mContext;
+  private BitmapPool mBitmapPool;
 
-    private GPUImageVignetteFilter mFilter = new GPUImageVignetteFilter();
-    private PointF mCenter;
-    private float[] mVignetteColor;
-    private float mVignetteStart;
-    private float mVignetteEnd;
+  private GPUImageVignetteFilter mFilter = new GPUImageVignetteFilter();
+  private PointF mCenter;
+  private float[] mVignetteColor;
+  private float mVignetteStart;
+  private float mVignetteEnd;
 
-    public VignetteFilterTransformation(Context context) {
-        this(context, Glide.get(context).getBitmapPool());
-    }
+  public VignetteFilterTransformation(Context context) {
+    this(context, Glide.get(context).getBitmapPool());
+  }
 
-    public VignetteFilterTransformation(Context context, BitmapPool pool) {
-        this(context, pool, new PointF(0.5f, 0.5f), new float[]{0.0f, 0.0f, 0.0f}, 0.0f, 0.75f);
-    }
+  public VignetteFilterTransformation(Context context, BitmapPool pool) {
+    this(context, pool, new PointF(0.5f, 0.5f), new float[] { 0.0f, 0.0f, 0.0f }, 0.0f, 0.75f);
+  }
 
-    public VignetteFilterTransformation(Context context,
-            PointF center, float[] color, float start, float end) {
-        this(context, Glide.get(context).getBitmapPool(), center, color, start, end);
-    }
+  public VignetteFilterTransformation(Context context, PointF center, float[] color, float start,
+      float end) {
+    this(context, Glide.get(context).getBitmapPool(), center, color, start, end);
+  }
 
-    public VignetteFilterTransformation(Context context, BitmapPool pool,
-            PointF center, float[] color, float start, float end) {
-        mContext = context;
-        mBitmapPool = pool;
-        mCenter = center;
-        mVignetteColor = color;
-        mVignetteStart = start;
-        mVignetteEnd = end;
-        mFilter.setVignetteCenter(mCenter);
-        mFilter.setVignetteColor(mVignetteColor);
-        mFilter.setVignetteStart(mVignetteStart);
-        mFilter.setVignetteEnd(mVignetteEnd);
-    }
+  public VignetteFilterTransformation(Context context, BitmapPool pool, PointF center,
+      float[] color, float start, float end) {
+    mContext = context;
+    mBitmapPool = pool;
+    mCenter = center;
+    mVignetteColor = color;
+    mVignetteStart = start;
+    mVignetteEnd = end;
+    mFilter.setVignetteCenter(mCenter);
+    mFilter.setVignetteColor(mVignetteColor);
+    mFilter.setVignetteStart(mVignetteStart);
+    mFilter.setVignetteEnd(mVignetteEnd);
+  }
 
-    @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-        Bitmap source = resource.get();
+  @Override
+  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    Bitmap source = resource.get();
 
-        GPUImage gpuImage = new GPUImage(mContext);
-        gpuImage.setImage(source);
-        gpuImage.setFilter(mFilter);
-        Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
+    GPUImage gpuImage = new GPUImage(mContext);
+    gpuImage.setImage(source);
+    gpuImage.setFilter(mFilter);
+    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
-        source.recycle();
+    source.recycle();
 
-        return BitmapResource.obtain(bitmap, mBitmapPool);
-    }
+    return BitmapResource.obtain(bitmap, mBitmapPool);
+  }
 
-    @Override
-    public String getId() {
-        return "VignetteFilterTransformation(center=" + mCenter.toString() +
-                ",color=" + Arrays.toString(mVignetteColor) +
-                ",start=" + mVignetteStart + ",end=" + mVignetteEnd + ")";
-    }
+  @Override public String getId() {
+    return "VignetteFilterTransformation(center=" + mCenter.toString() +
+        ",color=" + Arrays.toString(mVignetteColor) +
+        ",start=" + mVignetteStart + ",end=" + mVignetteEnd + ")";
+  }
 }

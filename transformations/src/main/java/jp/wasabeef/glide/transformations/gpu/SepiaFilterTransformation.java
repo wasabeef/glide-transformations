@@ -16,15 +16,13 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
 
@@ -35,47 +33,46 @@ import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
  */
 public class SepiaFilterTransformation implements Transformation<Bitmap> {
 
-    private Context mContext;
-    private BitmapPool mBitmapPool;
+  private Context mContext;
+  private BitmapPool mBitmapPool;
 
-    private GPUImageSepiaFilter mFilter = new GPUImageSepiaFilter();
-    private float mIntensity;
+  private GPUImageSepiaFilter mFilter = new GPUImageSepiaFilter();
+  private float mIntensity;
 
-    public SepiaFilterTransformation(Context context) {
-        this(context, Glide.get(context).getBitmapPool());
-    }
+  public SepiaFilterTransformation(Context context) {
+    this(context, Glide.get(context).getBitmapPool());
+  }
 
-    public SepiaFilterTransformation(Context context, BitmapPool pool) {
-        this(context, pool, 1.0f);
-    }
+  public SepiaFilterTransformation(Context context, BitmapPool pool) {
+    this(context, pool, 1.0f);
+  }
 
-    public SepiaFilterTransformation(Context context, float intensity) {
-        this(context, Glide.get(context).getBitmapPool(), intensity);
-    }
+  public SepiaFilterTransformation(Context context, float intensity) {
+    this(context, Glide.get(context).getBitmapPool(), intensity);
+  }
 
-    public SepiaFilterTransformation(Context context, BitmapPool pool, float intensity) {
-        mContext = context;
-        mBitmapPool = pool;
-        mIntensity = intensity;
-        mFilter.setIntensity(mIntensity);
-    }
+  public SepiaFilterTransformation(Context context, BitmapPool pool, float intensity) {
+    mContext = context;
+    mBitmapPool = pool;
+    mIntensity = intensity;
+    mFilter.setIntensity(mIntensity);
+  }
 
-    @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-        Bitmap source = resource.get();
+  @Override
+  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    Bitmap source = resource.get();
 
-        GPUImage gpuImage = new GPUImage(mContext);
-        gpuImage.setImage(source);
-        gpuImage.setFilter(mFilter);
-        Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
+    GPUImage gpuImage = new GPUImage(mContext);
+    gpuImage.setImage(source);
+    gpuImage.setFilter(mFilter);
+    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
-        source.recycle();
+    source.recycle();
 
-        return BitmapResource.obtain(bitmap, mBitmapPool);
-    }
+    return BitmapResource.obtain(bitmap, mBitmapPool);
+  }
 
-    @Override
-    public String getId() {
-        return "SepiaFilterTransformation(intensity=" + mIntensity + ")";
-    }
+  @Override public String getId() {
+    return "SepiaFilterTransformation(intensity=" + mIntensity + ")";
+  }
 }

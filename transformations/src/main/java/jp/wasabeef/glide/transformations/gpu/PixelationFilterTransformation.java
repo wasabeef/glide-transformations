@@ -16,15 +16,13 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
 
@@ -35,47 +33,46 @@ import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
  */
 public class PixelationFilterTransformation implements Transformation<Bitmap> {
 
-    private Context mContext;
-    private BitmapPool mBitmapPool;
+  private Context mContext;
+  private BitmapPool mBitmapPool;
 
-    private GPUImagePixelationFilter mFilter = new GPUImagePixelationFilter();
-    private float mPixel;
+  private GPUImagePixelationFilter mFilter = new GPUImagePixelationFilter();
+  private float mPixel;
 
-    public PixelationFilterTransformation(Context context) {
-        this(context, Glide.get(context).getBitmapPool());
-    }
+  public PixelationFilterTransformation(Context context) {
+    this(context, Glide.get(context).getBitmapPool());
+  }
 
-    public PixelationFilterTransformation(Context context, BitmapPool pool) {
-        this(context, pool, 10f);
-    }
+  public PixelationFilterTransformation(Context context, BitmapPool pool) {
+    this(context, pool, 10f);
+  }
 
-    public PixelationFilterTransformation(Context context, float pixel) {
-        this(context, Glide.get(context).getBitmapPool(), pixel);
-    }
+  public PixelationFilterTransformation(Context context, float pixel) {
+    this(context, Glide.get(context).getBitmapPool(), pixel);
+  }
 
-    public PixelationFilterTransformation(Context context, BitmapPool pool, float pixel) {
-        mContext = context;
-        mBitmapPool = pool;
-        mPixel = pixel;
-        mFilter.setPixel(mPixel);
-    }
+  public PixelationFilterTransformation(Context context, BitmapPool pool, float pixel) {
+    mContext = context;
+    mBitmapPool = pool;
+    mPixel = pixel;
+    mFilter.setPixel(mPixel);
+  }
 
-    @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-        Bitmap source = resource.get();
+  @Override
+  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    Bitmap source = resource.get();
 
-        GPUImage gpuImage = new GPUImage(mContext);
-        gpuImage.setImage(source);
-        gpuImage.setFilter(mFilter);
-        Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
+    GPUImage gpuImage = new GPUImage(mContext);
+    gpuImage.setImage(source);
+    gpuImage.setFilter(mFilter);
+    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
-        source.recycle();
+    source.recycle();
 
-        return BitmapResource.obtain(bitmap, mBitmapPool);
-    }
+    return BitmapResource.obtain(bitmap, mBitmapPool);
+  }
 
-    @Override
-    public String getId() {
-        return "PixelationFilterTransformation(pixel=" + mPixel + ")";
-    }
+  @Override public String getId() {
+    return "PixelationFilterTransformation(pixel=" + mPixel + ")";
+  }
 }

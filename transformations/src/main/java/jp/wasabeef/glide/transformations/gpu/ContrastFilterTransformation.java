@@ -16,15 +16,13 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
 
@@ -33,47 +31,46 @@ import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
  */
 public class ContrastFilterTransformation implements Transformation<Bitmap> {
 
-    private Context mContext;
-    private BitmapPool mBitmapPool;
+  private Context mContext;
+  private BitmapPool mBitmapPool;
 
-    private GPUImageContrastFilter mFilter = new GPUImageContrastFilter();
-    private float mContrast;
+  private GPUImageContrastFilter mFilter = new GPUImageContrastFilter();
+  private float mContrast;
 
-    public ContrastFilterTransformation(Context context) {
-        this(context, Glide.get(context).getBitmapPool());
-    }
+  public ContrastFilterTransformation(Context context) {
+    this(context, Glide.get(context).getBitmapPool());
+  }
 
-    public ContrastFilterTransformation(Context context, BitmapPool pool) {
-        this(context, pool, 1.0f);
-    }
+  public ContrastFilterTransformation(Context context, BitmapPool pool) {
+    this(context, pool, 1.0f);
+  }
 
-    public ContrastFilterTransformation(Context context, float contrast) {
-        this(context, Glide.get(context).getBitmapPool(), contrast);
-    }
+  public ContrastFilterTransformation(Context context, float contrast) {
+    this(context, Glide.get(context).getBitmapPool(), contrast);
+  }
 
-    public ContrastFilterTransformation(Context context, BitmapPool pool, float contrast) {
-        mContext = context;
-        mBitmapPool = pool;
-        mContrast = contrast;
-        mFilter.setContrast(mContrast);
-    }
+  public ContrastFilterTransformation(Context context, BitmapPool pool, float contrast) {
+    mContext = context;
+    mBitmapPool = pool;
+    mContrast = contrast;
+    mFilter.setContrast(mContrast);
+  }
 
-    @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-        Bitmap source = resource.get();
+  @Override
+  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    Bitmap source = resource.get();
 
-        GPUImage gpuImage = new GPUImage(mContext);
-        gpuImage.setImage(source);
-        gpuImage.setFilter(mFilter);
-        Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
+    GPUImage gpuImage = new GPUImage(mContext);
+    gpuImage.setImage(source);
+    gpuImage.setFilter(mFilter);
+    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
 
-        source.recycle();
+    source.recycle();
 
-        return BitmapResource.obtain(bitmap, mBitmapPool);
-    }
+    return BitmapResource.obtain(bitmap, mBitmapPool);
+  }
 
-    @Override
-    public String getId() {
-        return "ContrastFilterTransformation(contrast=" + mContrast + ")";
-    }
+  @Override public String getId() {
+    return "ContrastFilterTransformation(contrast=" + mContrast + ")";
+  }
 }
