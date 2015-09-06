@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-Version 1.1.0 *(2015-07-24)*
+Version 1.1.0 *(2015-09-05)*
 ----------------------------
 
 Adjustment of default parameters.
