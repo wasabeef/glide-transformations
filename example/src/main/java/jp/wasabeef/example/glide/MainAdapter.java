@@ -9,15 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+
 import java.util.List;
+
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
 import jp.wasabeef.glide.transformations.CropTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import jp.wasabeef.glide.transformations.MaskTransformation;
+import jp.wasabeef.glide.transformations.NinePatchMaskTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation;
@@ -39,6 +45,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   private List<Type> mDataSet;
 
   enum Type {
+    Mask,
+    NinePatchMask,
     CropTop,
     CropCenter,
     CropBottom,
@@ -73,6 +81,22 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   @Override public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
     Transformation transformation = null;
     switch (mDataSet.get(position)) {
+      case Mask:
+        transformation = new MaskTransformation(mContext, R.drawable.mask210);
+        Glide.with(mContext)
+                .load(R.drawable.demo)
+                .override(210, 210)
+                .bitmapTransform(new CenterCrop(mContext), transformation)
+                .into(holder.image);
+        break;
+      case NinePatchMask:
+        transformation = new NinePatchMaskTransformation(mContext, R.drawable.chat_me_mask, 300, 300);
+        Glide.with(mContext)
+                .load(R.drawable.demo)
+                .override(300, 300)
+                .bitmapTransform(new CenterCrop(mContext), transformation)
+                .into(holder.image);
+        break;
       case CropTop:
         transformation =
             new CropTransformation(mContext, 300, 100, CropTransformation.CropType.TOP);
@@ -136,7 +160,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         break;
     }
 
-    Glide.with(mContext).load(R.drawable.demo).bitmapTransform(transformation).into(holder.image);
+    if (mDataSet.get(position) != Type.Mask && mDataSet.get(position) != Type.NinePatchMask) {
+      Glide.with(mContext).load(R.drawable.demo).bitmapTransform(transformation).into(holder.image);
+    }
     holder.title.setText(mDataSet.get(position).name());
   }
 

@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
     List<Type> dataSet = new ArrayList<>();
+    dataSet.add(Type.Mask);
+    dataSet.add(Type.NinePatchMask);
     dataSet.add(Type.CropTop);
     dataSet.add(Type.CropCenter);
     dataSet.add(Type.CropBottom);
