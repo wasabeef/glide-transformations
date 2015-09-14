@@ -48,8 +48,10 @@ public class MaskTransformation implements Transformation<Bitmap> {
     public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
         Bitmap source = resource.get();
 
+        boolean maskFromBitmapPool = true;
         Bitmap mask = mBitmapPool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
         if (mask == null) {
+            maskFromBitmapPool = false;
             mask = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
         }
 
@@ -75,6 +77,10 @@ public class MaskTransformation implements Transformation<Bitmap> {
         canvas.drawBitmap(mask, new Rect(0, 0, mask.getWidth(), mask.getHeight()), new Rect(0, 0,
                 source.getWidth(), source.getHeight()), null);
         canvas.drawBitmap(source, 0, 0, paint);
+
+        if (maskFromBitmapPool) {
+            mBitmapPool.put(mask);
+        }
 
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }

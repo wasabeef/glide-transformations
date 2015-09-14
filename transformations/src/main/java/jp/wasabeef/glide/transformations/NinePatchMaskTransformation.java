@@ -56,8 +56,10 @@ public class NinePatchMaskTransformation implements Transformation<Bitmap> {
         int width = outWidth == Target.SIZE_ORIGINAL ? source.getWidth() : outWidth;
         int height = outHeight == Target.SIZE_ORIGINAL ? source.getHeight() : outHeight;
 
+        boolean maskFromBitmapPool = true;
         Bitmap mask = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
         if (mask == null) {
+            maskFromBitmapPool = false;
             mask = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         }
 
@@ -83,6 +85,10 @@ public class NinePatchMaskTransformation implements Transformation<Bitmap> {
         canvas.drawBitmap(mask, new Rect(0, 0, mask.getWidth(), mask.getHeight()), new Rect(0, 0,
                 source.getWidth(), source.getHeight()), null);
         canvas.drawBitmap(source, 0, 0, paint);
+
+        if (maskFromBitmapPool) {
+            mBitmapPool.put(mask);
+        }
 
         return BitmapResource.obtain(bitmap, mBitmapPool);
     }
