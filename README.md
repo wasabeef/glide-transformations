@@ -76,7 +76,8 @@ android {
 ## Transformations
 
 ### Crop
-`CropTransformation`, `CropCircleTransformation`, `CropSquareTransformation`
+`CropTransformation`, `CropCircleTransformation`, `CropSquareTransformation`,
+`RoundedCornersTransformation`
 
 ### Color
 `ColorFilterTransformation`, `GrayscaleTransformation`
@@ -84,13 +85,12 @@ android {
 ### Blur
 `BlurTransformation`
 
-### Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
+### GPU Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
+*Will require add dependencies for GPUImage.*  
+
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
 `SwirlFilterTransformation`, `KuwaharaFilterTransformation`, `VignetteFilterTransformation`
-
-### Other
-`RoundedCornersTransformation`
 
 Applications using Glide Transformations
 ---

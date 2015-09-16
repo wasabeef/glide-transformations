@@ -16,7 +16,7 @@ android {
 
 dependencies {
     compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
-    compile "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
+    provided "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
 }
 
 android.libraryVariants.all { variant ->
