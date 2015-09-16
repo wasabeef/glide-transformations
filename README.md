@@ -54,7 +54,7 @@ You can set a multiple transformations.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
-  .bitmapTransform(new BlurTransformation(context, 25, 2), new CropCircleTransformation(pool))
+  .bitmapTransform(new BlurTransformation(context, 25, 2), new CropCircleTransformation(context))
   .into((ImageView) findViewById(R.id.image));
 ```
 
