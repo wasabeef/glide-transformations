@@ -89,7 +89,7 @@ android {
 `MaskTransformation`, `NinePatchMaskTransformation`
 
 ### GPU Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
-*Will require add dependencies for GPUImage.*  
+**Will require add dependencies for GPUImage.**  
 
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
