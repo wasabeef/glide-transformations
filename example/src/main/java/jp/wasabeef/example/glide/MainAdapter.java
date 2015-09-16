@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-
 import java.util.List;
-
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -84,18 +81,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
       case Mask:
         transformation = new MaskTransformation(mContext, R.drawable.mask210);
         Glide.with(mContext)
-                .load(R.drawable.demo)
-                .override(210, 210)
-                .bitmapTransform(new CenterCrop(mContext), transformation)
-                .into(holder.image);
+            .load(R.drawable.demo)
+            .override(210, 210)
+            .bitmapTransform(new CenterCrop(mContext), transformation)
+            .into(holder.image);
         break;
       case NinePatchMask:
-        transformation = new NinePatchMaskTransformation(mContext, R.drawable.chat_me_mask, 300, 300);
+        transformation = new NinePatchMaskTransformation(mContext, R.drawable.chat_me_mask);
         Glide.with(mContext)
-                .load(R.drawable.demo)
-                .override(300, 300)
-                .bitmapTransform(new CenterCrop(mContext), transformation)
-                .into(holder.image);
+            .load(R.drawable.demo)
+            .override(300, 300)
+            .bitmapTransform(new CenterCrop(mContext), transformation)
+            .into(holder.image);
         break;
       case CropTop:
         transformation =

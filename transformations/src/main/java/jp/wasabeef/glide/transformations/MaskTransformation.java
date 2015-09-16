@@ -24,70 +24,55 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import jp.wasabeef.glide.transformations.internal.Util;
 
 public class MaskTransformation implements Transformation<Bitmap> {
 
-    private Context mContext;
-    private BitmapPool mBitmapPool;
-    private int mMaskId;
+  private Context mContext;
+  private BitmapPool mBitmapPool;
+  private int mMaskId;
 
-    public MaskTransformation(Context context, int maskId) {
-        mBitmapPool = Glide.get(context).getBitmapPool();
-        mContext = context;
-        mMaskId = maskId;
+  public MaskTransformation(Context context, int maskId) {
+    mBitmapPool = Glide.get(context).getBitmapPool();
+    mContext = context;
+    mMaskId = maskId;
+  }
+
+  @Override
+  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    Bitmap source = resource.get();
+
+    int width = source.getWidth();
+    int height = source.getHeight();
+
+    Bitmap mask = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+    Drawable drawable = Util.getMaskDrawable(mContext, mMaskId);
+    drawable.setBounds(0, 0, width, height);
+    Canvas canvas = new Canvas(mask);
+    drawable.draw(canvas);
+
+    Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
+    if (bitmap == null) {
+      bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
     }
 
-    @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-        Bitmap source = resource.get();
+    Paint paint = new Paint();
+    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 
-        boolean maskFromBitmapPool = true;
-        Bitmap mask = mBitmapPool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-        if (mask == null) {
-            maskFromBitmapPool = false;
-            mask = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-        }
+    canvas = new Canvas(bitmap);
+    canvas.drawBitmap(mask, new Rect(0, 0, width, height), new Rect(0, 0, width, height), null);
+    canvas.drawBitmap(source, 0, 0, paint);
 
-        Drawable drawable;
-        if (Build.VERSION.SDK_INT >= 21) {
-            drawable = mContext.getDrawable(mMaskId);
-        } else {
-            drawable = mContext.getResources().getDrawable(mMaskId);
-        }
-        drawable.setBounds(0, 0, source.getWidth(), source.getHeight());
-        Canvas canvas = new Canvas(mask);
-        drawable.draw(canvas);
+    return BitmapResource.obtain(bitmap, mBitmapPool);
+  }
 
-        Bitmap bitmap = mBitmapPool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-        if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Paint paint = new Paint();
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-
-        canvas = new Canvas(bitmap);
-        canvas.drawBitmap(mask, new Rect(0, 0, mask.getWidth(), mask.getHeight()), new Rect(0, 0,
-                source.getWidth(), source.getHeight()), null);
-        canvas.drawBitmap(source, 0, 0, paint);
-
-        if (maskFromBitmapPool) {
-            mBitmapPool.put(mask);
-        }
-
-        return BitmapResource.obtain(bitmap, mBitmapPool);
-    }
-
-    @Override
-    public String getId() {
-        return "MaskTransformation(maskId=" + mMaskId + ")";
-    }
-
+  @Override public String getId() {
+    return "MaskTransformation(maskId=" + mMaskId + ")";
+  }
 }
