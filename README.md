@@ -85,6 +85,9 @@ android {
 ### Blur
 `BlurTransformation`
 
+### Mask
+`MaskTransformation`, `NinePatchMaskTransformation`
+
 ### GPU Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
 *Will require add dependencies for GPUImage.*  
 
