@@ -3,8 +3,8 @@ Change Log
 Version 1.2.0 *(2015-09-16)*
 ----------------------------
 
-add new transformations MaskTransformation and NinePatchMaskTransformation.
-Thank you @start141
+add new transformations MaskTransformation and NinePatchMaskTransformation.  
+Thanks to [start141](https://github.com/start141)
 
 Version 1.1.0 *(2015-09-05)*
 ----------------------------
