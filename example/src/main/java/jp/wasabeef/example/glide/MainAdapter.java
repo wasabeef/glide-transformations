@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import java.util.List;
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -76,89 +75,143 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   }
 
   @Override public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
-    Transformation transformation = null;
     switch (mDataSet.get(position)) {
       case Mask:
-        transformation = new MaskTransformation(mContext, R.drawable.mask210);
         Glide.with(mContext)
             .load(R.drawable.demo)
             .override(210, 210)
-            .bitmapTransform(new CenterCrop(mContext), transformation)
+            .bitmapTransform(new CenterCrop(mContext),
+                new MaskTransformation(mContext, R.drawable.mask210))
             .into(holder.image);
         break;
       case NinePatchMask:
-        transformation = new NinePatchMaskTransformation(mContext, R.drawable.chat_me_mask);
         Glide.with(mContext)
             .load(R.drawable.demo)
             .override(300, 300)
-            .bitmapTransform(new CenterCrop(mContext), transformation)
+            .bitmapTransform(new CenterCrop(mContext),
+                new NinePatchMaskTransformation(mContext, R.drawable.chat_me_mask))
             .into(holder.image);
         break;
       case CropTop:
-        transformation =
-            new CropTransformation(mContext, 300, 100, CropTransformation.CropType.TOP);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(
+                new CropTransformation(mContext, 300, 100, CropTransformation.CropType.TOP))
+            .into(holder.image);
         break;
       case CropCenter:
-        transformation = new CropTransformation(mContext, 300, 100);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new CropTransformation(mContext, 300, 100))
+            .into(holder.image);
         break;
       case CropBottom:
-        transformation =
-            new CropTransformation(mContext, 300, 100, CropTransformation.CropType.BOTTOM);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(
+                new CropTransformation(mContext, 300, 100, CropTransformation.CropType.BOTTOM))
+            .into(holder.image);
+
         break;
       case CropSquare:
-        transformation = new CropSquareTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new CropSquareTransformation(mContext))
+            .into(holder.image);
         break;
       case CropCircle:
-        transformation = new CropCircleTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new CropCircleTransformation(mContext))
+            .into(holder.image);
         break;
       case ColorFilter:
-        transformation = new ColorFilterTransformation(mContext, Color.argb(80, 255, 0, 0));
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new ColorFilterTransformation(mContext, Color.argb(80, 255, 0, 0)))
+            .into(holder.image);
         break;
       case Grayscale:
-        transformation = new GrayscaleTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new GrayscaleTransformation(mContext))
+            .into(holder.image);
         break;
       case RoundedCorners:
-        transformation = new RoundedCornersTransformation(mContext, 100, 0);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new RoundedCornersTransformation(mContext, 100, 0))
+            .into(holder.image);
         break;
       case Blur:
-        transformation = new BlurTransformation(mContext, 25, 1);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new BlurTransformation(mContext, 25, 1))
+            .into(holder.image);
         break;
       case Toon:
-        transformation = new ToonFilterTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.demo)
+            .bitmapTransform(new ToonFilterTransformation(mContext))
+            .into(holder.image);
         break;
       case Sepia:
-        transformation = new SepiaFilterTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new SepiaFilterTransformation(mContext))
+            .into(holder.image);
         break;
       case Contrast:
-        transformation = new ContrastFilterTransformation(mContext, 2.0f);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new ContrastFilterTransformation(mContext, 2.0f))
+            .into(holder.image);
         break;
       case Invert:
-        transformation = new InvertFilterTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new InvertFilterTransformation(mContext))
+            .into(holder.image);
         break;
       case Pixel:
-        transformation = new PixelationFilterTransformation(mContext, 20);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new PixelationFilterTransformation(mContext, 20))
+            .into(holder.image);
         break;
       case Sketch:
-        transformation = new SketchFilterTransformation(mContext);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new SketchFilterTransformation(mContext))
+            .into(holder.image);
         break;
       case Swirl:
-        transformation =
-            new SwirlFilterTransformation(mContext, 0.5f, 1.0f, new PointF(0.5f, 0.5f));
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(
+                new SwirlFilterTransformation(mContext, 0.5f, 1.0f, new PointF(0.5f, 0.5f)))
+            .into(holder.image);
+
         break;
       case Brightness:
-        transformation = new BrightnessFilterTransformation(mContext, 0.5f);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new BrightnessFilterTransformation(mContext, 0.5f))
+            .into(holder.image);
         break;
       case Kuawahara:
-        transformation = new KuwaharaFilterTransformation(mContext, 25);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new KuwaharaFilterTransformation(mContext, 25))
+            .into(holder.image);
         break;
       case Vignette:
-        transformation = new VignetteFilterTransformation(mContext, new PointF(0.5f, 0.5f),
-            new float[] { 0.0f, 0.0f, 0.0f }, 0f, 0.75f);
+        Glide.with(mContext)
+            .load(R.drawable.check)
+            .bitmapTransform(new VignetteFilterTransformation(mContext, new PointF(0.5f, 0.5f),
+                new float[] { 0.0f, 0.0f, 0.0f }, 0f, 0.75f))
+            .into(holder.image);
         break;
-    }
-
-    if (mDataSet.get(position) != Type.Mask && mDataSet.get(position) != Type.NinePatchMask) {
-      Glide.with(mContext).load(R.drawable.demo).bitmapTransform(transformation).into(holder.image);
     }
     holder.title.setText(mDataSet.get(position).name());
   }
