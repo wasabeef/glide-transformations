@@ -191,7 +191,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             .bitmapTransform(
                 new SwirlFilterTransformation(mContext, 0.5f, 1.0f, new PointF(0.5f, 0.5f)))
             .into(holder.image);
-
         break;
       case Brightness:
         Glide.with(mContext)
