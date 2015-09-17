@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.1.0'
+    compile 'jp.wasabeef:glide-transformations:1.2.0'
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
 }
@@ -54,7 +54,7 @@ You can set a multiple transformations.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
-  .bitmapTransform(new BlurTransformation(context, 25, 2), new CropCircleTransformation(pool))
+  .bitmapTransform(new BlurTransformation(context, 25, 2), new CropCircleTransformation(context))
   .into((ImageView) findViewById(R.id.image));
 ```
 
@@ -76,7 +76,8 @@ android {
 ## Transformations
 
 ### Crop
-`CropTransformation`, `CropCircleTransformation`, `CropSquareTransformation`
+`CropTransformation`, `CropCircleTransformation`, `CropSquareTransformation`,
+`RoundedCornersTransformation`
 
 ### Color
 `ColorFilterTransformation`, `GrayscaleTransformation`
@@ -84,13 +85,15 @@ android {
 ### Blur
 `BlurTransformation`
 
-### Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
+### Mask
+`MaskTransformation`, `NinePatchMaskTransformation`
+
+### GPU Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
+**Will require add dependencies for GPUImage.**  
+
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
 `SwirlFilterTransformation`, `KuwaharaFilterTransformation`, `VignetteFilterTransformation`
-
-### Other
-`RoundedCornersTransformation`
 
 Applications using Glide Transformations
 ---
