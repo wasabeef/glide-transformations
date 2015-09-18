@@ -75,7 +75,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
   @Override public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
     switch (mDataSet.get(position)) {
-      case Mask:
+      case Mask: {
         int width = Utils.dip2px(mContext, 133.33f);
         int height = Utils.dip2px(mContext, 126.33f);
         Glide.with(mContext)
@@ -85,9 +85,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 new MaskTransformation(mContext, R.drawable.mask_starfish))
             .into(holder.image);
         break;
-      case NinePatchMask:
-        width = Utils.dip2px(mContext, 150.0f);
-        height = Utils.dip2px(mContext, 100.0f);
+      }
+      case NinePatchMask: {
+        int width = Utils.dip2px(mContext, 150.0f);
+        int height = Utils.dip2px(mContext, 100.0f);
         Glide.with(mContext)
             .load(R.drawable.check)
             .override(width, height)
@@ -95,6 +96,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 new MaskTransformation(mContext, R.drawable.mask_chat_right))
             .into(holder.image);
         break;
+      }
       case CropTop:
         Glide.with(mContext)
             .load(R.drawable.demo)
