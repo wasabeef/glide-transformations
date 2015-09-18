@@ -23,14 +23,12 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-
-import jp.wasabeef.glide.transformations.internal.Util;
+import jp.wasabeef.glide.transformations.internal.Utils;
 
 public class MaskTransformation implements Transformation<Bitmap> {
 
@@ -44,9 +42,9 @@ public class MaskTransformation implements Transformation<Bitmap> {
   }
 
   /**
-   * @param maskId If you change the mask file, please rename the mask file, or Glide will get the
-   *               cache with the old mask. Because getId() will return the same values if using the
-   *               same make file name. If you have a good idea please tell we, thanks.
+   * @param maskId If you change the mask file, please also rename the mask file, or Glide will get
+   *               the cache with the old mask. Because getId() return the same values if using the
+   *               same make file name. If you have a good idea please tell us, thanks.
    */
   public MaskTransformation(Context context, int maskId) {
     mBitmapPool = Glide.get(context).getBitmapPool();
@@ -65,7 +63,7 @@ public class MaskTransformation implements Transformation<Bitmap> {
       result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
     }
 
-    Drawable mask = Util.getMaskDrawable(mContext, mMaskId);
+    Drawable mask = Utils.getMaskDrawable(mContext, mMaskId);
 
     Canvas canvas = new Canvas(result);
     mask.setBounds(0, 0, width, height);
@@ -75,7 +73,8 @@ public class MaskTransformation implements Transformation<Bitmap> {
     return BitmapResource.obtain(result, mBitmapPool);
   }
 
-  @Override public String getId() {
+  @Override
+  public String getId() {
     return "MaskTransformation(maskId="
             + mContext.getResources().getResourceEntryName(mMaskId) + ")";
   }

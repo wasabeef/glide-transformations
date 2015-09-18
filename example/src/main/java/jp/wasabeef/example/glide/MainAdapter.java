@@ -19,7 +19,6 @@ import jp.wasabeef.glide.transformations.CropSquareTransformation;
 import jp.wasabeef.glide.transformations.CropTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.MaskTransformation;
-import jp.wasabeef.glide.transformations.NinePatchMaskTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation;
@@ -77,19 +76,23 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   @Override public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
     switch (mDataSet.get(position)) {
       case Mask:
+        int width = Utils.dip2px(mContext, 133.33f);
+        int height = Utils.dip2px(mContext, 126.33f);
         Glide.with(mContext)
-            .load(R.drawable.demo)
-            .override(210, 210)
+            .load(R.drawable.check)
+            .override(width, height)
             .bitmapTransform(new CenterCrop(mContext),
-                new MaskTransformation(mContext, R.drawable.mask210))
+                new MaskTransformation(mContext, R.drawable.mask_starfish))
             .into(holder.image);
         break;
       case NinePatchMask:
+        width = Utils.dip2px(mContext, 150.0f);
+        height = Utils.dip2px(mContext, 100.0f);
         Glide.with(mContext)
-            .load(R.drawable.demo)
-            .override(300, 300)
+            .load(R.drawable.check)
+            .override(width, height)
             .bitmapTransform(new CenterCrop(mContext),
-                new NinePatchMaskTransformation(mContext, R.drawable.chat_me_mask))
+                new MaskTransformation(mContext, R.drawable.mask_chat_right))
             .into(holder.image);
         break;
       case CropTop:

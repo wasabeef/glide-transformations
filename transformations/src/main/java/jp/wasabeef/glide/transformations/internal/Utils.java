@@ -20,9 +20,9 @@ import android.os.Build;
  * limitations under the License.
  */
 
-public final class Util {
+public final class Utils {
 
-  private Util() {
+  private Utils() {
     // Utility class.
   }
 
