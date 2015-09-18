@@ -43,8 +43,8 @@ public class MaskTransformation implements Transformation<Bitmap> {
 
   /**
    * @param maskId If you change the mask file, please also rename the mask file, or Glide will get
-   *               the cache with the old mask. Because getId() return the same values if using the
-   *               same make file name. If you have a good idea please tell us, thanks.
+   * the cache with the old mask. Because getId() return the same values if using the
+   * same make file name. If you have a good idea please tell us, thanks.
    */
   public MaskTransformation(Context context, int maskId) {
     mBitmapPool = Glide.get(context).getBitmapPool();
@@ -55,6 +55,7 @@ public class MaskTransformation implements Transformation<Bitmap> {
   @Override
   public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
     Bitmap source = resource.get();
+
     int width = source.getWidth();
     int height = source.getHeight();
 
@@ -73,9 +74,8 @@ public class MaskTransformation implements Transformation<Bitmap> {
     return BitmapResource.obtain(result, mBitmapPool);
   }
 
-  @Override
-  public String getId() {
-    return "MaskTransformation(maskId="
-            + mContext.getResources().getResourceEntryName(mMaskId) + ")";
+  @Override public String getId() {
+    return "MaskTransformation(maskId=" + mContext.getResources().getResourceEntryName(mMaskId)
+        + ")";
   }
 }
