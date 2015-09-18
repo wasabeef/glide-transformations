@@ -1,5 +1,11 @@
 Change Log
 ==========
+
+Version 1.2.1 *(2015-09-18)*
+----------------------------
+
+Merged NinePatchMaskTransformation to MaskTransformation.
+
 Version 1.2.0 *(2015-09-16)*
 ----------------------------
 

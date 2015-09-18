@@ -86,7 +86,7 @@ android {
 `BlurTransformation`
 
 ### Mask
-`MaskTransformation`, `NinePatchMaskTransformation`
+`MaskTransformation`
 
 ### GPU Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
 **Will require add dependencies for GPUImage.**  
@@ -112,6 +112,16 @@ Daichi Furiya (Wasabeef) - <dadadada.chop@gmail.com>
 <img alt="Follow me on Twitter"
 src="https://raw.githubusercontent.com/wasabeef/art/master/twitter.png" width="75"/>
 </a>
+
+Contributions
+-------
+
+Any contributions are welcome!
+
+Contributers
+-------
+
+* [start141](https://github.com/start141)
 
 Thanks
 -------
