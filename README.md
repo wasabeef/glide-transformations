@@ -9,8 +9,9 @@ An Android transformation library providing a variety of image transformations f
 Please feel free to use this.
 
 
-#### Are you using Picasso?
-[Picasso Transformations](https://github.com/wasabeef/picasso-transformations)
+#### Are you using Picasso or Fresco?
+[Picasso Transformations](https://github.com/wasabeef/picasso-transformations)  
+[Fresco Processors](https://github.com/wasabeef/fresco-processors)
 
 # Demo
 
