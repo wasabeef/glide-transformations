@@ -93,7 +93,8 @@ android {
 
 `ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
 `InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
-`SwirlFilterTransformation`, `KuwaharaFilterTransformation`, `VignetteFilterTransformation`
+`SwirlFilterTransformation`, `BrightnessFilterTransformation`, `KuwaharaFilterTransformation`
+`VignetteFilterTransformation`
 
 Applications using Glide Transformations
 ---
