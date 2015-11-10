@@ -4,7 +4,7 @@ Change Log
 Version 1.3.0 *(2015-11-10)*
 ----------------------------
 
-add round corner type to RoundedCornersTransformation.
+add round corner type to RoundedCornersTransformation.  
 Thanks to [kaelaela](https://github.com/kaelaela)
 
 Version 1.2.1 *(2015-09-18)*
