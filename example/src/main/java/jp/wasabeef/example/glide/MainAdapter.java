@@ -145,7 +145,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
       case RoundedCorners:
         Glide.with(mContext)
             .load(R.drawable.demo)
-            .bitmapTransform(new RoundedCornersTransformation(mContext, 100, 0))
+            .bitmapTransform(new RoundedCornersTransformation(mContext, 30, 0,
+                RoundedCornersTransformation.CornerType.BOTTOM))
             .into(holder.image);
         break;
       case Blur:
