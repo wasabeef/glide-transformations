@@ -74,6 +74,10 @@ public class BlurTransformation implements Transformation<Bitmap> {
 
   @Override
   public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    Context context = mContext.get();
+    if(context == null) {
+      return resource;
+    }
     Bitmap source = resource.get();
 
     int width = source.getWidth();
@@ -92,7 +96,7 @@ public class BlurTransformation implements Transformation<Bitmap> {
     paint.setFlags(Paint.FILTER_BITMAP_FLAG);
     canvas.drawBitmap(source, 0, 0, paint);
 
-    RenderScript rs = RenderScript.create(mContext.get());
+    RenderScript rs = RenderScript.create(context);
     Allocation input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
         Allocation.USAGE_SCRIPT);
     Allocation output = Allocation.createTyped(rs, input.getType());
@@ -103,8 +107,6 @@ public class BlurTransformation implements Transformation<Bitmap> {
     blur.forEach(output);
     output.copyTo(bitmap);
 
-    source.recycle();
-    resource.recycle();
     rs.destroy();
 
     return BitmapResource.obtain(bitmap, mBitmapPool);
