@@ -49,9 +49,18 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
     this(context, radius, margin, CornerType.ALL);
   }
 
+  public RoundedCornersTransformation(BitmapPool pool, int radius, int margin) {
+    this(pool, radius, margin, CornerType.ALL);
+  }
+
   public RoundedCornersTransformation(Context context, int radius, int margin,
       CornerType cornerType) {
-    mBitmapPool = Glide.get(context).getBitmapPool();
+    this(Glide.get(context).getBitmapPool(), radius, margin, cornerType);
+  }
+
+  public RoundedCornersTransformation(BitmapPool pool, int radius, int margin,
+      CornerType cornerType) {
+    mBitmapPool = pool;
     mRadius = radius;
     mDiameter = mRadius * 2;
     mMargin = margin;

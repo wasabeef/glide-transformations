@@ -47,8 +47,12 @@ public class MaskTransformation implements Transformation<Bitmap> {
    * same make file name. If you have a good idea please tell us, thanks.
    */
   public MaskTransformation(Context context, int maskId) {
-    mBitmapPool = Glide.get(context).getBitmapPool();
-    mContext = context;
+    this(context, Glide.get(context).getBitmapPool(), maskId);
+  }
+
+  public MaskTransformation(Context context, BitmapPool pool, int maskId) {
+    mBitmapPool = pool;
+    mContext = context.getApplicationContext();
     mMaskId = maskId;
   }
 
