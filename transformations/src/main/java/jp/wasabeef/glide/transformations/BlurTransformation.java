@@ -58,14 +58,14 @@ public class BlurTransformation implements Transformation<Bitmap> {
   }
 
   public BlurTransformation(Context context, BitmapPool pool, int radius, int sampling) {
-    mContext = context;
+    mContext = context.getApplicationContext();
     mBitmapPool = pool;
     mRadius = radius;
     mSampling = sampling;
   }
 
   public BlurTransformation(Context context, int radius, int sampling) {
-    mContext = context;
+    mContext = context.getApplicationContext();
     mBitmapPool = Glide.get(context).getBitmapPool();
     mRadius = radius;
     mSampling = sampling;
