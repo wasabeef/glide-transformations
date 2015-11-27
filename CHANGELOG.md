@@ -4,7 +4,7 @@ Change Log
 Version 1.3.1 *(2015-11-27)*
 ----------------------------
 
-Change the renderscriptTargetApi down to 20.
+Change the renderscriptTargetApi down to 20.  
  Warning:Renderscript support mode is not currently supported with renderscript target 21+
 
 fix: memory leak.
