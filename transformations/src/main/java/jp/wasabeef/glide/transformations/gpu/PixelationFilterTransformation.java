@@ -17,13 +17,8 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
 
 /**
@@ -31,12 +26,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
  *
  * The pixel with a default of 10.0.
  */
-public class PixelationFilterTransformation implements Transformation<Bitmap> {
+public class PixelationFilterTransformation extends GPUFilterTransformation {
 
-  private Context mContext;
-  private BitmapPool mBitmapPool;
-
-  private GPUImagePixelationFilter mFilter = new GPUImagePixelationFilter();
   private float mPixel;
 
   public PixelationFilterTransformation(Context context) {
@@ -52,24 +43,10 @@ public class PixelationFilterTransformation implements Transformation<Bitmap> {
   }
 
   public PixelationFilterTransformation(Context context, BitmapPool pool, float pixel) {
-    mContext = context;
-    mBitmapPool = pool;
+    super(context, pool, new GPUImagePixelationFilter());
     mPixel = pixel;
-    mFilter.setPixel(mPixel);
-  }
-
-  @Override
-  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-    Bitmap source = resource.get();
-
-    GPUImage gpuImage = new GPUImage(mContext);
-    gpuImage.setImage(source);
-    gpuImage.setFilter(mFilter);
-    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
-
-    source.recycle();
-
-    return BitmapResource.obtain(bitmap, mBitmapPool);
+    GPUImagePixelationFilter filter = getFilter();
+    filter.setPixel(mPixel);
   }
 
   @Override public String getId() {

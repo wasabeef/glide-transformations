@@ -17,25 +17,16 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.PointF;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
 
 /**
  * Creates a swirl distortion on the image.
  */
-public class SwirlFilterTransformation implements Transformation<Bitmap> {
+public class SwirlFilterTransformation extends GPUFilterTransformation {
 
-  private Context mContext;
-  private BitmapPool mBitmapPool;
-
-  private GPUImageSwirlFilter mFilter = new GPUImageSwirlFilter();
   private float mRadius;
   private float mAngle;
   private PointF mCenter;
@@ -59,28 +50,14 @@ public class SwirlFilterTransformation implements Transformation<Bitmap> {
    */
   public SwirlFilterTransformation(Context context, BitmapPool pool, float radius, float angle,
       PointF center) {
-    mContext = context;
-    mBitmapPool = pool;
+    super(context, pool, new GPUImageSwirlFilter());
     mRadius = radius;
     mAngle = angle;
     mCenter = center;
-    mFilter.setRadius(mRadius);
-    mFilter.setAngle(mAngle);
-    mFilter.setCenter(mCenter);
-  }
-
-  @Override
-  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-    Bitmap source = resource.get();
-
-    GPUImage gpuImage = new GPUImage(mContext);
-    gpuImage.setImage(source);
-    gpuImage.setFilter(mFilter);
-    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
-
-    source.recycle();
-
-    return BitmapResource.obtain(bitmap, mBitmapPool);
+    GPUImageSwirlFilter filter = getFilter();
+    filter.setRadius(mRadius);
+    filter.setAngle(mAngle);
+    filter.setCenter(mCenter);
   }
 
   @Override public String getId() {

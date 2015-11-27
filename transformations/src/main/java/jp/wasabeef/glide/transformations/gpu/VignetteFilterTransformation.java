@@ -17,15 +17,10 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.PointF;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import java.util.Arrays;
-import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
 
 /**
@@ -33,12 +28,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
  * The directional intensity of the vignetting,
  * with a default of x = 0.5, y = 0.5, start = 0, end = 0.75
  */
-public class VignetteFilterTransformation implements Transformation<Bitmap> {
+public class VignetteFilterTransformation extends GPUFilterTransformation {
 
-  private Context mContext;
-  private BitmapPool mBitmapPool;
-
-  private GPUImageVignetteFilter mFilter = new GPUImageVignetteFilter();
   private PointF mCenter;
   private float[] mVignetteColor;
   private float mVignetteStart;
@@ -59,30 +50,16 @@ public class VignetteFilterTransformation implements Transformation<Bitmap> {
 
   public VignetteFilterTransformation(Context context, BitmapPool pool, PointF center,
       float[] color, float start, float end) {
-    mContext = context;
-    mBitmapPool = pool;
+    super(context, pool, new GPUImageVignetteFilter());
     mCenter = center;
     mVignetteColor = color;
     mVignetteStart = start;
     mVignetteEnd = end;
-    mFilter.setVignetteCenter(mCenter);
-    mFilter.setVignetteColor(mVignetteColor);
-    mFilter.setVignetteStart(mVignetteStart);
-    mFilter.setVignetteEnd(mVignetteEnd);
-  }
-
-  @Override
-  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-    Bitmap source = resource.get();
-
-    GPUImage gpuImage = new GPUImage(mContext);
-    gpuImage.setImage(source);
-    gpuImage.setFilter(mFilter);
-    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
-
-    source.recycle();
-
-    return BitmapResource.obtain(bitmap, mBitmapPool);
+    GPUImageVignetteFilter filter = getFilter();
+    filter.setVignetteCenter(mCenter);
+    filter.setVignetteColor(mVignetteColor);
+    filter.setVignetteStart(mVignetteStart);
+    filter.setVignetteEnd(mVignetteEnd);
   }
 
   @Override public String getId() {

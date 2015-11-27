@@ -17,13 +17,8 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
 
 /**
@@ -31,12 +26,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
  * The levels of quantization for the posterization of colors within the scene,
  * with a default of 10.0.
  */
-public class ToonFilterTransformation implements Transformation<Bitmap> {
+public class ToonFilterTransformation extends GPUFilterTransformation {
 
-  private Context mContext;
-  private BitmapPool mBitmapPool;
-
-  private GPUImageToonFilter mFilter = new GPUImageToonFilter();
   private float mThreshold;
   private float mQuantizationLevels;
 
@@ -54,26 +45,12 @@ public class ToonFilterTransformation implements Transformation<Bitmap> {
 
   public ToonFilterTransformation(Context context, BitmapPool pool, float threshold,
       float quantizationLevels) {
-    mContext = context;
-    mBitmapPool = pool;
+    super(context, pool, new GPUImageToonFilter());
     mThreshold = threshold;
     mQuantizationLevels = quantizationLevels;
-    mFilter.setThreshold(mThreshold);
-    mFilter.setQuantizationLevels(mQuantizationLevels);
-  }
-
-  @Override
-  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-    Bitmap source = resource.get();
-
-    GPUImage gpuImage = new GPUImage(mContext);
-    gpuImage.setImage(source);
-    gpuImage.setFilter(mFilter);
-    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
-
-    source.recycle();
-
-    return BitmapResource.obtain(bitmap, mBitmapPool);
+    GPUImageToonFilter filter = getFilter();
+    filter.setThreshold(mThreshold);
+    filter.setQuantizationLevels(mQuantizationLevels);
   }
 
   @Override public String getId() {
