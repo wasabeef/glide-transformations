@@ -29,14 +29,13 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import java.lang.ref.WeakReference;
 
 public class BlurTransformation implements Transformation<Bitmap> {
 
   private static int MAX_RADIUS = 25;
   private static int DEFAULT_DOWN_SAMPLING = 1;
 
-  private WeakReference<Context> mContext;
+  private Context mContext;
   private BitmapPool mBitmapPool;
 
   private int mRadius;
@@ -59,14 +58,14 @@ public class BlurTransformation implements Transformation<Bitmap> {
   }
 
   public BlurTransformation(Context context, BitmapPool pool, int radius, int sampling) {
-    mContext = new WeakReference<>(context);
+    mContext = context.getApplicationContext();
     mBitmapPool = pool;
     mRadius = radius;
     mSampling = sampling;
   }
 
   public BlurTransformation(Context context, int radius, int sampling) {
-    mContext = new WeakReference<>(context);
+    mContext = context.getApplicationContext();
     mBitmapPool = Glide.get(context).getBitmapPool();
     mRadius = radius;
     mSampling = sampling;
@@ -74,10 +73,6 @@ public class BlurTransformation implements Transformation<Bitmap> {
 
   @Override
   public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-    Context context = mContext.get();
-    if(context == null) {
-      return resource;
-    }
     Bitmap source = resource.get();
 
     int width = source.getWidth();
@@ -96,7 +91,7 @@ public class BlurTransformation implements Transformation<Bitmap> {
     paint.setFlags(Paint.FILTER_BITMAP_FLAG);
     canvas.drawBitmap(source, 0, 0, paint);
 
-    RenderScript rs = RenderScript.create(context);
+    RenderScript rs = RenderScript.create(mContext);
     Allocation input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
         Allocation.USAGE_SCRIPT);
     Allocation output = Allocation.createTyped(rs, input.getType());
