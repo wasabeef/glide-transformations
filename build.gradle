@@ -17,5 +17,10 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
+
+        // Access to glide snapshot builds
+        maven {
+          url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
     }
 }

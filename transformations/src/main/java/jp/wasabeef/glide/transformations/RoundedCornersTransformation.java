@@ -28,6 +28,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import java.security.MessageDigest;
 
 public class RoundedCornersTransformation implements Transformation<Bitmap> {
 
@@ -248,8 +249,13 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
     canvas.drawRect(new RectF(mMargin + mRadius, mMargin + mRadius, right, bottom), paint);
   }
 
-  @Override public String getId() {
+  public String getId() {
     return "RoundedTransformation(radius=" + mRadius + ", margin=" + mMargin + ", diameter="
         + mDiameter + ", cornerType=" + mCornerType.name() + ")";
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(getId().getBytes());
   }
 }
