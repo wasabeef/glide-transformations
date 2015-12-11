@@ -68,7 +68,7 @@ android {
     ...
     defaultConfig {
         // Warning:Renderscript support mode is not currently supported with renderscript target 21+
-        renderscriptTargetApi 23
+        renderscriptTargetApi 20
         renderscriptSupportModeEnabled true
     }
 }
