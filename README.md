@@ -97,6 +97,11 @@ android {
 `SwirlFilterTransformation`, `BrightnessFilterTransformation`, `KuwaharaFilterTransformation`
 `VignetteFilterTransformation`
 
+### Proguard
+```
+-dontwarn jp.co.cyberagent.android.gpuimage.**
+```
+
 Applications using Glide Transformations
 ---
 
