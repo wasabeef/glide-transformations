@@ -27,6 +27,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import java.security.MessageDigest;
 
 public class ColorFilterTransformation implements Transformation<Bitmap> {
 
@@ -66,7 +67,12 @@ public class ColorFilterTransformation implements Transformation<Bitmap> {
     return BitmapResource.obtain(bitmap, mBitmapPool);
   }
 
-  @Override public String getId() {
+  public String getId() {
     return "ColorFilterTransformation(color=" + mColor + ")";
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(getId().getBytes());
   }
 }

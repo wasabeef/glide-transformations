@@ -23,6 +23,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import java.security.MessageDigest;
 
 public class CropSquareTransformation implements Transformation<Bitmap> {
 
@@ -48,15 +49,16 @@ public class CropSquareTransformation implements Transformation<Bitmap> {
 
     Bitmap.Config config =
         source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
-    Bitmap bitmap = mBitmapPool.get(mWidth, mHeight, config);
-    if (bitmap == null) {
-      bitmap = Bitmap.createBitmap(source, mWidth, mHeight, size, size);
-    }
-
+    Bitmap bitmap  = Bitmap.createBitmap(source, mWidth, mHeight, size, size);
     return BitmapResource.obtain(bitmap, mBitmapPool);
   }
 
-  @Override public String getId() {
+  public String getId() {
     return "CropSquareTransformation(width=" + mWidth + ", height=" + mHeight + ")";
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(getId().getBytes());
   }
 }

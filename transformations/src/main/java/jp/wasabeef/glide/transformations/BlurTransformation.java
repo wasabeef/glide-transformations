@@ -29,6 +29,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import java.security.MessageDigest;
 
 public class BlurTransformation implements Transformation<Bitmap> {
 
@@ -104,7 +105,12 @@ public class BlurTransformation implements Transformation<Bitmap> {
     return BitmapResource.obtain(bitmap, mBitmapPool);
   }
 
-  @Override public String getId() {
+  public String getId() {
     return "BlurTransformation(radius=" + mRadius + ", sampling=" + mSampling + ")";
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(getId().getBytes());
   }
 }

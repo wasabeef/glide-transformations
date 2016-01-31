@@ -28,6 +28,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import java.security.MessageDigest;
 import jp.wasabeef.glide.transformations.internal.Utils;
 
 public class MaskTransformation implements Transformation<Bitmap> {
@@ -78,8 +79,13 @@ public class MaskTransformation implements Transformation<Bitmap> {
     return BitmapResource.obtain(result, mBitmapPool);
   }
 
-  @Override public String getId() {
+  public String getId() {
     return "MaskTransformation(maskId=" + mContext.getResources().getResourceEntryName(mMaskId)
         + ")";
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(getId().getBytes());
   }
 }
