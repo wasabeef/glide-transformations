@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
+import android.support.v8.renderscript.RSRuntimeException;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import com.bumptech.glide.Glide;
@@ -29,6 +30,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import jp.wasabeef.glide.transformations.internal.FastBlur;
 
 public class BlurTransformation implements Transformation<Bitmap> {
 
@@ -88,18 +90,26 @@ public class BlurTransformation implements Transformation<Bitmap> {
     paint.setFlags(Paint.FILTER_BITMAP_FLAG);
     canvas.drawBitmap(source, 0, 0, paint);
 
-    RenderScript rs = RenderScript.create(mContext);
-    Allocation input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
-        Allocation.USAGE_SCRIPT);
-    Allocation output = Allocation.createTyped(rs, input.getType());
-    ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+    RenderScript rs = null;
+    try {
+      rs = RenderScript.create(mContext);
+      Allocation input =
+          Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
+              Allocation.USAGE_SCRIPT);
+      Allocation output = Allocation.createTyped(rs, input.getType());
+      ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
 
-    blur.setInput(input);
-    blur.setRadius(mRadius);
-    blur.forEach(output);
-    output.copyTo(bitmap);
-
-    rs.destroy();
+      blur.setInput(input);
+      blur.setRadius(mRadius);
+      blur.forEach(output);
+      output.copyTo(bitmap);
+    } catch (RSRuntimeException e) {
+      bitmap = FastBlur.doBlur(bitmap, mRadius, true);
+    } finally {
+      if (rs != null) {
+        rs.destroy();
+      }
+    }
 
     return BitmapResource.obtain(bitmap, mBitmapPool);
   }

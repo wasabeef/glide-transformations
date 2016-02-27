@@ -14,12 +14,34 @@ android {
         // Warning:Renderscript support mode is not currently supported with renderscript target 21+
         renderscriptTargetApi RENDERSCRIPT_TARGET_API as int
         renderscriptSupportModeEnabled true
+
+        consumerProguardFiles 'proguard-rules.txt'
     }
 }
 
 dependencies {
     compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     provided "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
 }
 
 publish {

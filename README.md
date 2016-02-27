@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:1.3.1'
+    compile 'jp.wasabeef:glide-transformations:1.4.0'
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
 }
@@ -97,10 +97,6 @@ android {
 `SwirlFilterTransformation`, `BrightnessFilterTransformation`, `KuwaharaFilterTransformation`
 `VignetteFilterTransformation`
 
-### Proguard
-```
--dontwarn jp.co.cyberagent.android.gpuimage.**
-```
 
 Applications using Glide Transformations
 ---
