@@ -20,7 +20,7 @@ import android.graphics.Bitmap;
 
 public class FastBlur {
 
-  public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
+  public static Bitmap blur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
 
     // Stack Blur v1.0 from
     // http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html

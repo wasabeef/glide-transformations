@@ -9,10 +9,6 @@ android {
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode "git rev-list origin/master --count".execute().text.toInteger()
         versionName VERSION_NAME
-
-        // Warning:Renderscript support mode is not currently supported with renderscript target 21+
-        renderscriptTargetApi RENDERSCRIPT_TARGET_API as int
-        renderscriptSupportModeEnabled true
     }
 
     signingConfigs {
