@@ -152,7 +152,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
       case Blur:
         Glide.with(mContext)
             .load(R.drawable.check)
-            .bitmapTransform(new BlurTransformation(mContext, 25, 1))
+            .bitmapTransform(new BlurTransformation(mContext, 25))
             .into(holder.image);
         break;
       case Toon:
