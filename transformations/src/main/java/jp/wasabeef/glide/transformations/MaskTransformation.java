@@ -32,13 +32,13 @@ import jp.wasabeef.glide.transformations.internal.Utils;
 
 public class MaskTransformation implements Transformation<Bitmap> {
 
-  private static Paint mMaskingPaint = new Paint();
+  private static Paint sMaskingPaint = new Paint();
   private Context mContext;
   private BitmapPool mBitmapPool;
   private int mMaskId;
 
   static {
-    mMaskingPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+    sMaskingPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
   }
 
   /**
@@ -73,7 +73,7 @@ public class MaskTransformation implements Transformation<Bitmap> {
     Canvas canvas = new Canvas(result);
     mask.setBounds(0, 0, width, height);
     mask.draw(canvas);
-    canvas.drawBitmap(source, 0, 0, mMaskingPaint);
+    canvas.drawBitmap(source, 0, 0, sMaskingPaint);
 
     return BitmapResource.obtain(result, mBitmapPool);
   }
