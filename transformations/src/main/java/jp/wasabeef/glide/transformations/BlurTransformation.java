@@ -88,7 +88,7 @@ public class BlurTransformation implements Transformation<Bitmap> {
     paint.setFlags(Paint.FILTER_BITMAP_FLAG);
     canvas.drawBitmap(source, 0, 0, paint);
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       try {
         bitmap = RSBlur.blur(mContext, bitmap, mRadius);
       } catch (RSRuntimeException e) {

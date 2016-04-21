@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 2.0.1 *(2016-04-21)*
+----------------------------
+
+Fix:
+ [#35](https://github.com/wasabeef/glide-transformations/issues/35)
+ RSInvalidStateException
+
 Version 2.0.0 *(2016-03-02)*
 ----------------------------
 

@@ -28,11 +28,12 @@ import android.renderscript.ScriptIntrinsicBlur;
 
 public class RSBlur {
 
-  @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+  @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
   public static Bitmap blur(Context context, Bitmap bitmap, int radius) throws RSRuntimeException {
     RenderScript rs = null;
     try {
       rs = RenderScript.create(context);
+      rs.setMessageHandler(new RenderScript.RSMessageHandler());
       Allocation input =
           Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
               Allocation.USAGE_SCRIPT);

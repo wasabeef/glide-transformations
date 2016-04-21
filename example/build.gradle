@@ -1,58 +1,58 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
+  compileSdkVersion COMPILE_SDK_VERSION as int
+  buildToolsVersion BUILD_TOOLS_VERSION
 
-    defaultConfig {
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
-        versionCode "git rev-list origin/master --count".execute().text.toInteger()
-        versionName VERSION_NAME
-    }
+  defaultConfig {
+    minSdkVersion MIN_SDK_VERSION as int
+    targetSdkVersion TARGET_SDK_VERSION as int
+    versionCode "git rev-list origin/master --count".execute().text.toInteger()
+    versionName VERSION_NAME
+  }
 
-    signingConfigs {
-        release {
-            storeFile file(keyStoreProperty)
-            keyAlias keyAliasProperty
-            storePassword keyStorePasswordProperty
-            keyPassword keyAliasPasswordProperty
-        }
+  signingConfigs {
+    release {
+      storeFile file(keyStoreProperty)
+      keyAlias keyAliasProperty
+      storePassword keyStorePasswordProperty
+      keyPassword keyAliasPasswordProperty
     }
+  }
 
-    buildTypes {
-        debug {
-            debuggable true
-            zipAlignEnabled true
-        }
-        release {
-            debuggable false
-            zipAlignEnabled true
-            signingConfig signingConfigs.release
-        }
+  buildTypes {
+    debug {
+      debuggable true
+      zipAlignEnabled true
     }
+    release {
+      debuggable false
+      zipAlignEnabled true
+      signingConfig signingConfigs.release
+    }
+  }
 }
 
 def getKeyStoreProperty() {
-    return hasProperty('WASABEEF_KEYSTORE') ? WASABEEF_KEYSTORE : "debug.keystore"
+  return hasProperty('WASABEEF_KEYSTORE') ? WASABEEF_KEYSTORE : "debug.keystore"
 }
 
 def getKeyAliasProperty() {
-    return hasProperty('WASABEEF_KEYALIAS') ? WASABEEF_KEYALIAS : "android"
+  return hasProperty('WASABEEF_KEYALIAS') ? WASABEEF_KEYALIAS : "android"
 }
 
 def getKeyStorePasswordProperty() {
-    return hasProperty('WASABEEF_KEYSTOREPASSWORD') ? WASABEEF_KEYSTOREPASSWORD : "androiddebugkey"
+  return hasProperty('WASABEEF_KEYSTOREPASSWORD') ? WASABEEF_KEYSTOREPASSWORD : "androiddebugkey"
 }
 
 def getKeyAliasPasswordProperty() {
-    return hasProperty('WASABEEF_KEYALIASPASSWORD') ? WASABEEF_KEYALIASPASSWORD : "android"
+  return hasProperty('WASABEEF_KEYALIASPASSWORD') ? WASABEEF_KEYALIASPASSWORD : "android"
 }
 
 dependencies {
-    compile project(':transformations')
-    compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
-    compile "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
-    compile "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
-    compile "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
+  compile project(':transformations')
+  compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+  compile "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
+  compile "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
+  compile "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
 }
