@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+Version 2.0.2 *(2017-03-17)*
+----------------------------
+
+Update:
+- Compile & Target SDK Version 23 -> 25
+- Build Tools 23.0.2 -> 25.0.2
+- Support Library 23.2.1 -> 25.3.0
+- GPUImage for Android 1.3.0 -> 1.4.1
+
+Bug Fix:
+- [Additional resource cleanup in RSBlur #45](https://github.com/wasabeef/glide-transformations/pull/45)
+ 
 Version 2.0.1 *(2016-04-21)*
 ----------------------------
 
