@@ -39,11 +39,11 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
     DIAGONAL_FROM_TOP_LEFT, DIAGONAL_FROM_TOP_RIGHT
   }
 
-  private BitmapPool mBitmapPool;
-  private int mRadius;
-  private int mDiameter;
-  private int mMargin;
-  private CornerType mCornerType;
+  private final BitmapPool mBitmapPool;
+  private final int mRadius;
+  private final int mDiameter;
+  private final int mMargin;
+  private final CornerType mCornerType;
 
   public RoundedCornersTransformation(Context context, int radius, int margin) {
     this(context, radius, margin, CornerType.ALL);
@@ -68,11 +68,8 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
   }
 
   @Override
-  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+  public Resource<Bitmap> transform(Resource<Bitmap> resource, int width, int height) {
     Bitmap source = resource.get();
-
-    int width = source.getWidth();
-    int height = source.getHeight();
 
     Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
     if (bitmap == null) {
