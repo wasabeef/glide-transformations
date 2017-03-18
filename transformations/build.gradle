@@ -20,26 +20,6 @@ dependencies {
   provided "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
 }
 
-task androidJavadocs(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-  classifier = 'javadoc'
-  from androidJavadocs.destinationDir
-}
-
-task androidSourcesJar(type: Jar) {
-  classifier = 'sources'
-  from android.sourceSets.main.java.srcDirs
-}
-
-artifacts {
-  archives androidSourcesJar
-  archives androidJavadocsJar
-}
-
 publish {
   userOrg = POM_DEVELOPER_ID
   groupId = GROUP
@@ -47,4 +27,7 @@ publish {
   publishVersion = VERSION_NAME
   desc = POM_DESCRIPTION
   website = POM_URL
+  bintrayUser = BINTRAY_USER
+  bintrayKey = BINTRAY_API_KEY
+  autoPublish = false
 }
