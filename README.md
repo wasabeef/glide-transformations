@@ -29,7 +29,6 @@ Please feel free to use this.
 ```groovy
 repositories {
     jcenter()
-    mavenCentral()  // GPUImage for Android
 }
 
 dependencies {
