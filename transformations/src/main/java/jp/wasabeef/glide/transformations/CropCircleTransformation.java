@@ -30,7 +30,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 
 public class CropCircleTransformation implements Transformation<Bitmap> {
 
-  private BitmapPool mBitmapPool;
+  private final BitmapPool mBitmapPool;
 
   public CropCircleTransformation(Context context) {
     this(Glide.get(context).getBitmapPool());
