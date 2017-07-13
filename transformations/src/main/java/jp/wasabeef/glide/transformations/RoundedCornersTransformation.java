@@ -255,5 +255,5 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
   
   @Override void updateDiskCacheKey(MessageDigest messageDigest) {
     // no op
-  };
+  }
 }
