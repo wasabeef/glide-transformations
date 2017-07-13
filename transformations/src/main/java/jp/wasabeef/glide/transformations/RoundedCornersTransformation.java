@@ -252,4 +252,8 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
     return "RoundedTransformation(radius=" + mRadius + ", margin=" + mMargin + ", diameter="
         + mDiameter + ", cornerType=" + mCornerType.name() + ")";
   }
+  
+  @Override void updateDiskCacheKey(MessageDigest messageDigest) {
+    // no op
+  };
 }
