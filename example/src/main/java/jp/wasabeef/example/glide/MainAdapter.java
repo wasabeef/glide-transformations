@@ -4,13 +4,16 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
@@ -31,13 +34,17 @@ import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation;
 
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
+import static com.bumptech.glide.request.RequestOptions.overrideOf;
+
 /**
  * Created by Wasabeef on 2015/01/11.
  */
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-  private Context mContext;
-  private List<Type> mDataSet;
+  private Context context;
+  private List<Type> dataSet;
 
   enum Type {
     Mask,
@@ -64,165 +71,168 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   }
 
   public MainAdapter(Context context, List<Type> dataSet) {
-    mContext = context;
-    mDataSet = dataSet;
+    this.context = context;
+    this.dataSet = dataSet;
   }
 
   @Override public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View v = LayoutInflater.from(mContext).inflate(R.layout.layout_list_item, parent, false);
+    View v = LayoutInflater.from(context).inflate(R.layout.layout_list_item, parent, false);
     return new ViewHolder(v);
   }
 
   @Override public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
-    switch (mDataSet.get(position)) {
+    DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+    switch (dataSet.get(position)) {
       case Mask: {
-        int width = Utils.dip2px(mContext, 133.33f);
-        int height = Utils.dip2px(mContext, 126.33f);
-        Glide.with(mContext)
+        int width = Utils.dip2px(context, 133.33f);
+        int height = Utils.dip2px(context, 126.33f);
+        Glide.with(context)
             .load(R.drawable.check)
-            .override(width, height)
-            .bitmapTransform(new CenterCrop(mContext),
-                new MaskTransformation(mContext, R.drawable.mask_starfish))
+            .apply(overrideOf(width, height))
+            .apply(centerCropTransform())
+            .apply(bitmapTransform(new MaskTransformation(R.drawable.mask_starfish)))
             .into(holder.image);
         break;
       }
       case NinePatchMask: {
-        int width = Utils.dip2px(mContext, 150.0f);
-        int height = Utils.dip2px(mContext, 100.0f);
-        Glide.with(mContext)
+        int width = Utils.dip2px(context, 150.0f);
+        int height = Utils.dip2px(context, 100.0f);
+        Glide.with(context)
             .load(R.drawable.check)
-            .override(width, height)
-            .bitmapTransform(new CenterCrop(mContext),
-                new MaskTransformation(mContext, R.drawable.mask_chat_right))
+            .apply(overrideOf(width, height))
+            .apply(bitmapTransform(new MaskTransformation(R.drawable.mask_chat_right)))
             .into(holder.image);
         break;
       }
       case CropTop:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(
-                new CropTransformation(mContext, 300, 100, CropTransformation.CropType.TOP))
+            .apply(bitmapTransform(
+                new CropTransformation(300 * (int) metrics.density, 100 * (int) metrics.density,
+                    CropTransformation.CropType.TOP)))
             .into(holder.image);
         break;
       case CropCenter:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new CropTransformation(mContext, 300, 100))
+            .apply(bitmapTransform(
+                new CropTransformation(300 * (int) metrics.density, 100 * (int) metrics.density)))
             .into(holder.image);
         break;
       case CropBottom:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(
-                new CropTransformation(mContext, 300, 100, CropTransformation.CropType.BOTTOM))
+            .apply(bitmapTransform(
+                new CropTransformation(300 * (int) metrics.density, 100 * (int) metrics.density,
+                    CropTransformation.CropType.BOTTOM)))
             .into(holder.image);
 
         break;
       case CropSquare:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new CropSquareTransformation(mContext))
+            .apply(bitmapTransform(new CropSquareTransformation()))
             .into(holder.image);
         break;
       case CropCircle:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new CropCircleTransformation(mContext))
+            .apply(bitmapTransform(new CropCircleTransformation()))
             .into(holder.image);
         break;
       case ColorFilter:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new ColorFilterTransformation(mContext, Color.argb(80, 255, 0, 0)))
+            .apply(bitmapTransform(new ColorFilterTransformation(Color.argb(80, 255, 0, 0))))
             .into(holder.image);
         break;
       case Grayscale:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new GrayscaleTransformation(mContext))
+            .apply(bitmapTransform(new GrayscaleTransformation()))
             .into(holder.image);
         break;
       case RoundedCorners:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new RoundedCornersTransformation(mContext, 30, 0,
-                RoundedCornersTransformation.CornerType.BOTTOM))
+            .apply(bitmapTransform(new RoundedCornersTransformation(45, 0,
+                RoundedCornersTransformation.CornerType.BOTTOM)))
             .into(holder.image);
         break;
       case Blur:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new BlurTransformation(mContext, 25))
+            .apply(bitmapTransform(new BlurTransformation(25)))
             .into(holder.image);
         break;
       case Toon:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.demo)
-            .bitmapTransform(new ToonFilterTransformation(mContext))
+            .apply(bitmapTransform(new ToonFilterTransformation()))
             .into(holder.image);
         break;
       case Sepia:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new SepiaFilterTransformation(mContext))
+            .apply(bitmapTransform(new SepiaFilterTransformation()))
             .into(holder.image);
         break;
       case Contrast:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new ContrastFilterTransformation(mContext, 2.0f))
+            .apply(bitmapTransform(new ContrastFilterTransformation(2.0f)))
             .into(holder.image);
         break;
       case Invert:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new InvertFilterTransformation(mContext))
+            .apply(bitmapTransform(new InvertFilterTransformation()))
             .into(holder.image);
         break;
       case Pixel:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new PixelationFilterTransformation(mContext, 20))
+            .apply(bitmapTransform(new PixelationFilterTransformation(20)))
             .into(holder.image);
         break;
       case Sketch:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new SketchFilterTransformation(mContext))
+            .apply(bitmapTransform(new SketchFilterTransformation()))
             .into(holder.image);
         break;
       case Swirl:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(
-                new SwirlFilterTransformation(mContext, 0.5f, 1.0f, new PointF(0.5f, 0.5f)))
+            .apply(bitmapTransform(
+                new SwirlFilterTransformation(0.5f, 1.0f, new PointF(0.5f, 0.5f))).dontAnimate())
             .into(holder.image);
         break;
       case Brightness:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new BrightnessFilterTransformation(mContext, 0.5f))
+            .apply(bitmapTransform(new BrightnessFilterTransformation(0.5f)).dontAnimate())
             .into(holder.image);
         break;
       case Kuawahara:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new KuwaharaFilterTransformation(mContext, 25))
+            .apply(bitmapTransform(new KuwaharaFilterTransformation(25)).dontAnimate())
             .into(holder.image);
         break;
       case Vignette:
-        Glide.with(mContext)
+        Glide.with(context)
             .load(R.drawable.check)
-            .bitmapTransform(new VignetteFilterTransformation(mContext, new PointF(0.5f, 0.5f),
-                new float[] { 0.0f, 0.0f, 0.0f }, 0f, 0.75f))
+            .apply(bitmapTransform(new VignetteFilterTransformation(new PointF(0.5f, 0.5f),
+                new float[] { 0.0f, 0.0f, 0.0f }, 0f, 0.75f)).dontAnimate())
             .into(holder.image);
         break;
     }
-    holder.title.setText(mDataSet.get(position).name());
+    holder.title.setText(dataSet.get(position).name());
   }
 
   @Override public int getItemCount() {
-    return mDataSet.size();
+    return dataSet.size();
   }
 
   static class ViewHolder extends RecyclerView.ViewHolder {

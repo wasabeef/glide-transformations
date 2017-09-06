@@ -16,9 +16,6 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.content.Context;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
 
 /**
@@ -28,33 +25,24 @@ import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
  */
 public class ToonFilterTransformation extends GPUFilterTransformation {
 
-  private float mThreshold;
-  private float mQuantizationLevels;
+  private float threshold;
+  private float quantizationLevels;
 
-  public ToonFilterTransformation(Context context) {
-    this(context, Glide.get(context).getBitmapPool());
+  public ToonFilterTransformation() {
+    this(.2f, 10.0f);
   }
 
-  public ToonFilterTransformation(Context context, BitmapPool pool) {
-    this(context, pool, .2f, 10.0f);
-  }
-
-  public ToonFilterTransformation(Context context, float threshold, float quantizationLevels) {
-    this(context, Glide.get(context).getBitmapPool(), threshold, quantizationLevels);
-  }
-
-  public ToonFilterTransformation(Context context, BitmapPool pool, float threshold,
-      float quantizationLevels) {
-    super(context, pool, new GPUImageToonFilter());
-    mThreshold = threshold;
-    mQuantizationLevels = quantizationLevels;
+  public ToonFilterTransformation(float threshold, float quantizationLevels) {
+    super(new GPUImageToonFilter());
+    this.threshold = threshold;
+    this.quantizationLevels = quantizationLevels;
     GPUImageToonFilter filter = getFilter();
-    filter.setThreshold(mThreshold);
-    filter.setQuantizationLevels(mQuantizationLevels);
+    filter.setThreshold(this.threshold);
+    filter.setQuantizationLevels(this.quantizationLevels);
   }
 
-  @Override public String getId() {
-    return "ToonFilterTransformation(threshold=" + mThreshold +
-        ",quantizationLevels=" + mQuantizationLevels + ")";
+  @Override public String key() {
+    return "ToonFilterTransformation(threshold=" + threshold +
+        ",quantizationLevels=" + quantizationLevels + ")";
   }
 }

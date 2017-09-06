@@ -22,34 +22,19 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
+import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 
-public class GrayscaleTransformation implements Transformation<Bitmap> {
+public class GrayscaleTransformation extends BitmapTransformation {
 
-  private BitmapPool mBitmapPool;
-
-  public GrayscaleTransformation(Context context) {
-    this(Glide.get(context).getBitmapPool());
-  }
-
-  public GrayscaleTransformation(BitmapPool pool) {
-    mBitmapPool = pool;
-  }
-
-  @Override
-  public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-    Bitmap source = resource.get();
-
-    int width = source.getWidth();
-    int height = source.getHeight();
+  @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
+      @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+    int width = toTransform.getWidth();
+    int height = toTransform.getHeight();
 
     Bitmap.Config config =
-        source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
-    Bitmap bitmap = mBitmapPool.get(width, height, config);
+        toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
+    Bitmap bitmap = pool.get(width, height, config);
     if (bitmap == null) {
       bitmap = Bitmap.createBitmap(width, height, config);
     }
@@ -59,12 +44,12 @@ public class GrayscaleTransformation implements Transformation<Bitmap> {
     saturation.setSaturation(0f);
     Paint paint = new Paint();
     paint.setColorFilter(new ColorMatrixColorFilter(saturation));
-    canvas.drawBitmap(source, 0, 0, paint);
+    canvas.drawBitmap(toTransform, 0, 0, paint);
 
-    return BitmapResource.obtain(bitmap, mBitmapPool);
+    return bitmap;
   }
 
-  @Override public String getId() {
+  @Override public String key() {
     return "GrayscaleTransformation()";
   }
 }

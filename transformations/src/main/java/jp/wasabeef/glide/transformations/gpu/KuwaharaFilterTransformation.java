@@ -16,9 +16,6 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.content.Context;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import jp.co.cyberagent.android.gpuimage.GPUImageKuwaharaFilter;
 
 /**
@@ -29,28 +26,20 @@ import jp.co.cyberagent.android.gpuimage.GPUImageKuwaharaFilter;
  */
 public class KuwaharaFilterTransformation extends GPUFilterTransformation {
 
-  private int mRadius;
+  private int radius;
 
-  public KuwaharaFilterTransformation(Context context) {
-    this(context, Glide.get(context).getBitmapPool());
+  public KuwaharaFilterTransformation() {
+    this(25);
   }
 
-  public KuwaharaFilterTransformation(Context context, BitmapPool pool) {
-    this(context, pool, 25);
-  }
-
-  public KuwaharaFilterTransformation(Context context, int radius) {
-    this(context, Glide.get(context).getBitmapPool(), radius);
-  }
-
-  public KuwaharaFilterTransformation(Context context, BitmapPool pool, int radius) {
-    super(context, pool, new GPUImageKuwaharaFilter());
-    mRadius = radius;
+  public KuwaharaFilterTransformation(int radius) {
+    super(new GPUImageKuwaharaFilter());
+    this.radius = radius;
     GPUImageKuwaharaFilter filter = getFilter();
-    filter.setRadius(mRadius);
+    filter.setRadius(this.radius);
   }
 
-  @Override public String getId() {
-    return "KuwaharaFilterTransformation(radius=" + mRadius + ")";
+  @Override public String key() {
+    return "KuwaharaFilterTransformation(radius=" + radius + ")";
   }
 }
