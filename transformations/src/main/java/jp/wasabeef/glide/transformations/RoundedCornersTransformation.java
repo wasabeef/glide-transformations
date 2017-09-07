@@ -233,4 +233,8 @@ public class RoundedCornersTransformation extends BitmapTransformation {
     return "RoundedTransformation(radius=" + radius + ", margin=" + margin + ", diameter="
         + diameter + ", cornerType=" + cornerType.name() + ")";
   }
+  
+  @Override void updateDiskCacheKey(MessageDigest messageDigest) {
+    // no op
+  }
 }
