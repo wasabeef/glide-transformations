@@ -24,12 +24,15 @@ import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 
 public class CropSquareTransformation extends BitmapTransformation {
 
+  private int size;
+
   @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
       @NonNull Bitmap toTransform, int outWidth, int outHeight) {
-    return TransformationUtils.centerCrop(pool, toTransform, outWidth, outHeight);
+    this.size = Math.max(outWidth, outHeight);
+    return TransformationUtils.centerCrop(pool, toTransform, size, size);
   }
 
   @Override public String key() {
-    return "CropSquareTransformation()";
+    return "CropSquareTransformation(size=" + size + ")";
   }
 }

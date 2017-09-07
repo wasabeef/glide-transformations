@@ -29,7 +29,7 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.util.Util;
 import java.security.MessageDigest;
 
-abstract class BitmapTransformation implements Transformation<Bitmap> {
+public abstract class BitmapTransformation implements Transformation<Bitmap> {
 
   public abstract String key();
 

@@ -24,7 +24,7 @@ import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageFilter;
 import jp.wasabeef.glide.transformations.BitmapTransformation;
 
-public class GPUFilterTransformation extends BitmapTransformation{
+public class GPUFilterTransformation extends BitmapTransformation {
 
   private GPUImageFilter gpuImageFilter;
 

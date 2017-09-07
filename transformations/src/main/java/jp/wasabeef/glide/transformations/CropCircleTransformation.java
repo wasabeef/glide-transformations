@@ -21,7 +21,12 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
+import com.bumptech.glide.request.RequestOptions;
 
+/**
+ * @deprecated Use {@link RequestOptions#circleCrop()}.
+ */
+@Deprecated
 public class CropCircleTransformation extends BitmapTransformation {
 
   @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
