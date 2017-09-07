@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+Version 3.0.0 *(2017-09-06)*
+----------------------------
+
+Update:
+- Build Tools 25.0.2 -> 26.0.1
+- Min SDK Version 11 -> 14
+- Glide 3.7.0 -> 4.0.0
+
+Feature: 
+- Supported Glide 4.0.0
+
 Version 2.0.2 *(2017-03-17)*
 ----------------------------
 
