@@ -51,9 +51,7 @@ public class MaskTransformation extends BitmapTransformation {
     int height = toTransform.getHeight();
 
     Bitmap bitmap = pool.get(width, height, Bitmap.Config.ARGB_8888);
-    if (bitmap == null) {
-      bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-    }
+    bitmap.setHasAlpha(true);
 
     Drawable mask = Utils.getMaskDrawable(context.getApplicationContext(), maskId);
 

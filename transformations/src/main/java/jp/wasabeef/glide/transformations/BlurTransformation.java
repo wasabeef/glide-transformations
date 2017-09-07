@@ -57,9 +57,6 @@ public class BlurTransformation extends BitmapTransformation {
     int scaledHeight = height / sampling;
 
     Bitmap bitmap = pool.get(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
-    if (bitmap == null) {
-      bitmap = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
-    }
 
     Canvas canvas = new Canvas(bitmap);
     canvas.scale(1 / (float) sampling, 1 / (float) sampling);

@@ -108,7 +108,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Glide.with(context)
             .load(R.drawable.demo)
             .apply(bitmapTransform(
-                new CropTransformation(300 * (int) metrics.density, 100 * (int) metrics.density,
+                new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100),
                     CropTransformation.CropType.TOP)))
             .into(holder.image);
         break;
@@ -116,14 +116,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Glide.with(context)
             .load(R.drawable.demo)
             .apply(bitmapTransform(
-                new CropTransformation(300 * (int) metrics.density, 100 * (int) metrics.density)))
+                new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100))))
             .into(holder.image);
         break;
       case CropBottom:
         Glide.with(context)
             .load(R.drawable.demo)
             .apply(bitmapTransform(
-                new CropTransformation(300 * (int) metrics.density, 100 * (int) metrics.density,
+                new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100),
                     CropTransformation.CropType.BOTTOM)))
             .into(holder.image);
 

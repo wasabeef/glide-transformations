@@ -41,9 +41,6 @@ public class ColorFilterTransformation extends BitmapTransformation {
     Bitmap.Config config =
         toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
     Bitmap bitmap = pool.get(width, height, config);
-    if (bitmap == null) {
-      bitmap = Bitmap.createBitmap(width, height, config);
-    }
 
     Canvas canvas = new Canvas(bitmap);
     Paint paint = new Paint();

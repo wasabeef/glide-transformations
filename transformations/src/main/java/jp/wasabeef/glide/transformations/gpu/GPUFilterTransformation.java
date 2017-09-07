@@ -38,9 +38,7 @@ public class GPUFilterTransformation extends BitmapTransformation {
     gpuImage.setImage(toTransform);
     gpuImage.setFilter(gpuImageFilter);
 
-    Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
-
-    return bitmap;
+    return gpuImage.getBitmapWithFilterApplied();
   }
 
   @Override public String key() {
