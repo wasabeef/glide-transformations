@@ -1,6 +1,7 @@
 package jp.wasabeef.example.glide;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
 import jp.wasabeef.glide.transformations.CropTransformation;
+import jp.wasabeef.glide.transformations.CropTransformation.CropType;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.MaskTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -89,8 +91,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Glide.with(context)
             .load(R.drawable.check)
             .apply(overrideOf(width, height))
-            .apply(centerCropTransform())
-            .apply(bitmapTransform(new MaskTransformation(R.drawable.mask_starfish)))
+            .apply(bitmapTransform(new MultiTransformation<>(new CenterCrop(), new MaskTransformation(R.drawable.mask_starfish))))
             .into(holder.image);
         break;
       }
@@ -100,7 +101,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Glide.with(context)
             .load(R.drawable.check)
             .apply(overrideOf(width, height))
-            .apply(bitmapTransform(new MaskTransformation(R.drawable.mask_chat_right)))
+            .apply(bitmapTransform(new MultiTransformation<>(new CenterCrop(), new MaskTransformation(R.drawable.mask_chat_right))))
             .into(holder.image);
         break;
       }
@@ -109,7 +110,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             .load(R.drawable.demo)
             .apply(bitmapTransform(
                 new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100),
-                    CropTransformation.CropType.TOP)))
+                    CropType.TOP)))
             .into(holder.image);
         break;
       case CropCenter:
@@ -124,7 +125,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             .load(R.drawable.demo)
             .apply(bitmapTransform(
                 new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100),
-                    CropTransformation.CropType.BOTTOM)))
+                    CropType.BOTTOM)))
             .into(holder.image);
 
         break;
