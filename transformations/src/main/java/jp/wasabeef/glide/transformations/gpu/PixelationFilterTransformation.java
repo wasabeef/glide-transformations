@@ -16,9 +16,6 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.content.Context;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
 
 /**
@@ -28,28 +25,20 @@ import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
  */
 public class PixelationFilterTransformation extends GPUFilterTransformation {
 
-  private float mPixel;
+  private float pixel;
 
-  public PixelationFilterTransformation(Context context) {
-    this(context, Glide.get(context).getBitmapPool());
+  public PixelationFilterTransformation() {
+    this(10f);
   }
 
-  public PixelationFilterTransformation(Context context, BitmapPool pool) {
-    this(context, pool, 10f);
-  }
-
-  public PixelationFilterTransformation(Context context, float pixel) {
-    this(context, Glide.get(context).getBitmapPool(), pixel);
-  }
-
-  public PixelationFilterTransformation(Context context, BitmapPool pool, float pixel) {
-    super(context, pool, new GPUImagePixelationFilter());
-    mPixel = pixel;
+  public PixelationFilterTransformation(float pixel) {
+    super(new GPUImagePixelationFilter());
+    this.pixel = pixel;
     GPUImagePixelationFilter filter = getFilter();
-    filter.setPixel(mPixel);
+    filter.setPixel(this.pixel);
   }
 
-  @Override public String getId() {
-    return "PixelationFilterTransformation(pixel=" + mPixel + ")";
+  @Override public String key() {
+    return "PixelationFilterTransformation(pixel=" + pixel + ")";
   }
 }

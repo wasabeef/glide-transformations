@@ -16,9 +16,6 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.content.Context;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
 
 /**
@@ -26,28 +23,20 @@ import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
  */
 public class ContrastFilterTransformation extends GPUFilterTransformation {
 
-  private float mContrast;
+  private float contrast;
 
-  public ContrastFilterTransformation(Context context) {
-    this(context, Glide.get(context).getBitmapPool());
+  public ContrastFilterTransformation() {
+    this(1.0f);
   }
 
-  public ContrastFilterTransformation(Context context, BitmapPool pool) {
-    this(context, pool, 1.0f);
-  }
-
-  public ContrastFilterTransformation(Context context, float contrast) {
-    this(context, Glide.get(context).getBitmapPool(), contrast);
-  }
-
-  public ContrastFilterTransformation(Context context, BitmapPool pool, float contrast) {
-    super(context, pool, new GPUImageContrastFilter());
-    mContrast = contrast;
+  public ContrastFilterTransformation(float contrast) {
+    super(new GPUImageContrastFilter());
+    this.contrast = contrast;
     GPUImageContrastFilter filter = getFilter();
-    filter.setContrast(mContrast);
+    filter.setContrast(this.contrast);
   }
 
-  @Override public String getId() {
-    return "ContrastFilterTransformation(contrast=" + mContrast + ")";
+  @Override public String key() {
+    return "ContrastFilterTransformation(contrast=" + contrast + ")";
   }
 }

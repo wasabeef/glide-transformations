@@ -52,6 +52,7 @@ def getKeyAliasPasswordProperty() {
 dependencies {
   compile project(':transformations')
   compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+  annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
   compile "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
   compile "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
   compile "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
