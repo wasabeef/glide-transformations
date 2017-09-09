@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 3.0.1 *(2017-09-08)*
+----------------------------
+
+Bug Fix:
+- [Deleted a setting for DexGuard #86](https://github.com/wasabeef/glide-transformations/issues/86)
+
 Version 3.0.0 *(2017-09-06)*
 ----------------------------
 
