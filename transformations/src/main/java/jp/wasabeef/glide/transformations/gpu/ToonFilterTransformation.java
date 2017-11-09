@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * The threshold at which to apply the edges, default of 0.2.
@@ -41,8 +42,13 @@ public class ToonFilterTransformation extends GPUFilterTransformation {
     filter.setQuantizationLevels(this.quantizationLevels);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "ToonFilterTransformation(threshold=" + threshold +
         ",quantizationLevels=" + quantizationLevels + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation.class;
   }
 }

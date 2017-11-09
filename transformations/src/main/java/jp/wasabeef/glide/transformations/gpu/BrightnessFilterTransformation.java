@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageBrightnessFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * brightness value ranges from -1.0 to 1.0, with 0.0 as the normal level
@@ -36,7 +37,12 @@ public class BrightnessFilterTransformation extends GPUFilterTransformation {
     filter.setBrightness(this.brightness);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "BrightnessFilterTransformation(brightness=" + brightness + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation.class;
   }
 }

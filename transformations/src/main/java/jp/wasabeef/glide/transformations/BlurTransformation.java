@@ -77,7 +77,12 @@ public class BlurTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "BlurTransformation(radius=" + radius + ", sampling=" + sampling + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.BlurTransformation.class;
   }
 }

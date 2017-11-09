@@ -18,6 +18,7 @@ package jp.wasabeef.glide.transformations.gpu;
 
 import android.graphics.PointF;
 import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Creates a swirl distortion on the image.
@@ -48,8 +49,13 @@ public class SwirlFilterTransformation extends GPUFilterTransformation {
     filter.setCenter(this.center);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "SwirlFilterTransformation(radius=" + radius +
         ",angle=" + angle + ",center=" + center.toString() + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation.class;
   }
 }

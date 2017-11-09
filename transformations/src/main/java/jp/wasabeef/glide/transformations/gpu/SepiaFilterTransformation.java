@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Applies a simple sepia effect.
@@ -38,7 +39,12 @@ public class SepiaFilterTransformation extends GPUFilterTransformation {
     filter.setIntensity(this.intensity);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "SepiaFilterTransformation(intensity=" + intensity + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation.class;
   }
 }

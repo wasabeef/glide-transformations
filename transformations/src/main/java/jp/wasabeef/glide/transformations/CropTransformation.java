@@ -74,9 +74,14 @@ public class CropTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "CropTransformation(width=" + width + ", height=" + height + ", cropType=" + cropType
         + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.CropTransformation.class;
   }
 
   private float getTop(float scaledHeight) {

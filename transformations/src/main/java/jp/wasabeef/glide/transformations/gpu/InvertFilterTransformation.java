@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageColorInvertFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Invert all the colors in the image.
@@ -27,7 +28,12 @@ public class InvertFilterTransformation extends GPUFilterTransformation {
     super(new GPUImageColorInvertFilter());
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "InvertFilterTransformation()";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation.class;
   }
 }

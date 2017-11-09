@@ -63,7 +63,12 @@ public class MaskTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "MaskTransformation(maskId=" + maskId + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.MaskTransformation.class;
   }
 }

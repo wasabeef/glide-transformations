@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * contrast value ranges from 0.0 to 4.0, with 1.0 as the normal level
@@ -36,7 +37,12 @@ public class ContrastFilterTransformation extends GPUFilterTransformation {
     filter.setContrast(this.contrast);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "ContrastFilterTransformation(contrast=" + contrast + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation.class;
   }
 }

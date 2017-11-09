@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageSketchFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 public class SketchFilterTransformation extends GPUFilterTransformation {
 
@@ -24,7 +25,12 @@ public class SketchFilterTransformation extends GPUFilterTransformation {
     super(new GPUImageSketchFilter());
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "SketchFilterTransformation()";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation.class;
   }
 }

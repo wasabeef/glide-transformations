@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImageKuwaharaFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Kuwahara all the colors in the image.
@@ -39,7 +40,12 @@ public class KuwaharaFilterTransformation extends GPUFilterTransformation {
     filter.setRadius(this.radius);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "KuwaharaFilterTransformation(radius=" + radius + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation.class;
   }
 }

@@ -41,11 +41,16 @@ public class GPUFilterTransformation extends BitmapTransformation {
     return gpuImage.getBitmapWithFilterApplied();
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return getClass().getSimpleName();
   }
 
   @SuppressWarnings("unchecked") public <T> T getFilter() {
     return (T) gpuImageFilter;
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.GPUFilterTransformation.class;
   }
 }

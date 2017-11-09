@@ -46,7 +46,12 @@ public class GrayscaleTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "GrayscaleTransformation()";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.GrayscaleTransformation.class;
   }
 }

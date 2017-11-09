@@ -32,7 +32,12 @@ public class CropSquareTransformation extends BitmapTransformation {
     return TransformationUtils.centerCrop(pool, toTransform, size, size);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "CropSquareTransformation(size=" + size + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.CropSquareTransformation.class;
   }
 }

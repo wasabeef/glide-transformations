@@ -34,7 +34,12 @@ public class CropCircleTransformation extends BitmapTransformation {
     return TransformationUtils.circleCrop(pool, toTransform, outWidth, outHeight);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "CropCircleTransformation()";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.CropCircleTransformation.class;
   }
 }

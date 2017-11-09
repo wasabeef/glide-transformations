@@ -229,8 +229,13 @@ public class RoundedCornersTransformation extends BitmapTransformation {
     canvas.drawRect(new RectF(margin + radius, margin + radius, right, bottom), paint);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "RoundedTransformation(radius=" + radius + ", margin=" + margin + ", diameter="
         + diameter + ", cornerType=" + cornerType.name() + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.RoundedCornersTransformation.class;
   }
 }

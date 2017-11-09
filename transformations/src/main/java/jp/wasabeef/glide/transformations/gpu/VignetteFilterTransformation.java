@@ -19,6 +19,7 @@ package jp.wasabeef.glide.transformations.gpu;
 import android.graphics.PointF;
 import java.util.Arrays;
 import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Performs a vignetting effect, fading out the image at the edges
@@ -49,9 +50,14 @@ public class VignetteFilterTransformation extends GPUFilterTransformation {
     filter.setVignetteEnd(vignetteEnd);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "VignetteFilterTransformation(center=" + center.toString() +
         ",color=" + Arrays.toString(vignetteColor) +
         ",start=" + vignetteStart + ",end=" + vignetteEnd + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation.class;
   }
 }

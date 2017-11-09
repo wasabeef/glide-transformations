@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Applies a Pixelation effect to the image.
@@ -38,7 +39,12 @@ public class PixelationFilterTransformation extends GPUFilterTransformation {
     filter.setPixel(this.pixel);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "PixelationFilterTransformation(pixel=" + pixel + ")";
+  }
+
+  @Override
+  protected Class<? extends BitmapTransformation> clazz() {
+    return jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation.class;
   }
 }
