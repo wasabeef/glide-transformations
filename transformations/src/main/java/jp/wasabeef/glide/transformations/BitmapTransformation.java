@@ -20,7 +20,6 @@ package jp.wasabeef.glide.transformations;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
@@ -31,9 +30,6 @@ import com.bumptech.glide.util.Util;
 import java.security.MessageDigest;
 
 public abstract class BitmapTransformation implements Transformation<Bitmap> {
-
-  protected abstract Class<? extends BitmapTransformation> clazz();
-  private static final int VERSION = 1;
 
   @Override
   public final Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int outWidth,
@@ -61,22 +57,11 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
   protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
       @NonNull Bitmap toTransform, int outWidth, int outHeight);
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(getClazzWithVersion().getBytes());
-  }
+  @Override public abstract void updateDiskCacheKey(MessageDigest messageDigest);
 
   @Override
-  public boolean equals(Object o) {
-    return o.getClass() == clazz();
-  }
+  public abstract boolean equals(Object o);
 
   @Override
-  public int hashCode() {
-    return getClazzWithVersion().hashCode();
-  }
-
-  public String getClazzWithVersion() {
-    return clazz().getName() + "." + VERSION;
-  }
-
+  public abstract int hashCode();
 }

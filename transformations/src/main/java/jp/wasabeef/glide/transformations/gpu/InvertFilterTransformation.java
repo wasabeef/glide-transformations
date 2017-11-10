@@ -16,13 +16,17 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageColorInvertFilter;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Invert all the colors in the image.
  */
 public class InvertFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   public InvertFilterTransformation() {
     super(new GPUImageColorInvertFilter());
@@ -33,7 +37,17 @@ public class InvertFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof InvertFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

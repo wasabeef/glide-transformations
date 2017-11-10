@@ -24,8 +24,13 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import java.security.MessageDigest;
 
 public class ColorFilterTransformation extends BitmapTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.ColorFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private int color;
 
@@ -56,7 +61,17 @@ public class ColorFilterTransformation extends BitmapTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.ColorFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof ColorFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

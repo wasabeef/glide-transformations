@@ -26,7 +26,13 @@ import android.graphics.Shader;
 import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
+import java.security.MessageDigest;
+
 public class RoundedCornersTransformation extends BitmapTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.RoundedCornersTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   public enum CornerType {
     ALL,
@@ -235,7 +241,17 @@ public class RoundedCornersTransformation extends BitmapTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.RoundedCornersTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof RoundedCornersTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

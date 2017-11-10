@@ -16,13 +16,17 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageBrightnessFilter;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * brightness value ranges from -1.0 to 1.0, with 0.0 as the normal level
  */
 public class BrightnessFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float brightness;
 
@@ -42,7 +46,17 @@ public class BrightnessFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof BrightnessFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

@@ -17,13 +17,17 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.graphics.PointF;
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Creates a swirl distortion on the image.
  */
 public class SwirlFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float radius;
   private float angle;
@@ -55,7 +59,17 @@ public class SwirlFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof SwirlFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

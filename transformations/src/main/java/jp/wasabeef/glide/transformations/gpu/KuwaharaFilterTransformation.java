@@ -16,8 +16,8 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageKuwaharaFilter;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Kuwahara all the colors in the image.
@@ -26,6 +26,10 @@ import jp.wasabeef.glide.transformations.BitmapTransformation;
  * The larger the radius, the slower the filter.
  */
 public class KuwaharaFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private int radius;
 
@@ -45,7 +49,17 @@ public class KuwaharaFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof KuwaharaFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

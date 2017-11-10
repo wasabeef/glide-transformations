@@ -22,8 +22,13 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import java.security.MessageDigest;
 
 public class CropTransformation extends BitmapTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.CropTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   public enum CropType {
     TOP,
@@ -80,8 +85,18 @@ public class CropTransformation extends BitmapTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.CropTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof CropTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 
   private float getTop(float scaledHeight) {
@@ -96,4 +111,5 @@ public class CropTransformation extends BitmapTransformation {
         return 0;
     }
   }
+
 }

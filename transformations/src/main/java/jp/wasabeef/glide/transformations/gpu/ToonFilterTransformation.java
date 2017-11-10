@@ -16,8 +16,8 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * The threshold at which to apply the edges, default of 0.2.
@@ -25,6 +25,10 @@ import jp.wasabeef.glide.transformations.BitmapTransformation;
  * with a default of 10.0.
  */
 public class ToonFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float threshold;
   private float quantizationLevels;
@@ -48,7 +52,17 @@ public class ToonFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof ToonFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

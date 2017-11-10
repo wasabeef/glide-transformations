@@ -16,13 +16,17 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageContrastFilter;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * contrast value ranges from 0.0 to 4.0, with 1.0 as the normal level
  */
 public class ContrastFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float contrast;
 
@@ -42,7 +46,17 @@ public class ContrastFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof ContrastFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

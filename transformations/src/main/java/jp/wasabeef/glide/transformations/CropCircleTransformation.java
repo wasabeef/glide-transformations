@@ -22,12 +22,17 @@ import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 import com.bumptech.glide.request.RequestOptions;
+import java.security.MessageDigest;
 
 /**
  * @deprecated Use {@link RequestOptions#circleCrop()}.
  */
 @Deprecated
 public class CropCircleTransformation extends BitmapTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.CropCircleTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
       @NonNull Bitmap toTransform, int outWidth, int outHeight) {
@@ -39,7 +44,17 @@ public class CropCircleTransformation extends BitmapTransformation {
   }
 
   @Override
-  protected Class<? extends BitmapTransformation> clazz() {
-    return jp.wasabeef.glide.transformations.CropCircleTransformation.class;
+  public boolean equals(Object o) {
+    return o instanceof CropCircleTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }
