@@ -31,8 +31,6 @@ import java.security.MessageDigest;
 
 public abstract class BitmapTransformation implements Transformation<Bitmap> {
 
-  public abstract String key();
-
   @Override
   public final Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int outWidth,
       int outHeight) {
@@ -59,7 +57,11 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
   protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
       @NonNull Bitmap toTransform, int outWidth, int outHeight);
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(key().getBytes());
-  }
+  @Override public abstract void updateDiskCacheKey(MessageDigest messageDigest);
+
+  @Override
+  public abstract boolean equals(Object o);
+
+  @Override
+  public abstract int hashCode();
 }

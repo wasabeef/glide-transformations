@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
 
 /**
@@ -24,6 +25,10 @@ import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
  * The pixel with a default of 10.0.
  */
 public class PixelationFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float pixel;
 
@@ -38,7 +43,22 @@ public class PixelationFilterTransformation extends GPUFilterTransformation {
     filter.setPixel(this.pixel);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "PixelationFilterTransformation(pixel=" + pixel + ")";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return o instanceof PixelationFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

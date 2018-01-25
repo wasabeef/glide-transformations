@@ -17,6 +17,7 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.graphics.PointF;
+import java.security.MessageDigest;
 import java.util.Arrays;
 import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
 
@@ -26,6 +27,10 @@ import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
  * with a default of x = 0.5, y = 0.5, start = 0, end = 0.75
  */
 public class VignetteFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private PointF center;
   private float[] vignetteColor;
@@ -49,9 +54,24 @@ public class VignetteFilterTransformation extends GPUFilterTransformation {
     filter.setVignetteEnd(vignetteEnd);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "VignetteFilterTransformation(center=" + center.toString() +
         ",color=" + Arrays.toString(vignetteColor) +
         ",start=" + vignetteStart + ",end=" + vignetteEnd + ")";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return o instanceof VignetteFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }

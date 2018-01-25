@@ -16,6 +16,7 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import java.security.MessageDigest;
 import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
 
 /**
@@ -24,6 +25,10 @@ import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
  * The intensity with a default of 1.0.
  */
 public class SepiaFilterTransformation extends GPUFilterTransformation {
+
+  private static final int VERSION = 1;
+  private static final String ID = "jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation." + VERSION;
+  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float intensity;
 
@@ -38,7 +43,22 @@ public class SepiaFilterTransformation extends GPUFilterTransformation {
     filter.setIntensity(this.intensity);
   }
 
-  @Override public String key() {
+  @Override public String toString() {
     return "SepiaFilterTransformation(intensity=" + intensity + ")";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return o instanceof SepiaFilterTransformation;
+  }
+
+  @Override
+  public int hashCode() {
+    return ID.hashCode();
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(ID_BYTES);
   }
 }
