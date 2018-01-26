@@ -1,6 +1,19 @@
 Change Log
 ==========
 
+Version 3.1.0 *(2018-01-26)*
+----------------------------
+
+Update:  
+- Compile & Target SDK Version 25 -> 27  
+- Build Tools 26.0.1 -> 27.0.3  
+- Support Library 25.3.1 -> 27.0.2  
+- Glide 4.0.0 -> 4.5.0  
+
+Bug Fix:  
+- [Implement equals() and hashCode() methods #105](https://github.com/wasabeef/glide-transformations/pull/105)  
+- Use RenderScript#releaseAllContexts  
+
 Version 3.0.1 *(2017-09-08)*
 ----------------------------
 
