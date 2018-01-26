@@ -48,7 +48,11 @@ public class RSBlur {
       output.copyTo(bitmap);
     } finally {
       if (rs != null) {
-        rs.destroy();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          RenderScript.releaseAllContexts();
+        } else {
+          rs.destroy();
+        }
       }
       if (input != null) {
         input.destroy();
