@@ -26,7 +26,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
 public class SwirlFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
-  private static final String ID = "jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation." + VERSION;
+  private static final String ID =
+      "jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float radius;
@@ -54,22 +55,19 @@ public class SwirlFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override public String toString() {
-    return "SwirlFilterTransformation(radius=" + radius +
-        ",angle=" + angle + ",center=" + center.toString() + ")";
+    return "SwirlFilterTransformation(radius=" + radius + ",angle=" + angle + ",center="
+        + center.toString() + ")";
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     return o instanceof SwirlFilterTransformation;
   }
 
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override
-  public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }

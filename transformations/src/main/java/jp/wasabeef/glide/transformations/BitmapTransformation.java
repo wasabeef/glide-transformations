@@ -59,9 +59,7 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
 
   @Override public abstract void updateDiskCacheKey(MessageDigest messageDigest);
 
-  @Override
-  public abstract boolean equals(Object o);
+  @Override public abstract boolean equals(Object o);
 
-  @Override
-  public abstract int hashCode();
+  @Override public abstract int hashCode();
 }

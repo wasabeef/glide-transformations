@@ -26,7 +26,8 @@ import java.security.MessageDigest;
 public class CropSquareTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
-  private static final String ID = "jp.wasabeef.glide.transformations.CropSquareTransformation." + VERSION;
+  private static final String ID =
+      "jp.wasabeef.glide.transformations.CropSquareTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private int size;
@@ -41,18 +42,15 @@ public class CropSquareTransformation extends BitmapTransformation {
     return "CropSquareTransformation(size=" + size + ")";
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     return o instanceof CropSquareTransformation;
   }
 
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override
-  public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }

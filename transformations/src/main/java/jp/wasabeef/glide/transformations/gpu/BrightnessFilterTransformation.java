@@ -25,7 +25,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImageBrightnessFilter;
 public class BrightnessFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
-  private static final String ID = "jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation." + VERSION;
+  private static final String ID =
+      "jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private float brightness;
@@ -45,18 +46,15 @@ public class BrightnessFilterTransformation extends GPUFilterTransformation {
     return "BrightnessFilterTransformation(brightness=" + brightness + ")";
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     return o instanceof BrightnessFilterTransformation;
   }
 
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override
-  public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }

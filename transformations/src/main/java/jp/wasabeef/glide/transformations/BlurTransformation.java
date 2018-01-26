@@ -31,7 +31,8 @@ import jp.wasabeef.glide.transformations.internal.RSBlur;
 public class BlurTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
-  private static final String ID = "jp.wasabeef.glide.transformations.BlurTransformation." + VERSION;
+  private static final String ID =
+      "jp.wasabeef.glide.transformations.BlurTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private static int MAX_RADIUS = 25;
@@ -86,18 +87,15 @@ public class BlurTransformation extends BitmapTransformation {
     return "BlurTransformation(radius=" + radius + ", sampling=" + sampling + ")";
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     return o instanceof BlurTransformation;
   }
 
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override
-  public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }

@@ -29,7 +29,8 @@ import java.security.MessageDigest;
 public class GrayscaleTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
-  private static final String ID = "jp.wasabeef.glide.transformations.GrayscaleTransformation." + VERSION;
+  private static final String ID =
+      "jp.wasabeef.glide.transformations.GrayscaleTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
@@ -55,18 +56,15 @@ public class GrayscaleTransformation extends BitmapTransformation {
     return "GrayscaleTransformation()";
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     return o instanceof GrayscaleTransformation;
   }
 
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override
-  public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }
