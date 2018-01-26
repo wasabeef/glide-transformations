@@ -16,9 +16,9 @@ android {
 }
 
 dependencies {
-  compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+  implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
   annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
-  provided "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
+  compileOnly "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
 }
 
 publish {

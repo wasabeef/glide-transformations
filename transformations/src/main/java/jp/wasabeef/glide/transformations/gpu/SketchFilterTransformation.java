@@ -1,7 +1,7 @@
 package jp.wasabeef.glide.transformations.gpu;
 
 /**
- * Copyright (C) 2017 Wasabeef
+ * Copyright (C) 2018 Wasabeef
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,8 @@ import jp.co.cyberagent.android.gpuimage.GPUImageSketchFilter;
 public class SketchFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
-  private static final String ID = "jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation." + VERSION;
+  private static final String ID =
+      "jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   public SketchFilterTransformation() {
@@ -33,18 +34,15 @@ public class SketchFilterTransformation extends GPUFilterTransformation {
     return "SketchFilterTransformation()";
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     return o instanceof SketchFilterTransformation;
   }
 
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override
-  public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }

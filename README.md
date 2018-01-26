@@ -32,9 +32,9 @@ repositories {
 }
 
 dependencies {
-    compile 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'jp.wasabeef:glide-transformations:3.1.0'
     // If you want to use the GPU Filters
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 }
 ```
 
@@ -122,7 +122,7 @@ Thanks
 License
 -------
 
-    Copyright 2017 Wasabeef
+    Copyright 2018 Wasabeef
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

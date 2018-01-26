@@ -1,7 +1,7 @@
 package jp.wasabeef.glide.transformations;
 
 /**
- * Copyright (C) 2017 Wasabeef
+ * Copyright (C) 2018 Wasabeef
  * Copyright 2014 Google, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,9 +59,7 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
 
   @Override public abstract void updateDiskCacheKey(MessageDigest messageDigest);
 
-  @Override
-  public abstract boolean equals(Object o);
+  @Override public abstract boolean equals(Object o);
 
-  @Override
-  public abstract int hashCode();
+  @Override public abstract int hashCode();
 }

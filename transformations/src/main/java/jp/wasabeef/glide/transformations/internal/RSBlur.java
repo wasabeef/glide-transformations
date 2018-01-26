@@ -11,7 +11,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 
 /**
- * Copyright (C) 2017 Wasabeef
+ * Copyright (C) 2018 Wasabeef
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,11 @@ public class RSBlur {
       output.copyTo(bitmap);
     } finally {
       if (rs != null) {
-        rs.destroy();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          RenderScript.releaseAllContexts();
+        } else {
+          rs.destroy();
+        }
       }
       if (input != null) {
         input.destroy();
