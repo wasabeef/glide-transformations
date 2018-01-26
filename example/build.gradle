@@ -52,11 +52,11 @@ def getKeyAliasPasswordProperty() {
 }
 
 dependencies {
-  compile project(':transformations')
-  compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+  implementation project(':transformations')
+  implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
   annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
-  compile "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
-  compile "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
-  compile "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
-  compile 'com.android.support.constraint:constraint-layout:1.1.0-beta4'
+  implementation "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
+  implementation "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
+  implementation "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
+  implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta4'
 }
