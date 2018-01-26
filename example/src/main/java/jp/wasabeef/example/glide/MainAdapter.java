@@ -1,11 +1,9 @@
 package jp.wasabeef.example.glide;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
@@ -37,7 +34,6 @@ import jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 import static com.bumptech.glide.request.RequestOptions.overrideOf;
 
 /**
@@ -83,25 +79,26 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   }
 
   @Override public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
-    DisplayMetrics metrics = context.getResources().getDisplayMetrics();
     switch (dataSet.get(position)) {
       case Mask: {
-        int width = Utils.dip2px(context, 133.33f);
-        int height = Utils.dip2px(context, 126.33f);
+        int width = Utils.dip2px(context, 266.66f);
+        int height = Utils.dip2px(context, 252.66f);
         Glide.with(context)
             .load(R.drawable.check)
             .apply(overrideOf(width, height))
-            .apply(bitmapTransform(new MultiTransformation<>(new CenterCrop(), new MaskTransformation(R.drawable.mask_starfish))))
+            .apply(bitmapTransform(new MultiTransformation<>(new CenterCrop(),
+                new MaskTransformation(R.drawable.mask_starfish))))
             .into(holder.image);
         break;
       }
       case NinePatchMask: {
-        int width = Utils.dip2px(context, 150.0f);
-        int height = Utils.dip2px(context, 100.0f);
+        int width = Utils.dip2px(context, 300.0f);
+        int height = Utils.dip2px(context, 200.0f);
         Glide.with(context)
             .load(R.drawable.check)
             .apply(overrideOf(width, height))
-            .apply(bitmapTransform(new MultiTransformation<>(new CenterCrop(), new MaskTransformation(R.drawable.mask_chat_right))))
+            .apply(bitmapTransform(new MultiTransformation<>(new CenterCrop(),
+                new MaskTransformation(R.drawable.mask_chat_right))))
             .into(holder.image);
         break;
       }
@@ -117,7 +114,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Glide.with(context)
             .load(R.drawable.demo)
             .apply(bitmapTransform(
-                new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100))))
+                new CropTransformation(Utils.dip2px(context, 300), Utils.dip2px(context, 100), CropType.CENTER)))
             .into(holder.image);
         break;
       case CropBottom:
