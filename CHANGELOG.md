@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+Version 3.1.1 *(2018-02-13)*
+----------------------------
+
+Update:  
+- Glide 4.5.0 -> 4.6.1  
+
+Bug Fix:  
+- Fix settings fot proguard.
+
 Version 3.1.0 *(2018-01-26)*
 ----------------------------
 
