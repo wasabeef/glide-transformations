@@ -12,6 +12,9 @@ android {
     versionName VERSION_NAME
 
     consumerProguardFiles 'proguard-rules.txt'
+
+    renderscriptTargetApi TARGET_SDK_VERSION
+    renderscriptSupportModeEnabled true
   }
 }
 
