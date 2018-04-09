@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+Version 3.2.0 *(2018-04-10)*
+----------------------------
+
+Update:  
+- Support Library 27.0.2 -> 27.1.0  
+
+Bug Fix:  
+- We quit use the RenderScript [#120](https://github.com/wasabeef/glide-transformations/issues/120)     
+
 Version 3.1.1 *(2018-02-13)*
 ----------------------------
 
