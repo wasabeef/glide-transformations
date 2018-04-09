@@ -44,7 +44,7 @@ Set Glide Transform.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
-  .apply(bitmapTransform(new BlurTransformation(25)))
+  .apply(bitmapTransform(new BlurTransformation(25, 3)))
   .into((ImageView) findViewById(R.id.image));
 ```
 
