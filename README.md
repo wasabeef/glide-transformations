@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'jp.wasabeef:glide-transformations:3.1.1'
+    implementation 'jp.wasabeef:glide-transformations:3.2.0'
     // If you want to use the GPU Filters
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 }
@@ -44,7 +44,7 @@ Set Glide Transform.
 
 ```java
 Glide.with(this).load(R.drawable.demo)
-  .apply(bitmapTransform(new BlurTransformation(25)))
+  .apply(bitmapTransform(new BlurTransformation(25, 3)))
   .into((ImageView) findViewById(R.id.image));
 ```
 
