@@ -11,10 +11,10 @@ android {
     versionCode "git rev-list origin/master --count".execute().text.toInteger()
     versionName VERSION_NAME
 
-    consumerProguardFiles 'proguard-rules.txt'
-
-    renderscriptTargetApi TARGET_SDK_VERSION
+    renderscriptTargetApi TARGET_SDK_VERSION as int
     renderscriptSupportModeEnabled true
+
+    consumerProguardFiles 'proguard-rules.txt'
   }
 }
 
