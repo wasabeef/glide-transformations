@@ -9,6 +9,9 @@ android {
     targetSdkVersion TARGET_SDK_VERSION as int
     versionCode "git rev-list origin/master --count".execute().text.toInteger()
     versionName VERSION_NAME
+
+    renderscriptTargetApi TARGET_SDK_VERSION as int
+    renderscriptSupportModeEnabled true
   }
 
   signingConfigs {
@@ -59,5 +62,5 @@ dependencies {
   implementation "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
   implementation "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
   implementation "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
-  implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta4'
+  implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }

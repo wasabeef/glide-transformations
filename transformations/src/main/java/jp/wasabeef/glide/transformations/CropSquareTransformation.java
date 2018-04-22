@@ -28,7 +28,6 @@ public class CropSquareTransformation extends BitmapTransformation {
   private static final int VERSION = 1;
   private static final String ID =
       "jp.wasabeef.glide.transformations.CropSquareTransformation." + VERSION;
-  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private int size;
 
@@ -43,14 +42,14 @@ public class CropSquareTransformation extends BitmapTransformation {
   }
 
   @Override public boolean equals(Object o) {
-    return o instanceof CropSquareTransformation;
+    return o instanceof CropSquareTransformation && ((CropSquareTransformation) o).size == size;
   }
 
   @Override public int hashCode() {
-    return ID.hashCode();
+    return ID.hashCode() + size * 10;
   }
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(ID_BYTES);
+  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+    messageDigest.update((ID + size).getBytes(CHARSET));
   }
 }

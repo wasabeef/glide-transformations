@@ -28,12 +28,11 @@ import java.security.MessageDigest;
 import jp.wasabeef.glide.transformations.internal.FastBlur;
 import jp.wasabeef.glide.transformations.internal.SupportRSBlur;
 
-public class SupportBlurTransformation extends BitmapTransformation {
+public class SupportRSBlurTransformation extends BitmapTransformation {
 
     private static final int VERSION = 1;
     private static final String ID =
-            "jp.wasabeef.glide.transformations.SupportBlurTransformation." + VERSION;
-    private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
+            "jp.wasabeef.glide.transformations.SupportRSBlurTransformation." + VERSION;
 
     private static int MAX_RADIUS = 25;
     private static int DEFAULT_DOWN_SAMPLING = 1;
@@ -41,15 +40,15 @@ public class SupportBlurTransformation extends BitmapTransformation {
     private int radius;
     private int sampling;
 
-    public SupportBlurTransformation() {
+    public SupportRSBlurTransformation() {
         this(MAX_RADIUS, DEFAULT_DOWN_SAMPLING);
     }
 
-    public SupportBlurTransformation(int radius) {
+    public SupportRSBlurTransformation(int radius) {
         this(radius, DEFAULT_DOWN_SAMPLING);
     }
 
-    public SupportBlurTransformation(int radius, int sampling) {
+    public SupportRSBlurTransformation(int radius, int sampling) {
         this.radius = radius;
         this.sampling = sampling;
     }
@@ -84,18 +83,20 @@ public class SupportBlurTransformation extends BitmapTransformation {
     }
 
     @Override public String toString() {
-        return "SupportBlurTransformation(radius=" + radius + ", sampling=" + sampling + ")";
+        return "SupportRSBlurTransformation(radius=" + radius + ", sampling=" + sampling + ")";
     }
 
     @Override public boolean equals(Object o) {
-        return o instanceof SupportBlurTransformation;
+        return o instanceof SupportRSBlurTransformation &&
+            ((SupportRSBlurTransformation) o).radius == radius &&
+            ((SupportRSBlurTransformation) o).sampling == sampling;
     }
 
     @Override public int hashCode() {
-        return ID.hashCode();
+        return ID.hashCode() + radius * 1000 + sampling * 10;
     }
 
-    @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-        messageDigest.update(ID_BYTES);
+    @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+        messageDigest.update((ID + radius + sampling).getBytes(CHARSET));
     }
 }

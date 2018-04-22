@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'jp.wasabeef:glide-transformations:3.2.0'
+    implementation 'jp.wasabeef:glide-transformations:3.3.0'
     // If you want to use the GPU Filters
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 }
@@ -59,6 +59,21 @@ MultiTransformation multi = new MultiTransformation(
 Glide.with(this).load(R.drawable.demo)
   .apply(bitmapTransform(multi))
   .into((ImageView) findViewById(R.id.image));
+```
+
+# Step 4
+
+If you are using `SupportRSBlurTransformation`.
+
+```groovy
+android {
+    ...
+    defaultConfig { 
+        ...
+        renderscriptTargetApi YOUR_TARGET_SDK_VERSION as int
+        renderscriptSupportModeEnabled true
+    }
+}
 ```
 
 ## Transformations

@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+Version 3.3.0 *(2018-04-23)*
+----------------------------
+
+Update:  
+- Support Library 27.1.0 -> 27.1.1  
+- Glide 4.6.1 -> 4.7.1  
+
+Feature:  
+- SupportRSBlurTransformation [#125](https://github.com/wasabeef/glide-transformations/pull/125)   
+  it's using RenderScript support mode but can you choose to use or not.   
+  Thank you [@fougere-mike](https://github.com/fougere-mike)  
+
+Bug Fix: 
+- Set detail of Cache key [#119](https://github.com/wasabeef/glide-transformations/issues/119)     
+
 Version 3.2.0 *(2018-04-10)*
 ----------------------------
 
