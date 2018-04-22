@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     dataSet.add(Type.Grayscale);
     dataSet.add(Type.RoundedCorners);
     dataSet.add(Type.Blur);
+    dataSet.add(Type.SupportRSBlur);
     dataSet.add(Type.Toon);
     dataSet.add(Type.Sepia);
     dataSet.add(Type.Contrast);

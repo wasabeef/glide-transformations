@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+
 import java.util.List;
+
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -22,6 +25,7 @@ import jp.wasabeef.glide.transformations.CropTransformation.CropType;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.MaskTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import jp.wasabeef.glide.transformations.SupportRSBlurTransformation;
 import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation;
@@ -56,6 +60,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     Grayscale,
     RoundedCorners,
     Blur,
+    SupportRSBlur,
     Toon,
     Sepia,
     Contrast,
@@ -161,6 +166,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Glide.with(context)
             .load(R.drawable.check)
             .apply(bitmapTransform(new BlurTransformation(25)))
+            .into(holder.image);
+        break;
+      case SupportRSBlur:
+        Glide.with(context)
+            .load(R.drawable.check)
+            .apply(bitmapTransform(new SupportRSBlurTransformation(25, 10)))
             .into(holder.image);
         break;
       case Toon:

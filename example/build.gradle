@@ -9,6 +9,9 @@ android {
     targetSdkVersion TARGET_SDK_VERSION as int
     versionCode "git rev-list origin/master --count".execute().text.toInteger()
     versionName VERSION_NAME
+
+    renderscriptTargetApi TARGET_SDK_VERSION as int
+    renderscriptSupportModeEnabled true
   }
 
   signingConfigs {
