@@ -32,7 +32,6 @@ public class RoundedCornersTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID = "jp.wasabeef.glide.transformations.RoundedCornersTransformation." + VERSION;
-  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   public enum CornerType {
     ALL,
@@ -238,14 +237,18 @@ public class RoundedCornersTransformation extends BitmapTransformation {
   }
 
   @Override public boolean equals(Object o) {
-    return o instanceof RoundedCornersTransformation;
+    return o instanceof RoundedCornersTransformation &&
+        ((RoundedCornersTransformation) o).radius == radius &&
+        ((RoundedCornersTransformation) o).diameter == diameter &&
+        ((RoundedCornersTransformation) o).margin == margin &&
+        ((RoundedCornersTransformation) o).cornerType == cornerType;
   }
 
   @Override public int hashCode() {
-    return ID.hashCode();
+    return ID.hashCode() + radius * 10000 + diameter * 1000 + margin * 100 + cornerType.ordinal() * 10;
   }
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(ID_BYTES);
+  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+    messageDigest.update((ID + radius + diameter + margin + cornerType).getBytes(CHARSET));
   }
 }

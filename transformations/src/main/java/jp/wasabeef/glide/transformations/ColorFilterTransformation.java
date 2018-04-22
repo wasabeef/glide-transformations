@@ -31,7 +31,6 @@ public class ColorFilterTransformation extends BitmapTransformation {
   private static final int VERSION = 1;
   private static final String ID =
       "jp.wasabeef.glide.transformations.ColorFilterTransformation." + VERSION;
-  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private int color;
 
@@ -62,14 +61,15 @@ public class ColorFilterTransformation extends BitmapTransformation {
   }
 
   @Override public boolean equals(Object o) {
-    return o instanceof ColorFilterTransformation;
+    return o instanceof ColorFilterTransformation &&
+        ((ColorFilterTransformation) o).color == color;
   }
 
   @Override public int hashCode() {
-    return ID.hashCode();
+    return ID.hashCode() + color * 10;
   }
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(ID_BYTES);
+  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+    messageDigest.update((ID + color).getBytes(CHARSET));
   }
 }

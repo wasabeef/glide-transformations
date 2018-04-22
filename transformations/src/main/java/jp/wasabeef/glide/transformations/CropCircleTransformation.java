@@ -33,7 +33,6 @@ public class CropCircleTransformation extends BitmapTransformation {
   private static final int VERSION = 1;
   private static final String ID =
       "jp.wasabeef.glide.transformations.CropCircleTransformation." + VERSION;
-  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
       @NonNull Bitmap toTransform, int outWidth, int outHeight) {
@@ -52,7 +51,7 @@ public class CropCircleTransformation extends BitmapTransformation {
     return ID.hashCode();
   }
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(ID_BYTES);
+  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+    messageDigest.update((ID).getBytes(CHARSET));
   }
 }

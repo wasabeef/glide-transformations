@@ -63,7 +63,7 @@ public class GPUFilterTransformation extends BitmapTransformation {
     return ID.hashCode();
   }
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
+  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }

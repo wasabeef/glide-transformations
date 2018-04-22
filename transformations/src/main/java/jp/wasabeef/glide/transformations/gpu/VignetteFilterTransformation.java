@@ -17,6 +17,8 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
+
 import java.security.MessageDigest;
 import java.util.Arrays;
 import jp.co.cyberagent.android.gpuimage.GPUImageVignetteFilter;
@@ -31,7 +33,6 @@ public class VignetteFilterTransformation extends GPUFilterTransformation {
   private static final int VERSION = 1;
   private static final String ID =
       "jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation." + VERSION;
-  private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private PointF center;
   private float[] vignetteColor;
@@ -61,14 +62,19 @@ public class VignetteFilterTransformation extends GPUFilterTransformation {
   }
 
   @Override public boolean equals(Object o) {
-    return o instanceof VignetteFilterTransformation;
+    return o instanceof VignetteFilterTransformation &&
+      ((VignetteFilterTransformation) o).center.equals(center.x, center.y) &&
+      Arrays.equals(((VignetteFilterTransformation) o).vignetteColor, vignetteColor) &&
+      ((VignetteFilterTransformation) o).vignetteStart == vignetteStart &&
+      ((VignetteFilterTransformation) o).vignetteEnd == vignetteEnd;
   }
 
   @Override public int hashCode() {
-    return ID.hashCode();
+    return ID.hashCode() + center.hashCode() + Arrays.hashCode(vignetteColor) +
+        (int) (vignetteStart * 100) + (int) (vignetteEnd * 10);
   }
 
-  @Override public void updateDiskCacheKey(MessageDigest messageDigest) {
-    messageDigest.update(ID_BYTES);
+  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+    messageDigest.update((ID + center + Arrays.hashCode(vignetteColor) + vignetteStart + vignetteEnd).getBytes(CHARSET));
   }
 }
