@@ -21,7 +21,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
-import android.renderscript.RSRuntimeException;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
@@ -29,6 +28,7 @@ import java.security.MessageDigest;
 
 import androidx.annotation.NonNull;
 import jp.wasabeef.glide.transformations.internal.FastBlur;
+import jp.wasabeef.glide.transformations.internal.RSBlur;
 import jp.wasabeef.glide.transformations.internal.SupportRSBlur;
 
 public class SupportRSBlurTransformation extends BitmapTransformation {
@@ -76,7 +76,9 @@ public class SupportRSBlurTransformation extends BitmapTransformation {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       try {
         bitmap = SupportRSBlur.blur(context, bitmap, radius);
-      } catch (RSRuntimeException e) {
+      } catch (NoClassDefFoundError e) {
+        bitmap = RSBlur.blur(context, bitmap, radius);
+      } catch (RuntimeException e) {
         bitmap = FastBlur.blur(bitmap, radius, true);
       }
     } else {

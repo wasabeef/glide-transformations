@@ -26,7 +26,6 @@ import android.renderscript.ScriptIntrinsicBlur;
  * limitations under the License.
  */
 
-@Deprecated
 public class RSBlur {
 
   @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
