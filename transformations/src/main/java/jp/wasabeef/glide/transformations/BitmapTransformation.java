@@ -19,7 +19,7 @@ package jp.wasabeef.glide.transformations;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
@@ -27,7 +27,10 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.util.Util;
+
 import java.security.MessageDigest;
+
+import androidx.annotation.NonNull;
 
 public abstract class BitmapTransformation implements Transformation<Bitmap> {
 
@@ -56,11 +59,14 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
   }
 
   protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
-      @NonNull Bitmap toTransform, int outWidth, int outHeight);
+                                      @NonNull Bitmap toTransform, int outWidth, int outHeight);
 
-  @Override public abstract void updateDiskCacheKey(@NonNull MessageDigest messageDigest);
+  @Override
+  public abstract void updateDiskCacheKey(@NonNull MessageDigest messageDigest);
 
-  @Override public abstract boolean equals(Object o);
+  @Override
+  public abstract boolean equals(Object o);
 
-  @Override public abstract int hashCode();
+  @Override
+  public abstract int hashCode();
 }

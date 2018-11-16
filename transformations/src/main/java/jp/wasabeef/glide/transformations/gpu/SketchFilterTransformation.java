@@ -16,10 +16,10 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.support.annotation.NonNull;
-
 import java.security.MessageDigest;
-import jp.co.cyberagent.android.gpuimage.GPUImageSketchFilter;
+
+import androidx.annotation.NonNull;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSketchFilter;
 
 public class SketchFilterTransformation extends GPUFilterTransformation {
 
@@ -31,19 +31,23 @@ public class SketchFilterTransformation extends GPUFilterTransformation {
     super(new GPUImageSketchFilter());
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "SketchFilterTransformation()";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof SketchFilterTransformation;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update((ID).getBytes(CHARSET));
   }
 }

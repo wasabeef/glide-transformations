@@ -16,10 +16,10 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.support.annotation.NonNull;
-
 import java.security.MessageDigest;
-import jp.co.cyberagent.android.gpuimage.GPUImageKuwaharaFilter;
+
+import androidx.annotation.NonNull;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageKuwaharaFilter;
 
 /**
  * Kuwahara all the colors in the image.
@@ -46,19 +46,23 @@ public class KuwaharaFilterTransformation extends GPUFilterTransformation {
     filter.setRadius(this.radius);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "KuwaharaFilterTransformation(radius=" + radius + ")";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof KuwaharaFilterTransformation;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode() + radius * 10;
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update((ID + radius).getBytes(CHARSET));
   }
 }

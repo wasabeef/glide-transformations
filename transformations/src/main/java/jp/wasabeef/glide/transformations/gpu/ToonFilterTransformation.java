@@ -16,10 +16,10 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.support.annotation.NonNull;
-
 import java.security.MessageDigest;
-import jp.co.cyberagent.android.gpuimage.GPUImageToonFilter;
+
+import androidx.annotation.NonNull;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageToonFilter;
 
 /**
  * The threshold at which to apply the edges, default of 0.2.
@@ -48,22 +48,26 @@ public class ToonFilterTransformation extends GPUFilterTransformation {
     filter.setQuantizationLevels(this.quantizationLevels);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "ToonFilterTransformation(threshold=" + threshold + ",quantizationLevels="
         + quantizationLevels + ")";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof ToonFilterTransformation &&
         ((ToonFilterTransformation) o).threshold == threshold &&
         ((ToonFilterTransformation) o).quantizationLevels == quantizationLevels;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode() + (int) (threshold * 1000) + (int) (quantizationLevels * 10);
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update((ID + threshold + quantizationLevels).getBytes(CHARSET));
   }
 }

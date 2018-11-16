@@ -1,4 +1,4 @@
-package jp.wasabeef.example.glide;
+package jp.wasabeef.example.glide
 
 /**
  * Copyright (C) 2018 Wasabeef
@@ -16,12 +16,8 @@ package jp.wasabeef.example.glide;
  * limitations under the License.
  */
 
-import android.content.Context;
+import android.content.res.Resources
 
-public class Utils {
+val Float.px: Float get() = (this * Resources.getSystem().displayMetrics.density)
 
-  public static int dip2px(Context context, float dp) {
-    float scale = context.getResources().getDisplayMetrics().density;
-    return (int) (dp * scale + 0.5f);
-  }
-}
+val Int.px: Int get() = ((this * Resources.getSystem().displayMetrics.density).toInt())

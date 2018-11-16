@@ -18,11 +18,14 @@ package jp.wasabeef.glide.transformations.gpu;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+
 import java.security.MessageDigest;
+
+import androidx.annotation.NonNull;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
-import jp.co.cyberagent.android.gpuimage.GPUImageFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 public class GPUFilterTransformation extends BitmapTransformation {
@@ -38,8 +41,9 @@ public class GPUFilterTransformation extends BitmapTransformation {
     this.gpuImageFilter = filter;
   }
 
-  @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
-      @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+  @Override
+  protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
+                             @NonNull Bitmap toTransform, int outWidth, int outHeight) {
     GPUImage gpuImage = new GPUImage(context);
     gpuImage.setImage(toTransform);
     gpuImage.setFilter(gpuImageFilter);
@@ -47,23 +51,28 @@ public class GPUFilterTransformation extends BitmapTransformation {
     return gpuImage.getBitmapWithFilterApplied();
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return getClass().getSimpleName();
   }
 
-  @SuppressWarnings("unchecked") public <T> T getFilter() {
+  @SuppressWarnings("unchecked")
+  public <T> T getFilter() {
     return (T) gpuImageFilter;
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof GPUFilterTransformation;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode();
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update(ID_BYTES);
   }
 }
