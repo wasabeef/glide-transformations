@@ -16,10 +16,10 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
-import android.support.annotation.NonNull;
-
 import java.security.MessageDigest;
-import jp.co.cyberagent.android.gpuimage.GPUImagePixelationFilter;
+
+import androidx.annotation.NonNull;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImagePixelationFilter;
 
 /**
  * Applies a Pixelation effect to the image.
@@ -45,19 +45,23 @@ public class PixelationFilterTransformation extends GPUFilterTransformation {
     filter.setPixel(this.pixel);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "PixelationFilterTransformation(pixel=" + pixel + ")";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof PixelationFilterTransformation;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode() + (int) (pixel * 10);
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update((ID + pixel).getBytes(CHARSET));
   }
 }

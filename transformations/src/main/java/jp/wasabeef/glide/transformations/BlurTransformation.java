@@ -20,13 +20,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.os.Build;
-import android.renderscript.RSRuntimeException;
-import android.support.annotation.NonNull;
+
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+
 import java.security.MessageDigest;
+
+import androidx.annotation.NonNull;
 import jp.wasabeef.glide.transformations.internal.FastBlur;
-import jp.wasabeef.glide.transformations.internal.RSBlur;
 
 public class BlurTransformation extends BitmapTransformation {
 
@@ -53,8 +53,9 @@ public class BlurTransformation extends BitmapTransformation {
     this.sampling = sampling;
   }
 
-  @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
-      @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+  @Override
+  protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
+                             @NonNull Bitmap toTransform, int outWidth, int outHeight) {
 
     int width = toTransform.getWidth();
     int height = toTransform.getHeight();
@@ -74,21 +75,25 @@ public class BlurTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "BlurTransformation(radius=" + radius + ", sampling=" + sampling + ")";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof BlurTransformation &&
         ((BlurTransformation) o).radius == radius &&
         ((BlurTransformation) o).sampling == sampling;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode() + radius * 1000 + sampling * 10;
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update((ID + radius + sampling).getBytes(CHARSET));
   }
 }

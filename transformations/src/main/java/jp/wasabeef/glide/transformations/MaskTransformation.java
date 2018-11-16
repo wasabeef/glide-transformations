@@ -23,9 +23,12 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+
 import java.security.MessageDigest;
+
+import androidx.annotation.NonNull;
 import jp.wasabeef.glide.transformations.internal.Utils;
 
 public class MaskTransformation extends BitmapTransformation {
@@ -43,15 +46,16 @@ public class MaskTransformation extends BitmapTransformation {
 
   /**
    * @param maskId If you change the mask file, please also rename the mask file, or Glide will get
-   * the cache with the old mask. Because key() return the same values if using the
-   * same make file name. If you have a good idea please tell us, thanks.
+   *               the cache with the old mask. Because key() return the same values if using the
+   *               same make file name. If you have a good idea please tell us, thanks.
    */
   public MaskTransformation(int maskId) {
     this.maskId = maskId;
   }
 
-  @Override protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
-      @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+  @Override
+  protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
+                             @NonNull Bitmap toTransform, int outWidth, int outHeight) {
     int width = toTransform.getWidth();
     int height = toTransform.getHeight();
 
@@ -68,20 +72,24 @@ public class MaskTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "MaskTransformation(maskId=" + maskId + ")";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     return o instanceof MaskTransformation &&
         ((MaskTransformation) o).maskId == maskId;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return ID.hashCode() + maskId * 10;
   }
 
-  @Override public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+  @Override
+  public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
     messageDigest.update((ID + maskId).getBytes(CHARSET));
   }
 }

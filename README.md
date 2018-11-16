@@ -28,13 +28,13 @@ Please feel free to use this.
 #### Gradle
 ```groovy
 repositories {
-    jcenter()
+  jcenter()
 }
 
 dependencies {
-    implementation 'jp.wasabeef:glide-transformations:3.3.0'
-    // If you want to use the GPU Filters
-    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+  implementation 'jp.wasabeef:glide-transformations:4.x.x'
+  // If you want to use the GPU Filters
+  implementation 'jp.co.cyberagent.android:gpuimage:2.x.x'
 }
 ```
 
@@ -42,23 +42,23 @@ dependencies {
 
 Set Glide Transform.
 
-```java
+```kotlin
 Glide.with(this).load(R.drawable.demo)
-  .apply(bitmapTransform(new BlurTransformation(25, 3)))
-  .into((ImageView) findViewById(R.id.image));
+  .apply(bitmapTransform(BlurTransformation(25, 3)))
+  .into(imageView)
 ```
 
 ## Advanced Step 3
 
 You can set a multiple transformations.
 
-```java
-MultiTransformation multi = new MultiTransformation(
-    new BlurTransformation(25), 
-    new RoundedCornersTransformation(128, 0, RoundedCornersTransformation.CornerType.BOTTOM))))
+```kotlin
+val multi = MultiTransformation<Bitmap>(
+  BlurTransformation(25),
+  RoundedCornersTransformation(128, 0, CornerType.BOTTOM))))
 Glide.with(this).load(R.drawable.demo)
   .apply(bitmapTransform(multi))
-  .into((ImageView) findViewById(R.id.image));
+  .into(imageView))
 ```
 
 # Step 4
@@ -67,12 +67,12 @@ If you are using `SupportRSBlurTransformation`.
 
 ```groovy
 android {
-    ...
-    defaultConfig { 
-        ...
-        renderscriptTargetApi YOUR_TARGET_SDK_VERSION as int
-        renderscriptSupportModeEnabled true
-    }
+  //...
+  defaultConfig {
+  //...
+  renderscriptTargetApi YOUR_TARGET_SDK_VERSION as int
+  renderscriptSupportModeEnabled true
+  }
 }
 ```
 
