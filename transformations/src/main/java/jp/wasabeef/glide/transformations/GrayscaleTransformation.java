@@ -45,6 +45,8 @@ public class GrayscaleTransformation extends BitmapTransformation {
         toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
     Bitmap bitmap = pool.get(width, height, config);
 
+    setCanvasBitmapDensity(toTransform,bitmap);
+
     Canvas canvas = new Canvas(bitmap);
     ColorMatrix saturation = new ColorMatrix();
     saturation.setSaturation(0f);

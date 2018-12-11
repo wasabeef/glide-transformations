@@ -68,13 +68,15 @@ public class RoundedCornersTransformation extends BitmapTransformation {
     Bitmap bitmap = pool.get(width, height, Bitmap.Config.ARGB_8888);
     bitmap.setHasAlpha(true);
 
-    Canvas canvas = new Canvas(bitmap);
-    Paint paint = new Paint();
-    paint.setAntiAlias(true);
-    paint.setShader(new BitmapShader(toTransform, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-    drawRoundRect(canvas, paint, width, height);
-    return bitmap;
-  }
+        setCanvasBitmapDensity(toTransform, bitmap);
+
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(toTransform, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        drawRoundRect(canvas, paint, width, height);
+        return bitmap;
+    }
 
   private void drawRoundRect(Canvas canvas, Paint paint, float width, float height) {
     float right = width - margin;
