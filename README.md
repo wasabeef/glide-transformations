@@ -79,25 +79,35 @@ android {
 ## Transformations
 
 ### Crop
-`CropTransformation`, `CropCircleTransformation`, `CropSquareTransformation`,
-`RoundedCornersTransformation`
+- `CropTransformation`
+- `CropCircleTransformation`
+- `CropCircleWithBorderTransformation`
+- `CropSquareTransformation`
+- `RoundedCornersTransformation`
 
 ### Color
-`ColorFilterTransformation`, `GrayscaleTransformation`
+- `ColorFilterTransformation`
+- `GrayscaleTransformation`
 
 ### Blur
-`BlurTransformation`
+- `BlurTransformation`
 
 ### Mask
-`MaskTransformation`
+- `MaskTransformation`
 
 ### GPU Filter (use [GPUImage](https://github.com/CyberAgent/android-gpuimage))
 **Will require add dependencies for GPUImage.**  
 
-`ToonFilterTransformation`, `SepiaFilterTransformation`, `ContrastFilterTransformation`  
-`InvertFilterTransformation`, `PixelationFilterTransformation`, `SketchFilterTransformation`  
-`SwirlFilterTransformation`, `BrightnessFilterTransformation`, `KuwaharaFilterTransformation`
-`VignetteFilterTransformation`
+- `ToonFilterTransformation`
+- `SepiaFilterTransformation`
+- `ContrastFilterTransformation`
+- `InvertFilterTransformation`
+- `PixelationFilterTransformation`
+- `SketchFilterTransformation`
+- `SwirlFilterTransformation`
+- `BrightnessFilterTransformation`
+- `KuwaharaFilterTransformation`
+- `VignetteFilterTransformation`
 
 
 Applications using Glide Transformations
@@ -129,6 +139,7 @@ Contributers
 -------
 
 * [start141](https://github.com/start141)
+* [squeeish](https://github.com/squeeish)
 
 Thanks
 -------
