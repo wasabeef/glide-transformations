@@ -67,11 +67,13 @@ public class SupportRSBlurTransformation extends BitmapTransformation {
 
     Bitmap bitmap = pool.get(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
 
-    Canvas canvas = new Canvas(bitmap);
-    canvas.scale(1 / (float) sampling, 1 / (float) sampling);
-    Paint paint = new Paint();
-    paint.setFlags(Paint.FILTER_BITMAP_FLAG);
-    canvas.drawBitmap(toTransform, 0, 0, paint);
+        setCanvasBitmapDensity(toTransform, bitmap);
+
+        Canvas canvas = new Canvas(bitmap);
+        canvas.scale(1 / (float) sampling, 1 / (float) sampling);
+        Paint paint = new Paint();
+        paint.setFlags(Paint.FILTER_BITMAP_FLAG);
+        canvas.drawBitmap(toTransform, 0, 0, paint);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       try {

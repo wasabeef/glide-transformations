@@ -76,6 +76,8 @@ public class CropTransformation extends BitmapTransformation {
     float top = getTop(scaledHeight);
     RectF targetRect = new RectF(left, top, left + scaledWidth, top + scaledHeight);
 
+    setCanvasBitmapDensity(toTransform,bitmap);
+
     Canvas canvas = new Canvas(bitmap);
     canvas.drawBitmap(toTransform, null, targetRect, null);
 

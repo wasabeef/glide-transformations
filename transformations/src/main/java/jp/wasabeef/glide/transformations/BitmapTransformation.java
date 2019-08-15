@@ -58,8 +58,12 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
     return result;
   }
 
-  protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
-                                      @NonNull Bitmap toTransform, int outWidth, int outHeight);
+    void setCanvasBitmapDensity(@NonNull Bitmap toTransform, @NonNull Bitmap canvasBitmap) {
+        canvasBitmap.setDensity(toTransform.getDensity());
+    }
+
+    protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
+                                        @NonNull Bitmap toTransform, int outWidth, int outHeight);
 
   @Override
   public abstract void updateDiskCacheKey(@NonNull MessageDigest messageDigest);

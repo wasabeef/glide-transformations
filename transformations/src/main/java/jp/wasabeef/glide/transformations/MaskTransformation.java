@@ -64,6 +64,8 @@ public class MaskTransformation extends BitmapTransformation {
 
     Drawable mask = Utils.getMaskDrawable(context.getApplicationContext(), maskId);
 
+    setCanvasBitmapDensity(toTransform,bitmap);
+
     Canvas canvas = new Canvas(bitmap);
     mask.setBounds(0, 0, width, height);
     mask.draw(canvas);
