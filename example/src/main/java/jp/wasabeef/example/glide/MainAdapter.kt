@@ -19,6 +19,7 @@ import jp.wasabeef.example.glide.MainAdapter.Type.*
 import jp.wasabeef.glide.transformations.*
 import jp.wasabeef.glide.transformations.CropTransformation.CropType
 import jp.wasabeef.glide.transformations.gpu.*
+import jp.wasabeef.glide.transformations.internal.Utils
 
 /**
  * Created by Wasabeef on 2015/01/11.
@@ -36,6 +37,7 @@ class MainAdapter(
     CropBottom,
     CropSquare,
     CropCircle,
+    CropCircleWithBorder,
     ColorFilter,
     Grayscale,
     RoundedCorners,
@@ -65,7 +67,7 @@ class MainAdapter(
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
     when (dataSet[position]) {
-      MainAdapter.Type.Mask -> {
+      Mask -> {
         Glide.with(context)
             .load(R.drawable.check)
             .apply(overrideOf(266.px, 252.px))
@@ -73,7 +75,7 @@ class MainAdapter(
                 MaskTransformation(R.drawable.mask_starfish))))
             .into(holder.image)
       }
-      MainAdapter.Type.NinePatchMask -> {
+      NinePatchMask -> {
         Glide.with(context)
             .load(R.drawable.check)
             .apply(overrideOf(300.px, 200.px))
@@ -105,6 +107,12 @@ class MainAdapter(
       CropCircle -> Glide.with(context)
           .load(R.drawable.demo)
           .apply(bitmapTransform(CropCircleTransformation()))
+          .into(holder.image)
+
+      CropCircleWithBorder -> Glide.with(context)
+          .load(R.drawable.demo)
+          .apply(bitmapTransform(
+              CropCircleWithBorderTransformation(Utils.toDp(4), Color.rgb(0, 145, 86))))
           .into(holder.image)
 
       ColorFilter -> Glide.with(context)
