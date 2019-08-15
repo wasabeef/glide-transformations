@@ -69,9 +69,9 @@ If you are using `SupportRSBlurTransformation`.
 android {
   //...
   defaultConfig {
-  //...
-  renderscriptTargetApi YOUR_TARGET_SDK_VERSION as int
-  renderscriptSupportModeEnabled true
+    //...
+    renderscriptTargetApi YOUR_TARGET_SDK_VERSION as int
+    renderscriptSupportModeEnabled true
   }
 }
 ```
