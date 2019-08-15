@@ -3,14 +3,14 @@ package jp.wasabeef.glide.transformations.internal;
 import android.graphics.Bitmap;
 
 /**
- * Copyright (C) 2018 Wasabeef
- *
+ * Copyright (C) 2019 Wasabeef
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -72,15 +72,15 @@ public class FastBlur {
     int wh = w * h;
     int div = radius + radius + 1;
 
-    int r[] = new int[wh];
-    int g[] = new int[wh];
-    int b[] = new int[wh];
+    int[] r = new int[wh];
+    int[] g = new int[wh];
+    int[] b = new int[wh];
     int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
-    int vmin[] = new int[Math.max(w, h)];
+    int[] vmin = new int[Math.max(w, h)];
 
     int divsum = (div + 1) >> 1;
     divsum *= divsum;
-    int dv[] = new int[256 * divsum];
+    int[] dv = new int[256 * divsum];
     for (i = 0; i < 256 * divsum; i++) {
       dv[i] = (i / divsum);
     }
