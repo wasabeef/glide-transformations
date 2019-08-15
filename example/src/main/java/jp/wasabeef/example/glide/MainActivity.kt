@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     findViewById<RecyclerView>(R.id.list).apply {
       layoutManager = LinearLayoutManager(context)
       adapter = MainAdapter(context, mutableListOf(
-          Mask, NinePatchMask, CropTop, CropCenter, CropBottom, CropSquare, CropCircle,
+          Mask, NinePatchMask, RoundedCorners, CropTop, CropCenter, CropBottom, CropSquare, CropCircle,
           CropCircleWithBorder, Grayscale, Blur, SupportRSBlur, Toon, Sepia, Contrast, Invert,
           Pixel, Sketch, Swirl, Brightness, Kuawahara, Vignette
       ))
