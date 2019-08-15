@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+Version 4.1.0 *(2019-08-15)*
+----------------------------
+
+Add:
+- Support to CropCircle with Border [#136](https://github.com/wasabeef/glide-transformations/pull/136)
+
+Update:
+- Glide to 4.9.0
+- Android Gradle plugin to 3.6.0-alpha05
+- Kotlin to 1.3.41	
+
+Bug Fix:
+- Fix diffrent density [#147](https://github.com/wasabeef/glide-transformations/pull/147)
+
+
 Version 4.0.1 *(2018-11-20)*
 ----------------------------
 
