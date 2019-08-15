@@ -44,7 +44,7 @@ Set Glide Transform.
 
 ```kotlin
 Glide.with(this).load(R.drawable.demo)
-  .apply(bitmapTransform(BlurTransformation(25, 3)))
+  .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
   .into(imageView)
 ```
 
@@ -57,7 +57,7 @@ val multi = MultiTransformation<Bitmap>(
   BlurTransformation(25),
   RoundedCornersTransformation(128, 0, CornerType.BOTTOM))))
 Glide.with(this).load(R.drawable.demo)
-  .apply(bitmapTransform(multi))
+  .apply(RequestOptions.bitmapTransform(multi))
   .into(imageView))
 ```
 
