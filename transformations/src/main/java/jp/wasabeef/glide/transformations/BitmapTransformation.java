@@ -3,13 +3,13 @@ package jp.wasabeef.glide.transformations;
 /**
  * Copyright (C) 2019 Wasabeef
  * Copyright 2014 Google, Inc. All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,8 @@ package jp.wasabeef.glide.transformations;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
@@ -29,8 +31,6 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.util.Util;
 
 import java.security.MessageDigest;
-
-import androidx.annotation.NonNull;
 
 public abstract class BitmapTransformation implements Transformation<Bitmap> {
 
@@ -58,12 +58,12 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
     return result;
   }
 
-    void setCanvasBitmapDensity(@NonNull Bitmap toTransform, @NonNull Bitmap canvasBitmap) {
-        canvasBitmap.setDensity(toTransform.getDensity());
-    }
+  void setCanvasBitmapDensity(@NonNull Bitmap toTransform, @NonNull Bitmap canvasBitmap) {
+    canvasBitmap.setDensity(toTransform.getDensity());
+  }
 
-    protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
-                                        @NonNull Bitmap toTransform, int outWidth, int outHeight);
+  protected abstract Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
+                                      @NonNull Bitmap toTransform, int outWidth, int outHeight);
 
   @Override
   public abstract void updateDiskCacheKey(@NonNull MessageDigest messageDigest);

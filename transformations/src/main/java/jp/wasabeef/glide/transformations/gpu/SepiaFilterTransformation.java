@@ -16,14 +16,15 @@ package jp.wasabeef.glide.transformations.gpu;
  * limitations under the License.
  */
 
+import androidx.annotation.NonNull;
+
 import java.security.MessageDigest;
 
-import androidx.annotation.NonNull;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter;
 
 /**
  * Applies a simple sepia effect.
- *
+ * <p>
  * The intensity with a default of 1.0.
  */
 public class SepiaFilterTransformation extends GPUFilterTransformation {
