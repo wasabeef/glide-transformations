@@ -135,7 +135,7 @@ Contributions
 
 Any contributions are welcome!
 
-Contributers
+Contributors
 -------
 
 * [start141](https://github.com/start141)
