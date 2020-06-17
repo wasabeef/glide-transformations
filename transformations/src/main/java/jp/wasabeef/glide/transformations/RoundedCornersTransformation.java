@@ -222,8 +222,8 @@ public class RoundedCornersTransformation extends BitmapTransformation {
         radius, paint);
     canvas.drawRoundRect(new RectF(right - diameter, bottom - diameter, right, bottom), radius,
         radius, paint);
-    canvas.drawRect(new RectF(margin, margin + radius, right - diameter, bottom), paint);
-    canvas.drawRect(new RectF(margin + diameter, margin, right, bottom - radius), paint);
+    canvas.drawRect(new RectF(margin, margin + radius, right - radius, bottom), paint);
+    canvas.drawRect(new RectF(margin + radius, margin, right, bottom - radius), paint);
   }
 
   private void drawDiagonalFromTopRightRoundRect(Canvas canvas, Paint paint, float right,
