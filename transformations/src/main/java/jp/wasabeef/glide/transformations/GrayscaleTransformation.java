@@ -1,7 +1,7 @@
 package jp.wasabeef.glide.transformations;
 
 /**
- * Copyright (C) 2019 Wasabeef
+ * Copyright (C) 2020 Wasabeef
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class GrayscaleTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.GrayscaleTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.GrayscaleTransformation." + VERSION;
 
   @Override
   protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
@@ -42,7 +42,7 @@ public class GrayscaleTransformation extends BitmapTransformation {
     int height = toTransform.getHeight();
 
     Bitmap.Config config =
-        toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
+      toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
     Bitmap bitmap = pool.get(width, height, config);
 
     setCanvasBitmapDensity(toTransform, bitmap);

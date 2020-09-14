@@ -1,7 +1,7 @@
 package jp.wasabeef.glide.transformations;
 
 /**
- * Copyright (C) 2019 Wasabeef
+ * Copyright (C) 2020 Wasabeef
  * Copyright 2014 Google, Inc. All rights reserved.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,8 +40,8 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
                                           int outWidth, int outHeight) {
     if (!Util.isValidDimensions(outWidth, outHeight)) {
       throw new IllegalArgumentException(
-          "Cannot apply transformation on width: " + outWidth + " or height: " + outHeight
-              + " less than or equal to zero and not Target.SIZE_ORIGINAL");
+        "Cannot apply transformation on width: " + outWidth + " or height: " + outHeight
+          + " less than or equal to zero and not Target.SIZE_ORIGINAL");
     }
     BitmapPool bitmapPool = Glide.get(context).getBitmapPool();
     Bitmap toTransform = resource.get();

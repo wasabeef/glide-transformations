@@ -17,7 +17,7 @@ import java.security.MessageDigest;
 import jp.wasabeef.glide.transformations.internal.Utils;
 
 /**
- * Copyright (C) 2019 Wasabeef
+ * Copyright (C) 2020 Wasabeef
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,10 +68,10 @@ public class CropCircleWithBorderTransformation extends BitmapTransformation {
 
     Canvas canvas = new Canvas(bitmap);
     canvas.drawCircle(
-        outWidth / 2f,
-        outHeight / 2f,
-        Math.max(outWidth, outHeight) / 2f - borderSize / 2f,
-        paint
+      outWidth / 2f,
+      outHeight / 2f,
+      Math.max(outWidth, outHeight) / 2f - borderSize / 2f,
+      paint
     );
 
     return bitmap;
@@ -85,8 +85,8 @@ public class CropCircleWithBorderTransformation extends BitmapTransformation {
   @Override
   public boolean equals(Object o) {
     return o instanceof CropCircleWithBorderTransformation &&
-        ((CropCircleWithBorderTransformation) o).borderSize == borderSize &&
-        ((CropCircleWithBorderTransformation) o).borderColor == borderColor;
+      ((CropCircleWithBorderTransformation) o).borderSize == borderSize &&
+      ((CropCircleWithBorderTransformation) o).borderColor == borderColor;
   }
 
   @Override

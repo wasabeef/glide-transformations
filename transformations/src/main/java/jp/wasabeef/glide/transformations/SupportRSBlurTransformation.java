@@ -1,7 +1,7 @@
 package jp.wasabeef.glide.transformations;
 
 /**
- * Copyright (C) 2019 Wasabeef
+ * Copyright (C) 2020 Wasabeef
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class SupportRSBlurTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.SupportRSBlurTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.SupportRSBlurTransformation." + VERSION;
 
   private static int MAX_RADIUS = 25;
   private static int DEFAULT_DOWN_SAMPLING = 1;
@@ -99,8 +99,8 @@ public class SupportRSBlurTransformation extends BitmapTransformation {
   @Override
   public boolean equals(Object o) {
     return o instanceof SupportRSBlurTransformation &&
-        ((SupportRSBlurTransformation) o).radius == radius &&
-        ((SupportRSBlurTransformation) o).sampling == sampling;
+      ((SupportRSBlurTransformation) o).radius == radius &&
+      ((SupportRSBlurTransformation) o).sampling == sampling;
   }
 
   @Override

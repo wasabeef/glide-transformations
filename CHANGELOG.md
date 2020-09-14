@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+Version 4.2.0 *(2020-09-15)*
+----------------------------
+
+Update:
+- Compile & Target SDK Version 28 -> 30
+- GPUImage 2.0.3 -> 2.0.4
+- Glide 4.9.0 -> 4.11.0
+
+Bugfix:
+- RoundedCornersTransformation with DIAGONAL_FROM_TOP_LEFT does not work [#178](https://github.com/wasabeef/glide-transformations/pull/178)
+
 Version 4.1.0 *(2019-08-15)*
 ----------------------------
 
