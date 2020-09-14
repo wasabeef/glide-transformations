@@ -1,7 +1,7 @@
 package jp.wasabeef.glide.transformations;
 
 /**
- * Copyright (C) 2019 Wasabeef
+ * Copyright (C) 2020 Wasabeef
  * Copyright 2014 Google, Inc. All rights reserved.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
