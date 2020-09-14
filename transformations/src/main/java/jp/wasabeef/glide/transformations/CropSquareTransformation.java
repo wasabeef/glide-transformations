@@ -30,7 +30,7 @@ public class CropSquareTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.CropSquareTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.CropSquareTransformation." + VERSION;
 
   private int size;
 

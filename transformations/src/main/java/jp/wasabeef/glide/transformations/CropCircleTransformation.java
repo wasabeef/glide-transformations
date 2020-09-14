@@ -35,7 +35,7 @@ public class CropCircleTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.CropCircleTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.CropCircleTransformation." + VERSION;
 
   @Override
   protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,

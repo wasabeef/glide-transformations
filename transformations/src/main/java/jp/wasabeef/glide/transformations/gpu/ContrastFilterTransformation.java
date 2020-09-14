@@ -29,7 +29,7 @@ public class ContrastFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation." + VERSION;
 
   private float contrast;
 

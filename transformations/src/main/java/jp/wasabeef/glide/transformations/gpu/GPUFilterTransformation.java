@@ -33,7 +33,7 @@ public class GPUFilterTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.GPUFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.GPUFilterTransformation." + VERSION;
   private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
   private GPUImageFilter gpuImageFilter;

@@ -29,7 +29,7 @@ public class InvertFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.InvertFilterTransformation." + VERSION;
 
   public InvertFilterTransformation() {
     super(new GPUImageColorInvertFilter());

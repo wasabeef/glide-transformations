@@ -31,7 +31,7 @@ public class SepiaFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation." + VERSION;
 
   private float intensity;
 

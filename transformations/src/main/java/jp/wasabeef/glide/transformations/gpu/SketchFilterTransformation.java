@@ -26,7 +26,7 @@ public class SketchFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.SketchFilterTransformation." + VERSION;
 
   public SketchFilterTransformation() {
     super(new GPUImageSketchFilter());

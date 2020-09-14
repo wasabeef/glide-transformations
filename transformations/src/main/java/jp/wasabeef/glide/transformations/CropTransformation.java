@@ -61,7 +61,7 @@ public class CropTransformation extends BitmapTransformation {
     height = height == 0 ? toTransform.getHeight() : height;
 
     Bitmap.Config config =
-        toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
+      toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
     Bitmap bitmap = pool.get(width, height, config);
 
     bitmap.setHasAlpha(true);
@@ -105,9 +105,9 @@ public class CropTransformation extends BitmapTransformation {
   @Override
   public boolean equals(Object o) {
     return o instanceof CropTransformation &&
-        ((CropTransformation) o).width == width &&
-        ((CropTransformation) o).height == height &&
-        ((CropTransformation) o).cropType == cropType;
+      ((CropTransformation) o).width == width &&
+      ((CropTransformation) o).height == height &&
+      ((CropTransformation) o).cropType == cropType;
   }
 
   @Override

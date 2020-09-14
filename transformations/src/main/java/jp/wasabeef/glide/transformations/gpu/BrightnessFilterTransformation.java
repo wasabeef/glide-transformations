@@ -29,7 +29,7 @@ public class BrightnessFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation." + VERSION;
 
   private float brightness;
 
@@ -52,7 +52,7 @@ public class BrightnessFilterTransformation extends GPUFilterTransformation {
   @Override
   public boolean equals(Object o) {
     return o instanceof BrightnessFilterTransformation &&
-        ((BrightnessFilterTransformation) o).brightness == brightness;
+      ((BrightnessFilterTransformation) o).brightness == brightness;
   }
 
   @Override

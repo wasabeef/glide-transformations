@@ -24,14 +24,14 @@ import jp.co.cyberagent.android.gpuimage.filter.GPUImagePixelationFilter;
 
 /**
  * Applies a Pixelation effect to the image.
- *
+ * <p>
  * The pixel with a default of 10.0.
  */
 public class PixelationFilterTransformation extends GPUFilterTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation." + VERSION;
 
   private float pixel;
 

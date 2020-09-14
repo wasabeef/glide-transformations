@@ -39,7 +39,7 @@ public class SupportRSBlur {
       rs = RenderScript.create(context);
       rs.setMessageHandler(new RenderScript.RSMessageHandler());
       input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
-          Allocation.USAGE_SCRIPT);
+        Allocation.USAGE_SCRIPT);
       output = Allocation.createTyped(rs, input.getType());
       blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
 

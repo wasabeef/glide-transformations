@@ -40,8 +40,8 @@ public abstract class BitmapTransformation implements Transformation<Bitmap> {
                                           int outWidth, int outHeight) {
     if (!Util.isValidDimensions(outWidth, outHeight)) {
       throw new IllegalArgumentException(
-          "Cannot apply transformation on width: " + outWidth + " or height: " + outHeight
-              + " less than or equal to zero and not Target.SIZE_ORIGINAL");
+        "Cannot apply transformation on width: " + outWidth + " or height: " + outHeight
+          + " less than or equal to zero and not Target.SIZE_ORIGINAL");
     }
     BitmapPool bitmapPool = Glide.get(context).getBitmapPool();
     Bitmap toTransform = resource.get();

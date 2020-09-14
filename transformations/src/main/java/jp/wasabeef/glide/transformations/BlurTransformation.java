@@ -33,7 +33,7 @@ public class BlurTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.BlurTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.BlurTransformation." + VERSION;
 
   private static int MAX_RADIUS = 25;
   private static int DEFAULT_DOWN_SAMPLING = 1;
@@ -86,8 +86,8 @@ public class BlurTransformation extends BitmapTransformation {
   @Override
   public boolean equals(Object o) {
     return o instanceof BlurTransformation &&
-        ((BlurTransformation) o).radius == radius &&
-        ((BlurTransformation) o).sampling == sampling;
+      ((BlurTransformation) o).radius == radius &&
+      ((BlurTransformation) o).sampling == sampling;
   }
 
   @Override

@@ -36,7 +36,7 @@ public class MaskTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
   private static final String ID =
-      "jp.wasabeef.glide.transformations.MaskTransformation." + VERSION;
+    "jp.wasabeef.glide.transformations.MaskTransformation." + VERSION;
 
   private static Paint paint = new Paint();
   private int maskId;
@@ -83,7 +83,7 @@ public class MaskTransformation extends BitmapTransformation {
   @Override
   public boolean equals(Object o) {
     return o instanceof MaskTransformation &&
-        ((MaskTransformation) o).maskId == maskId;
+      ((MaskTransformation) o).maskId == maskId;
   }
 
   @Override
