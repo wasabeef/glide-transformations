@@ -27,7 +27,7 @@ ext {
   publishedGroupId = 'jp.wasabeef'
   libraryName = 'glide-transformations'
   artifact = 'glide-transformations'
-  libraryDescription = 'Which provides simple Tranformations to Glide'
+  libraryDescription = 'Which provides simple Transformations to Glide'
   siteUrl = 'https://github.com/wasabeef/glide-transformations'
   gitUrl = 'https://github.com/wasabeef/glide-transformations.git'
   issueUrl = 'https://github.com/wasabeef/glide-transformations/issues'
