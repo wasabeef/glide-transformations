@@ -35,11 +35,11 @@ public class BlurTransformation extends BitmapTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.BlurTransformation." + VERSION;
 
-  private static int MAX_RADIUS = 25;
-  private static int DEFAULT_DOWN_SAMPLING = 1;
+  private static final int MAX_RADIUS = 25;
+  private static final int DEFAULT_DOWN_SAMPLING = 1;
 
-  private int radius;
-  private int sampling;
+  private final int radius;
+  private final int sampling;
 
   public BlurTransformation() {
     this(MAX_RADIUS, DEFAULT_DOWN_SAMPLING);

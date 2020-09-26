@@ -35,7 +35,7 @@ public class ColorFilterTransformation extends BitmapTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.ColorFilterTransformation." + VERSION;
 
-  private int color;
+  private final int color;
 
   public ColorFilterTransformation(int color) {
     this.color = color;

@@ -38,8 +38,8 @@ public class MaskTransformation extends BitmapTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.MaskTransformation." + VERSION;
 
-  private static Paint paint = new Paint();
-  private int maskId;
+  private static final Paint paint = new Paint();
+  private final int maskId;
 
   static {
     paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));

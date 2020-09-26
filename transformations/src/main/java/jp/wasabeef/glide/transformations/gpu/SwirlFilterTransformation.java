@@ -33,9 +33,9 @@ public class SwirlFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation." + VERSION;
 
-  private float radius;
-  private float angle;
-  private PointF center;
+  private final float radius;
+  private final float angle;
+  private final PointF center;
 
   public SwirlFilterTransformation() {
     this(.5f, 1.0f, new PointF(0.5f, 0.5f));

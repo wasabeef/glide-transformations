@@ -34,7 +34,7 @@ public class KuwaharaFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation." + VERSION;
 
-  private int radius;
+  private final int radius;
 
   public KuwaharaFilterTransformation() {
     this(25);

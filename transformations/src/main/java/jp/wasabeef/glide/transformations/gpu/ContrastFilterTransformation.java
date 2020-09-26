@@ -31,7 +31,7 @@ public class ContrastFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation." + VERSION;
 
-  private float contrast;
+  private final float contrast;
 
   public ContrastFilterTransformation() {
     this(1.0f);

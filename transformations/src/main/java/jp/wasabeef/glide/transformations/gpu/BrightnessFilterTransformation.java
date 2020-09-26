@@ -31,7 +31,7 @@ public class BrightnessFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation." + VERSION;
 
-  private float brightness;
+  private final float brightness;
 
   public BrightnessFilterTransformation() {
     this(0.0f);
