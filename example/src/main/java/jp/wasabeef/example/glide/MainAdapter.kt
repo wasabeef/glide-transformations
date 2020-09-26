@@ -19,6 +19,7 @@ import jp.wasabeef.example.glide.MainAdapter.Type.*
 import jp.wasabeef.glide.transformations.*
 import jp.wasabeef.glide.transformations.CropTransformation.CropType
 import jp.wasabeef.glide.transformations.gpu.*
+import jp.wasabeef.glide.transformations.internal.Utils
 
 /**
  * Created by Wasabeef on 2015/01/11.
@@ -41,7 +42,6 @@ class MainAdapter(
     Grayscale,
     RoundedCorners,
     Blur,
-    SupportRSBlur,
     Toon,
     Sepia,
     Contrast,
@@ -133,11 +133,6 @@ class MainAdapter(
       Blur -> Glide.with(context)
         .load(R.drawable.check)
         .apply(bitmapTransform(BlurTransformation(25)))
-        .into(holder.image)
-
-      SupportRSBlur -> Glide.with(context)
-        .load(R.drawable.check)
-        .apply(bitmapTransform(SupportRSBlurTransformation(25, 10)))
         .into(holder.image)
 
       Toon -> Glide.with(context)
