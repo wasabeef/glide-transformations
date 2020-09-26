@@ -41,8 +41,8 @@ class MainAdapter(
     ColorFilter,
     Grayscale,
     RoundedCorners,
-    Blur,
-    SupportRSBlur,
+    BlurLight,
+    BlurDeep,
     Toon,
     Sepia,
     Contrast,
@@ -131,14 +131,14 @@ class MainAdapter(
           RoundedCornersTransformation.CornerType.DIAGONAL_FROM_TOP_LEFT)))
         .into(holder.image)
 
-      Blur -> Glide.with(context)
+      BlurLight -> Glide.with(context)
         .load(R.drawable.check)
         .apply(bitmapTransform(BlurTransformation(25)))
         .into(holder.image)
 
-      SupportRSBlur -> Glide.with(context)
+      BlurDeep -> Glide.with(context)
         .load(R.drawable.check)
-        .apply(bitmapTransform(SupportRSBlurTransformation(25, 10)))
+        .apply(bitmapTransform(BlurTransformation(25, 8)))
         .into(holder.image)
 
       Toon -> Glide.with(context)

@@ -33,7 +33,7 @@ public class PixelationFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.PixelationFilterTransformation." + VERSION;
 
-  private float pixel;
+  private final float pixel;
 
   public PixelationFilterTransformation() {
     this(10f);

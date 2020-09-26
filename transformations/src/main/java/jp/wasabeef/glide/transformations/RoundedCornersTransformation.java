@@ -43,10 +43,10 @@ public class RoundedCornersTransformation extends BitmapTransformation {
     DIAGONAL_FROM_TOP_LEFT, DIAGONAL_FROM_TOP_RIGHT
   }
 
-  private int radius;
-  private int diameter;
-  private int margin;
-  private CornerType cornerType;
+  private final int radius;
+  private final int diameter;
+  private final int margin;
+  private final CornerType cornerType;
 
   public RoundedCornersTransformation(int radius, int margin) {
     this(radius, margin, CornerType.ALL);

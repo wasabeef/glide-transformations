@@ -27,21 +27,6 @@ public final class Utils {
     // Utility class.
   }
 
-  public static Drawable getMaskDrawable(Context context, int maskId) {
-    Drawable drawable;
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      drawable = context.getDrawable(maskId);
-    } else {
-      drawable = context.getResources().getDrawable(maskId);
-    }
-
-    if (drawable == null) {
-      throw new IllegalArgumentException("maskId is invalid");
-    }
-
-    return drawable;
-  }
-
   public static int toDp(int px) {
     return px * (int) Resources.getSystem().getDisplayMetrics().density;
   }

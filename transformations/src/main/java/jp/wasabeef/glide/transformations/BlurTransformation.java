@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.renderscript.RSRuntimeException;
 
 import androidx.annotation.NonNull;
 
@@ -28,6 +29,7 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import java.security.MessageDigest;
 
 import jp.wasabeef.glide.transformations.internal.FastBlur;
+import jp.wasabeef.glide.transformations.internal.RSBlur;
 
 public class BlurTransformation extends BitmapTransformation {
 
@@ -35,11 +37,11 @@ public class BlurTransformation extends BitmapTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.BlurTransformation." + VERSION;
 
-  private static int MAX_RADIUS = 25;
-  private static int DEFAULT_DOWN_SAMPLING = 1;
+  private static final int MAX_RADIUS = 25;
+  private static final int DEFAULT_DOWN_SAMPLING = 1;
 
-  private int radius;
-  private int sampling;
+  private final int radius;
+  private final int sampling;
 
   public BlurTransformation() {
     this(MAX_RADIUS, DEFAULT_DOWN_SAMPLING);
@@ -73,7 +75,11 @@ public class BlurTransformation extends BitmapTransformation {
     paint.setFlags(Paint.FILTER_BITMAP_FLAG);
     canvas.drawBitmap(toTransform, 0, 0, paint);
 
-    bitmap = FastBlur.blur(bitmap, radius, true);
+    try {
+      bitmap = RSBlur.blur(context, bitmap, radius);
+    } catch (RSRuntimeException e) {
+      bitmap = FastBlur.blur(bitmap, radius, true);
+    }
 
     return bitmap;
   }

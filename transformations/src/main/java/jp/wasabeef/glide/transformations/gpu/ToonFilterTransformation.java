@@ -33,8 +33,8 @@ public class ToonFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation." + VERSION;
 
-  private float threshold;
-  private float quantizationLevels;
+  private final float threshold;
+  private final float quantizationLevels;
 
   public ToonFilterTransformation() {
     this(.2f, 10.0f);

@@ -7,9 +7,6 @@ android {
     minSdkVersion MIN_SDK_VERSION as int
     targetSdkVersion TARGET_SDK_VERSION as int
 
-    renderscriptTargetApi TARGET_SDK_VERSION as int
-    renderscriptSupportModeEnabled true
-
     consumerProguardFiles 'proguard-rules.txt'
   }
 }

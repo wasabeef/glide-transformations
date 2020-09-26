@@ -36,10 +36,10 @@ public class VignetteFilterTransformation extends GPUFilterTransformation {
   private static final String ID =
     "jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation." + VERSION;
 
-  private PointF center;
-  private float[] vignetteColor;
-  private float vignetteStart;
-  private float vignetteEnd;
+  private final PointF center;
+  private final float[] vignetteColor;
+  private final float vignetteStart;
+  private final float vignetteEnd;
 
   public VignetteFilterTransformation() {
     this(new PointF(0.5f, 0.5f), new float[]{0.0f, 0.0f, 0.0f}, 0.0f, 0.75f);

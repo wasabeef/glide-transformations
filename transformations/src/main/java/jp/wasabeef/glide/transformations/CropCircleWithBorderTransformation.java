@@ -38,8 +38,8 @@ public class CropCircleWithBorderTransformation extends BitmapTransformation {
   private static final int VERSION = 1;
   private static final String ID = "jp.wasabeef.glide.transformations.CropCircleWithBorderTransformation." + VERSION;
 
-  private int borderSize;
-  private int borderColor;
+  private final int borderSize;
+  private final int borderColor;
 
 
   public CropCircleWithBorderTransformation() {

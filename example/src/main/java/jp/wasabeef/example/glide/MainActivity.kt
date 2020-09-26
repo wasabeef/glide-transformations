@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
       layoutManager = LinearLayoutManager(context)
       adapter = MainAdapter(context, mutableListOf(
         Mask, NinePatchMask, RoundedCorners, CropTop, CropCenter, CropBottom, CropSquare, CropCircle,
-        CropCircleWithBorder, Grayscale, Blur, SupportRSBlur, Toon, Sepia, Contrast, Invert,
+        CropCircleWithBorder, Grayscale, BlurLight, BlurDeep, Toon, Sepia, Contrast, Invert,
         Pixel, Sketch, Swirl, Brightness, Kuawahara, Vignette
       ))
     }
