@@ -19,7 +19,6 @@ import jp.wasabeef.example.glide.MainAdapter.Type.*
 import jp.wasabeef.glide.transformations.*
 import jp.wasabeef.glide.transformations.CropTransformation.CropType
 import jp.wasabeef.glide.transformations.gpu.*
-import jp.wasabeef.glide.transformations.internal.Utils
 
 /**
  * Created by Wasabeef on 2015/01/11.

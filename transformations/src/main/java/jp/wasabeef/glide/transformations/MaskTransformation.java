@@ -30,8 +30,6 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 
 import java.security.MessageDigest;
 
-import jp.wasabeef.glide.transformations.internal.Utils;
-
 public class MaskTransformation extends BitmapTransformation {
 
   private static final int VERSION = 1;
@@ -63,7 +61,7 @@ public class MaskTransformation extends BitmapTransformation {
     Bitmap bitmap = pool.get(width, height, Bitmap.Config.ARGB_8888);
     bitmap.setHasAlpha(true);
 
-    Drawable mask = Utils.getMaskDrawable(context.getApplicationContext(), maskId);
+    Drawable mask = context.getDrawable(maskId);
 
     setCanvasBitmapDensity(toTransform, bitmap);
 
