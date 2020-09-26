@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+Version 4.2.1 *(2020-09-27)*
+----------------------------
+
+Feature
+- Remove support v8 renderscript (Please use BlurTransformation)
+
+Update
+- minSdkVersion -> 21
+- GPUImage -> 2.1.0
+- Cleanup codes
+
 Version 4.2.0 *(2020-09-15)*
 ----------------------------
 
