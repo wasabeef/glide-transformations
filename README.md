@@ -34,7 +34,7 @@ repositories {
 dependencies {
   implementation 'jp.wasabeef:glide-transformations:4.x.x'
   // If you want to use the GPU Filters
-  implementation 'jp.co.cyberagent.android:gpuimage:2.x.x'
+  implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
 }
 ```
 
