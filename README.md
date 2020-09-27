@@ -61,21 +61,6 @@ Glide.with(this).load(R.drawable.demo)
   .into(imageView))
 ```
 
-# Step 4
-
-If you are using `SupportRSBlurTransformation`.
-
-```groovy
-android {
-  //...
-  defaultConfig {
-    //...
-    renderscriptTargetApi YOUR_TARGET_SDK_VERSION as int
-    renderscriptSupportModeEnabled true
-  }
-}
-```
-
 ## Transformations
 
 ### Crop
