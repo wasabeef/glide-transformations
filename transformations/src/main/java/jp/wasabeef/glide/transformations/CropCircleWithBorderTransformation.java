@@ -66,11 +66,12 @@ public class CropCircleWithBorderTransformation extends BitmapTransformation {
     paint.setStrokeWidth(borderSize);
     paint.setAntiAlias(true);
 
+    int outMinEdge = Math.min(outWidth, outHeight);
     Canvas canvas = new Canvas(bitmap);
     canvas.drawCircle(
-      outWidth / 2f,
-      outHeight / 2f,
-      Math.max(outWidth, outHeight) / 2f - borderSize / 2f,
+      outMinEdge / 2f,
+      outMinEdge / 2f,
+      outMinEdge / 2f - borderSize / 2f,
       paint
     );
 
