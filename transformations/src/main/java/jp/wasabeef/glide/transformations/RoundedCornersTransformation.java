@@ -38,7 +38,7 @@ public class RoundedCornersTransformation extends BitmapTransformation {
   public enum CornerType {
     ALL,
     TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT,
-    TOP, BOTTOM, LEFT, RIGHT,
+    TOP, BOTTOM, LEFT, RIGHT,TOP_LEFT_RIGHT,
     OTHER_TOP_LEFT, OTHER_TOP_RIGHT, OTHER_BOTTOM_LEFT, OTHER_BOTTOM_RIGHT,
     DIAGONAL_FROM_TOP_LEFT, DIAGONAL_FROM_TOP_RIGHT
   }
@@ -109,6 +109,9 @@ public class RoundedCornersTransformation extends BitmapTransformation {
         break;
       case RIGHT:
         drawRightRoundRect(canvas, paint, right, bottom);
+        break;
+      case TOP_LEFT_RIGHT:
+        drawTopLeftRightRoundRect(canvas, paint, right, bottom);
         break;
       case OTHER_TOP_LEFT:
         drawOtherTopLeftRoundRect(canvas, paint, right, bottom);
@@ -183,6 +186,14 @@ public class RoundedCornersTransformation extends BitmapTransformation {
   private void drawRightRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
     canvas.drawRoundRect(new RectF(right - diameter, margin, right, bottom), radius, radius, paint);
     canvas.drawRect(new RectF(margin, margin, right - radius, bottom), paint);
+  }
+
+  private void drawTopLeftRightRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+    canvas.drawRoundRect(new RectF(margin, margin, margin + diameter, margin + diameter), radius, radius, paint);
+    canvas.drawRoundRect(new RectF(right, margin, right - diameter, margin + diameter), radius, radius, paint);
+    canvas.drawRect(new RectF(margin + radius, margin, right - radius, bottom + margin), paint);
+    canvas.drawRect(new RectF(margin, margin + radius, margin + radius, bottom + margin), paint);
+    canvas.drawRect(new RectF(right - radius, margin + radius, right, bottom + margin), paint);
   }
 
   private void drawOtherTopLeftRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
