@@ -29,7 +29,7 @@ import java.security.MessageDigest;
 
 public class CropTransformation extends BitmapTransformation {
 
-  private static final int VERSION = 1;
+  private static final int VERSION = 2;
   private static final String ID = "jp.wasabeef.glide.transformations.CropTransformation." + VERSION;
 
   public enum CropType {
@@ -38,10 +38,9 @@ public class CropTransformation extends BitmapTransformation {
     BOTTOM
   }
 
-  private int width;
-  private int height;
-
-  private CropType cropType = CropType.CENTER;
+  final private int width;
+  final private int height;
+  final private CropType cropType;
 
   public CropTransformation(int width, int height) {
     this(width, height, CropType.CENTER);
@@ -56,9 +55,10 @@ public class CropTransformation extends BitmapTransformation {
   @Override
   protected Bitmap transform(@NonNull Context context, @NonNull BitmapPool pool,
                              @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+    int toWidth, toHeight;
 
-    width = width == 0 ? toTransform.getWidth() : width;
-    height = height == 0 ? toTransform.getHeight() : height;
+    toWidth = width == 0 ? outWidth : width;
+    toHeight = height == 0 ? outHeight : height;
 
     Bitmap.Config config =
       toTransform.getConfig() != null ? toTransform.getConfig() : Bitmap.Config.ARGB_8888;
@@ -66,14 +66,14 @@ public class CropTransformation extends BitmapTransformation {
 
     bitmap.setHasAlpha(true);
 
-    float scaleX = (float) width / toTransform.getWidth();
-    float scaleY = (float) height / toTransform.getHeight();
+    float scaleX = (float) toWidth / toTransform.getWidth();
+    float scaleY = (float) toHeight / toTransform.getHeight();
     float scale = Math.max(scaleX, scaleY);
 
     float scaledWidth = scale * toTransform.getWidth();
     float scaledHeight = scale * toTransform.getHeight();
-    float left = (width - scaledWidth) / 2;
-    float top = getTop(scaledHeight);
+    float left = (toWidth - scaledWidth) / 2;
+    float top = getTop(toHeight, scaledHeight);
     RectF targetRect = new RectF(left, top, left + scaledWidth, top + scaledHeight);
 
     setCanvasBitmapDensity(toTransform, bitmap);
@@ -84,14 +84,14 @@ public class CropTransformation extends BitmapTransformation {
     return bitmap;
   }
 
-  private float getTop(float scaledHeight) {
+  private float getTop(float toHeight, float scaledHeight) {
     switch (cropType) {
       case TOP:
         return 0;
       case CENTER:
-        return (height - scaledHeight) / 2;
+        return (toHeight - scaledHeight) / 2;
       case BOTTOM:
-        return height - scaledHeight;
+        return toHeight - scaledHeight;
       default:
         return 0;
     }
